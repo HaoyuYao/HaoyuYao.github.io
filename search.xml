@@ -1,21 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2022/12/16/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <title>使用django+canvas完成简单的网页游戏</title>
+    <url>/2022/12/16/%E4%BD%BF%E7%94%A8django-canvas%E5%AE%8C%E6%88%90%E7%AE%80%E5%8D%95%E7%9A%84%E7%BD%91%E9%A1%B5%E6%B8%B8%E6%88%8F/</url>
+    <content><![CDATA[<p><em>最近买了acwing的django框架课学习使用django进行简单的网页游戏开发，虽然现在还没有学完，但是目前对于javascript使用canvas进行简单的游戏开发已经有了相对之前非常多的心得，故有此篇，之后关于用户系统和thrift联机对战的内容会单独出一篇文章</em></p>
+<h2 id="1-1进行远程开发的前期工作"><a href="#1-1进行远程开发的前期工作" class="headerlink" title="1. 1进行远程开发的前期工作"></a>1. 1进行远程开发的前期工作</h2><h3 id="为什么要远程开发："><a href="#为什么要远程开发：" class="headerlink" title="为什么要远程开发："></a>为什么要远程开发：</h3><p>因为对于当下的服务器部署应用开发而言，云盘，数据库以及 app 本身会被存放在不同的服务器中，这样在本地的环境与线上环境会产生较大的差异，需要进行调试的时候也会遇上难以解决的结构问题，故而最好的方法是直接通过ssh远程登陆到服务器上，直接在服务器上进行远程开发，这样就能根本上避免掉从本地部署到服务器过程中会出现的一系列问题。</p>
+<h3 id="工具选择："><a href="#工具选择：" class="headerlink" title="工具选择："></a>工具选择：</h3><p>由于是django远程开发，故而有主要有三种选择：</p>
+<ol>
+<li>直接在终端使用vim或者nano进行代码编写；</li>
+<li>在本地通过vscode远程登录到服务器上，使用code本身完善的图形化界面进行代码编写；</li>
+<li>在本地使用pycharm通过sftp文件模式进行简介的远程代码编写；</li>
+</ol>
+<p>第一种是给大佬使用的，在使用之前你需要对vim或者nano的操作有相当程度的熟悉，但是即使不使用这种方式编写代码，也要有对这两个工具使用方法最基本的了解，因为对于需要管理员权限的文件的操作通常还是要在vim中进行的；</p>
+<p>第二种是我目前开发所使用的方法，使用vscode相较于直接使用终端开发的优点主要在于方便的文件结构图视，熟悉的操作方式，以及更为好看的界面，但是受限于服务器本身孱弱的性能（1c2g），vscode的代码补全功能体验上阉割了不少，但是总归好过vim；</p>
+<p>第三种方式应该是效率最高的方式，没有采用的原因是我自身更加希望通过避免使用ide来减少对其的依赖，因为ide过于周到的一条龙服务会使没有什么基础的小白对于一个项目所需要的各种知识的掌握有所欠缺，这点在后面会说明</p>
+<h3 id="服务器搭建："><a href="#服务器搭建：" class="headerlink" title="服务器搭建："></a>服务器搭建：</h3><p>服务器选择的是阿里云的云服务器，1c2g，可以直接选择试用的服务器先白嫖一个月再说，在服务器中又加了一层docker容器，优点是方便将你的成果直接打包迁移，省去了配环境的许多工作，同时将不同的服务部署在不同的容器中，管理起来也更加安全方便，关于docker的各种指令可以参考以下网址：</p>
+<p><a href="https://www.acwing.com/file_system/file/content/whole/index/content/3074146/">https://www.acwing.com/file_system/file/content/whole/index/content/3074146/</a></p>
+<h2 id="1-2-django项目的文件结构的介绍"><a href="#1-2-django项目的文件结构的介绍" class="headerlink" title="1.2 django项目的文件结构的介绍"></a>1.2 django项目的文件结构的介绍</h2>]]></content>
+      <categories>
+        <category>科技</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>django</tag>
+        <tag>远程开发</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于本博客的一些希望</title>
+    <url>/2022/12/16/%E5%85%B3%E4%BA%8E%E6%9C%AC%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%8C%E6%9C%9B/</url>
+    <content><![CDATA[<p><em>关于本博客的一些初衷，首先写在这里，以勉励自己</em></p>
+<h2 id="为什么要写博客"><a href="#为什么要写博客" class="headerlink" title="为什么要写博客"></a>为什么要写博客</h2><p>写博客的目的不在于给别人看，博客对我而言是一个特殊的笔记本，与普通的笔记本不同的是，博客中的内容并不是直接来源于一本书，一堂课，或者某一个视频，一篇博客的内容的直接生产者是我自己，一篇博客代表这我自己在这一段时间中获得的知识与感想的集合，它自成我的体系，它独属于我自己，写博客的过程，更似写一篇日记，我需要将自己的所思所想从心底全部引出，落在纸上（乐），这本身就是一种回顾，总结与加深，通过写博客，可以让一个人培养起不断反思，不断求深求全的习惯，我想这对自己的发展是大有脾益的。</p>
 ]]></content>
+      <categories>
+        <category>随记</category>
+      </categories>
+      <tags>
+        <tag>总结</tag>
+      </tags>
   </entry>
 </search>
