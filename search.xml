@@ -41,30 +41,17 @@
       </tags>
   </entry>
   <entry>
-    <title>关于django用户系统的搭建流程</title>
-    <url>/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="用户系统的搭建和登录界面的完成"><a href="#用户系统的搭建和登录界面的完成" class="headerlink" title="用户系统的搭建和登录界面的完成"></a>用户系统的搭建和登录界面的完成</h1><h2 id="1-1-向django自带数据库中添加自定义的类时需要注意的操作"><a href="#1-1-向django自带数据库中添加自定义的类时需要注意的操作" class="headerlink" title="1.1 向django自带数据库中添加自定义的类时需要注意的操作"></a>1.1 向django自带数据库中添加自定义的类时需要注意的操作</h2><p>启动uwsgi.ini服务之后<code>sudo uwsgi --ini scripts/uwsgi.ini</code>不要直接关闭终端，这样导致服务难以被关闭</p>
-<p>如果无法关闭，则使用<code>sudo fuser -k 8000/tcp</code>杀死在8000端口的进程，在运行ini</p>
-<p>登陆界面中的每个函数都要实现三个部分：</p>
-<ol>
-<li>views实现函数的本体</li>
-<li>urls中实现函数的映射</li>
-<li>js中实现对应的调用</li>
-</ol>
-<p>每一个处理请求的函数都要传入一个参数:request，请求登陆也是如此，并且导入包：<code>from django.http import JsonResponse</code></p>
-<p>json文件：通用的序列化存储字典等内容的文件</p>
-<p>path中填写的url最后一定带上&#x2F;，否则后面接新的东西时会出错</p>
-<p>注意为文件添加可执行权限的操作是 chmod +x filename</p>
-<p>js实现三秒后刷新：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+    <title>初学数组模拟邻接表的一些理解</title>
+    <url>/2022/12/24/%E5%88%9D%E5%AD%A6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<h2 id="head与next数组中保存的是ver数组的下标"><a href="#head与next数组中保存的是ver数组的下标" class="headerlink" title="head与next数组中保存的是ver数组的下标"></a>head与next数组中保存的是ver数组的下标</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//加入有向边(x, y)，权值为z；</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z)</span> </span>&#123;</span><br><span class="line">	ver[++tot] = y, edge[tot] = z; <span class="comment">//真实数据</span></span><br><span class="line">	next[tot] = head[x], head[x] = tot;</span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
 
+<h2 id="理解方法："><a href="#理解方法：" class="headerlink" title="理解方法："></a>理解方法：</h2><p>tot为每一个数据编号，从第一个输入开始一直往后排，至于数据的输入顺序有关，与数据本身的性质无关<br>ver[++tot]因此就表示新录入一个数据，编号tot++；<br>对于一个以邻接表表示的有向图而言，表头head的下表表示起点的值，head的内容指向该起点最新加入的一条邻边终点的编号（即输入时的tot），next[tot]表示下表为tot的数据的后面接的数的编号；因为表头指针更新的是最新插入的数据，所以无需查找到末尾直接更新表头指向即可，因此有了：<br>next[tot] &#x3D; head[x], head[x] &#x3D; tot; 这样的操作。</p>
 ]]></content>
       <categories>
-        <category>科技</category>
-        <category>笔记</category>
+        <category>算法</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -86,17 +73,54 @@
       </tags>
   </entry>
   <entry>
-    <title>初学数组模拟邻接表的一些理解</title>
-    <url>/2022/12/24/%E5%88%9D%E5%AD%A6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[<h2 id="head与next数组中保存的是ver数组的下标"><a href="#head与next数组中保存的是ver数组的下标" class="headerlink" title="head与next数组中保存的是ver数组的下标"></a>head与next数组中保存的是ver数组的下标</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//加入有向边(x, y)，权值为z；</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z)</span> </span>&#123;</span><br><span class="line">	ver[++tot] = y, edge[tot] = z; <span class="comment">//真实数据</span></span><br><span class="line">	next[tot] = head[x], head[x] = tot;</span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
+    <title>每日一题2022-10-30</title>
+    <url>/2022/12/30/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982022-10-30/</url>
+    <content><![CDATA[<h1 id="上课睡觉"><a href="#上课睡觉" class="headerlink" title="上课睡觉"></a>上课睡觉</h1><p>题目：<br><a href="https://www.acwing.com/problem/content/description/4369/">https://www.acwing.com/problem/content/description/4369/</a></p>
+<p>思路：<br>最终分配结果是每一堆的个数相同，则总堆数一定是sum的约数。补充知识：对于每一个数的平均约数都是logn个，推理过程如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">对于一个数n，1-n中含有的2的倍数有n/2个，3的倍数有n/3个，以此类推，则总倍数有：1+n/2+n/3+......+n/n = nlnn个，然后倍数与约数又是一对相对的概念，所以约数大概为lnn个，为logn级别</span><br></pre></td></tr></table></figure>
 
-<h2 id="理解方法："><a href="#理解方法：" class="headerlink" title="理解方法："></a>理解方法：</h2><p>tot为每一个数据编号，从第一个输入开始一直往后排，至于数据的输入顺序有关，与数据本身的性质无关<br>ver[++tot]因此就表示新录入一个数据，编号tot++；<br>对于一个以邻接表表示的有向图而言，表头head的下表表示起点的值，head的内容指向该起点最新加入的一条邻边终点的编号（即输入时的tot），next[tot]表示下表为tot的数据的后面接的数的编号；因为表头指针更新的是最新插入的数据，所以无需查找到末尾直接更新表头指向即可，因此有了：<br>next[tot] &#x3D; head[x], head[x] &#x3D; tot; 这样的操作。</p>
+<span id="more"></span>
+
+<p>所以解本题的思路为：寻找不同的cnt满足sum，然后依次检验cnt是否合法，最后找出最小的cnt(因为答案是n-sum&#x2F;cnt(动多少次就是原堆数减去现堆数))<br>如何检验是否合法：注意到能合并的堆一定是相互靠近的（这时候不要模拟实际的过程去思考，要抽象出最便于处理的本质），所以题目的本质就是将所给序列分割成一段段，每段sum都是cnt。</p>
+<p>使用差分与前缀和的知识。一定可以确定的是，每一堆的石子必然大于等于0.</p>
+<p>现预设一个cnt，然后从第一段开始检验，看看是否能够满足这个预设的cnt，然后再到后面去检验。<br>这样的话：枚举cnt是否成立时间复杂度为n，枚举约数时间复杂度为logn，总时间复杂度为nlogn，可以满足。<br>1e6下约数最多为240，则最多需要计算240*1e6次，c++一秒可以计算1e8次，所以稳过。</p>
+<p>示例代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> w[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">int</span> cnt)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>, s=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        s += w[i];</span><br><span class="line">        <span class="keyword">if</span>(s &gt; cnt) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(s == cnt) s=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>( T-- ) &#123;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;w[i]);</span><br><span class="line">            sum += w[i];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=n; i&gt;<span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span>(sum % i == <span class="number">0</span> &amp;&amp; <span class="built_in">check</span>(sum/i)) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, n-i);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>算法</category>
       </categories>
       <tags>
-        <tag>算法</tag>
+        <tag>练习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于django用户系统的搭建流程</title>
+    <url>/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="用户系统的搭建和登录界面的完成"><a href="#用户系统的搭建和登录界面的完成" class="headerlink" title="用户系统的搭建和登录界面的完成"></a>用户系统的搭建和登录界面的完成</h1><h2 id="1-1-向django自带数据库中添加自定义的类时需要注意的操作"><a href="#1-1-向django自带数据库中添加自定义的类时需要注意的操作" class="headerlink" title="1.1 向django自带数据库中添加自定义的类时需要注意的操作"></a>1.1 向django自带数据库中添加自定义的类时需要注意的操作</h2><p>启动uwsgi.ini服务之后<code>sudo uwsgi --ini scripts/uwsgi.ini</code>不要直接关闭终端，这样导致服务难以被关闭</p>
+<span id="more"></span>
+
+<p>如果无法关闭，则使用<code>sudo fuser -k 8000/tcp</code>杀死在8000端口的进程，在运行ini</p>
+<p>登陆界面中的每个函数都要实现三个部分：</p>
+<ol>
+<li>views实现函数的本体</li>
+<li>urls中实现函数的映射</li>
+<li>js中实现对应的调用</li>
+</ol>
+<p>每一个处理请求的函数都要传入一个参数:request，请求登陆也是如此，并且导入包：<code>from django.http import JsonResponse</code></p>
+<p>json文件：通用的序列化存储字典等内容的文件</p>
+<p>path中填写的url最后一定带上&#x2F;，否则后面接新的东西时会出错</p>
+<p>注意为文件添加可执行权限的操作是 chmod +x filename</p>
+<p>js实现三秒后刷新：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>科技</category>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
       </tags>
   </entry>
 </search>

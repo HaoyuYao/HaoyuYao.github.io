@@ -189,6 +189,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xiwen1.github.io/2022/12/30/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982022-10-30/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/touxiang.png">
+      <meta itemprop="name" content="xiwen_youmu">
+      <meta itemprop="description" content="张可为的个人博客，快给我关注（批脸）">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徯璺">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/30/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982022-10-30/" class="post-title-link" itemprop="url">每日一题2022-10-30</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-30 22:52:37 / 修改时间：22:54:45" itemprop="dateCreated datePublished" datetime="2022-12-30T22:52:37+08:00">2022-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="上课睡觉"><a href="#上课睡觉" class="headerlink" title="上课睡觉"></a>上课睡觉</h1><p>题目：<br><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/description/4369/">https://www.acwing.com/problem/content/description/4369/</a></p>
+<p>思路：<br>最终分配结果是每一堆的个数相同，则总堆数一定是sum的约数。补充知识：对于每一个数的平均约数都是logn个，推理过程如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对于一个数n，1-n中含有的2的倍数有n/2个，3的倍数有n/3个，以此类推，则总倍数有：1+n/2+n/3+......+n/n = nlnn个，然后倍数与约数又是一对相对的概念，所以约数大概为lnn个，为logn级别</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/12/30/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982022-10-30/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://xiwen1.github.io/2022/12/24/%E5%88%9D%E5%AD%A6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -299,7 +377,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-12-20 15:59:35" itemprop="dateModified" datetime="2022-12-20T15:59:35+08:00">2022-12-20</time>
+                <time title="修改时间：2022-12-30 22:54:18" itemprop="dateModified" datetime="2022-12-30T22:54:18+08:00">2022-12-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -327,17 +405,6 @@
 
       
           <h1 id="用户系统的搭建和登录界面的完成"><a href="#用户系统的搭建和登录界面的完成" class="headerlink" title="用户系统的搭建和登录界面的完成"></a>用户系统的搭建和登录界面的完成</h1><h2 id="1-1-向django自带数据库中添加自定义的类时需要注意的操作"><a href="#1-1-向django自带数据库中添加自定义的类时需要注意的操作" class="headerlink" title="1.1 向django自带数据库中添加自定义的类时需要注意的操作"></a>1.1 向django自带数据库中添加自定义的类时需要注意的操作</h2><p>启动uwsgi.ini服务之后<code>sudo uwsgi --ini scripts/uwsgi.ini</code>不要直接关闭终端，这样导致服务难以被关闭</p>
-<p>如果无法关闭，则使用<code>sudo fuser -k 8000/tcp</code>杀死在8000端口的进程，在运行ini</p>
-<p>登陆界面中的每个函数都要实现三个部分：</p>
-<ol>
-<li>views实现函数的本体</li>
-<li>urls中实现函数的映射</li>
-<li>js中实现对应的调用</li>
-</ol>
-<p>每一个处理请求的函数都要传入一个参数:request，请求登陆也是如此，并且导入包：<code>from django.http import JsonResponse</code></p>
-<p>json文件：通用的序列化存储字典等内容的文件</p>
-<p>path中填写的url最后一定带上&#x2F;，否则后面接新的东西时会出错</p>
-<p>注意为文件添加可执行权限的操作是 chmod +x filename</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/#more" rel="contents">
@@ -587,7 +654,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -598,7 +665,7 @@
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -610,6 +677,9 @@
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
         <a href="https://github.com/xiwen1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiwen1" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/1597083201@qq.com.com" title="E-Mail → 1597083201@qq.com.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
   <div class="cc-license motion-element" itemprop="license">
