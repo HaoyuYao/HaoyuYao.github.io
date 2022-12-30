@@ -1,6 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>2022-12-30一些感想和碎碎念</title>
+    <url>/2022/12/30/2022-12-30%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E7%A2%8E%E7%A2%8E%E5%BF%B5/</url>
+    <content><![CDATA[<h1 id="一些碎碎念"><a href="#一些碎碎念" class="headerlink" title="一些碎碎念"></a>一些碎碎念</h1><p>10号到现在20天完全就是一个比放寒假还摆烂的颓废状态hh，倒不是要忏悔什么，已经习惯了。</p>
+<span id="more"></span>
+
+<p>原因想了想，有很多，反正结果就是整个人被满满的负能量充斥，做什么事情都没有动力，然后负能量逐渐转化为失败感，开始emo，但是还是什么都不想做。</p>
+<p>今天上午考了思修，但是nb的我完全没有复习，全靠临时发挥，现在才感觉自己真的是胆子大，还是说已经摆烂到逃避现实了。</p>
+<p>我这个人真的就不能停下来，一停下来，整个人就会立马朝着死气沉沉的方向发展，必须不断的被人push，不然只能等到自己也都无法忍受的时候再亲自push自己；我这个人也是禁不住一点夸，做了一点点事情就会开心的不得了，觉得自己很了不起可以随便放松了，然后抱着手机玩几天后才发现自己什么都不是还在洋洋得意浪费生命。</p>
+<p>我要是会玩也不错，但是抱歉，一个宅男好像这个都做不到。我所做的恐怕只能叫颓废。</p>
+<p>我必须将每一天的任务安排的满满当当，预判到我会做的每一件事，确定我需要做的每一件事，然后不断push自己这样去做，这样我才能对自己的生活有些许的把握感。当然每一天的任务我都必然做不完，还是给自己积累焦虑了。</p>
+<p>但是一旦我自己停下来了，那一切就会朝着崩坏的方向发展，知道变成被负能量充满的样子然后向我现在这样做深刻的忏悔。</p>
+<p>我愿称之为张可为周期律。但是这样不行，因为一个周期中我摆烂的时间总是远远超过努力的时间，这样下去我会一次次的变成对一切失去把控的loser。</p>
+<p>没想到到了武大还是生活在被大佬支配的恐惧之中，但是我想这主要是我自己的问题，不要再摆烂辣。</p>
+<p>别恐惧了，有这时间不如多做一点事情，多做一点，最起码的好处是能对自己的生活多一份掌控感，这当然会不舒服，但是停下来也不是那么舒服（我只想舒服呃呃）。</p>
+<p>所以说写下这些记录一下，我想见证一下自己的这个周期律能不能在努力的时候再稍稍延长一下。</p>
+<p>希望以后也能认真写更多的笔记，整理更多的心得，水更多的碎碎念，欸嘿</p>
+]]></content>
+      <categories>
+        <category>随记</category>
+      </categories>
+      <tags>
+        <tag>日常</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>初学数组模拟邻接表的一些理解</title>
+    <url>/2022/12/24/%E5%88%9D%E5%AD%A6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<h2 id="head与next数组中保存的是ver数组的下标"><a href="#head与next数组中保存的是ver数组的下标" class="headerlink" title="head与next数组中保存的是ver数组的下标"></a>head与next数组中保存的是ver数组的下标</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//加入有向边(x, y)，权值为z；</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z)</span> </span>&#123;</span><br><span class="line">	ver[++tot] = y, edge[tot] = z; <span class="comment">//真实数据</span></span><br><span class="line">	next[tot] = head[x], head[x] = tot;</span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
+
+<h2 id="理解方法："><a href="#理解方法：" class="headerlink" title="理解方法："></a>理解方法：</h2><p>tot为每一个数据编号，从第一个输入开始一直往后排，至于数据的输入顺序有关，与数据本身的性质无关<br>ver[++tot]因此就表示新录入一个数据，编号tot++；<br>对于一个以邻接表表示的有向图而言，表头head的下表表示起点的值，head的内容指向该起点最新加入的一条邻边终点的编号（即输入时的tot），next[tot]表示下表为tot的数据的后面接的数的编号；因为表头指针更新的是最新插入的数据，所以无需查找到末尾直接更新表头指向即可，因此有了：<br>next[tot] &#x3D; head[x], head[x] &#x3D; tot; 这样的操作。</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于django用户系统的搭建流程</title>
+    <url>/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="用户系统的搭建和登录界面的完成"><a href="#用户系统的搭建和登录界面的完成" class="headerlink" title="用户系统的搭建和登录界面的完成"></a>用户系统的搭建和登录界面的完成</h1><h2 id="1-1-向django自带数据库中添加自定义的类时需要注意的操作"><a href="#1-1-向django自带数据库中添加自定义的类时需要注意的操作" class="headerlink" title="1.1 向django自带数据库中添加自定义的类时需要注意的操作"></a>1.1 向django自带数据库中添加自定义的类时需要注意的操作</h2><p>启动uwsgi.ini服务之后<code>sudo uwsgi --ini scripts/uwsgi.ini</code>不要直接关闭终端，这样导致服务难以被关闭</p>
+<span id="more"></span>
+
+<p>如果无法关闭，则使用<code>sudo fuser -k 8000/tcp</code>杀死在8000端口的进程，在运行ini</p>
+<p>登陆界面中的每个函数都要实现三个部分：</p>
+<ol>
+<li>views实现函数的本体</li>
+<li>urls中实现函数的映射</li>
+<li>js中实现对应的调用</li>
+</ol>
+<p>每一个处理请求的函数都要传入一个参数:request，请求登陆也是如此，并且导入包：<code>from django.http import JsonResponse</code></p>
+<p>json文件：通用的序列化存储字典等内容的文件</p>
+<p>path中填写的url最后一定带上&#x2F;，否则后面接新的东西时会出错</p>
+<p>注意为文件添加可执行权限的操作是 chmod +x filename</p>
+<p>js实现三秒后刷新：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>科技</category>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用django+canvas完成简单的网页游戏</title>
     <url>/2022/12/17/%E4%BD%BF%E7%94%A8django-canvas%E5%AE%8C%E6%88%90%E7%AE%80%E5%8D%95%E7%9A%84%E7%BD%91%E9%A1%B5%E6%B8%B8%E6%88%8F/</url>
     <content><![CDATA[<p><em>最近买了acwing的django框架课学习使用django进行简单的网页游戏开发，虽然现在还没有学完，但是目前对于javascript使用canvas进行简单的游戏开发已经有了相对之前非常多的心得，故有此篇，之后关于用户系统和thrift联机对战的内容会单独出一篇文章</em></p>
@@ -41,20 +109,6 @@
       </tags>
   </entry>
   <entry>
-    <title>初学数组模拟邻接表的一些理解</title>
-    <url>/2022/12/24/%E5%88%9D%E5%AD%A6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[<h2 id="head与next数组中保存的是ver数组的下标"><a href="#head与next数组中保存的是ver数组的下标" class="headerlink" title="head与next数组中保存的是ver数组的下标"></a>head与next数组中保存的是ver数组的下标</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//加入有向边(x, y)，权值为z；</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z)</span> </span>&#123;</span><br><span class="line">	ver[++tot] = y, edge[tot] = z; <span class="comment">//真实数据</span></span><br><span class="line">	next[tot] = head[x], head[x] = tot;</span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
-
-<h2 id="理解方法："><a href="#理解方法：" class="headerlink" title="理解方法："></a>理解方法：</h2><p>tot为每一个数据编号，从第一个输入开始一直往后排，至于数据的输入顺序有关，与数据本身的性质无关<br>ver[++tot]因此就表示新录入一个数据，编号tot++；<br>对于一个以邻接表表示的有向图而言，表头head的下表表示起点的值，head的内容指向该起点最新加入的一条邻边终点的编号（即输入时的tot），next[tot]表示下表为tot的数据的后面接的数的编号；因为表头指针更新的是最新插入的数据，所以无需查找到末尾直接更新表头指向即可，因此有了：<br>next[tot] &#x3D; head[x], head[x] &#x3D; tot; 这样的操作。</p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>关于本博客的一些希望</title>
     <url>/2022/12/16/%E5%85%B3%E4%BA%8E%E6%9C%AC%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%8C%E6%9C%9B/</url>
     <content><![CDATA[<p><em>关于本博客的一些初衷，首先写在这里，以勉励自己</em></p>
@@ -92,35 +146,6 @@
       </categories>
       <tags>
         <tag>练习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于django用户系统的搭建流程</title>
-    <url>/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="用户系统的搭建和登录界面的完成"><a href="#用户系统的搭建和登录界面的完成" class="headerlink" title="用户系统的搭建和登录界面的完成"></a>用户系统的搭建和登录界面的完成</h1><h2 id="1-1-向django自带数据库中添加自定义的类时需要注意的操作"><a href="#1-1-向django自带数据库中添加自定义的类时需要注意的操作" class="headerlink" title="1.1 向django自带数据库中添加自定义的类时需要注意的操作"></a>1.1 向django自带数据库中添加自定义的类时需要注意的操作</h2><p>启动uwsgi.ini服务之后<code>sudo uwsgi --ini scripts/uwsgi.ini</code>不要直接关闭终端，这样导致服务难以被关闭</p>
-<span id="more"></span>
-
-<p>如果无法关闭，则使用<code>sudo fuser -k 8000/tcp</code>杀死在8000端口的进程，在运行ini</p>
-<p>登陆界面中的每个函数都要实现三个部分：</p>
-<ol>
-<li>views实现函数的本体</li>
-<li>urls中实现函数的映射</li>
-<li>js中实现对应的调用</li>
-</ol>
-<p>每一个处理请求的函数都要传入一个参数:request，请求登陆也是如此，并且导入包：<code>from django.http import JsonResponse</code></p>
-<p>json文件：通用的序列化存储字典等内容的文件</p>
-<p>path中填写的url最后一定带上&#x2F;，否则后面接新的东西时会出错</p>
-<p>注意为文件添加可执行权限的操作是 chmod +x filename</p>
-<p>js实现三秒后刷新：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>科技</category>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
       </tags>
   </entry>
 </search>
