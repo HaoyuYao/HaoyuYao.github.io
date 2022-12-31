@@ -26,20 +26,6 @@
       </tags>
   </entry>
   <entry>
-    <title>初学数组模拟邻接表的一些理解</title>
-    <url>/2022/12/24/%E5%88%9D%E5%AD%A6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[<h2 id="head与next数组中保存的是ver数组的下标"><a href="#head与next数组中保存的是ver数组的下标" class="headerlink" title="head与next数组中保存的是ver数组的下标"></a>head与next数组中保存的是ver数组的下标</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//加入有向边(x, y)，权值为z；</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z)</span> </span>&#123;</span><br><span class="line">	ver[++tot] = y, edge[tot] = z; <span class="comment">//真实数据</span></span><br><span class="line">	next[tot] = head[x], head[x] = tot;</span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
-
-<h2 id="理解方法："><a href="#理解方法：" class="headerlink" title="理解方法："></a>理解方法：</h2><p>tot为每一个数据编号，从第一个输入开始一直往后排，至于数据的输入顺序有关，与数据本身的性质无关<br>ver[++tot]因此就表示新录入一个数据，编号tot++；<br>对于一个以邻接表表示的有向图而言，表头head的下表表示起点的值，head的内容指向该起点最新加入的一条邻边终点的编号（即输入时的tot），next[tot]表示下表为tot的数据的后面接的数的编号；因为表头指针更新的是最新插入的数据，所以无需查找到末尾直接更新表头指向即可，因此有了：<br>next[tot] &#x3D; head[x], head[x] &#x3D; tot; 这样的操作。</p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>关于django用户系统的搭建流程</title>
     <url>/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="用户系统的搭建和登录界面的完成"><a href="#用户系统的搭建和登录界面的完成" class="headerlink" title="用户系统的搭建和登录界面的完成"></a>用户系统的搭建和登录界面的完成</h1><h2 id="1-1-向django自带数据库中添加自定义的类时需要注意的操作"><a href="#1-1-向django自带数据库中添加自定义的类时需要注意的操作" class="headerlink" title="1.1 向django自带数据库中添加自定义的类时需要注意的操作"></a>1.1 向django自带数据库中添加自定义的类时需要注意的操作</h2><p>启动uwsgi.ini服务之后<code>sudo uwsgi --ini scripts/uwsgi.ini</code>不要直接关闭终端，这样导致服务难以被关闭</p>
@@ -127,6 +113,20 @@
       </tags>
   </entry>
   <entry>
+    <title>初学数组模拟邻接表的一些理解</title>
+    <url>/2022/12/24/%E5%88%9D%E5%AD%A6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<h2 id="head与next数组中保存的是ver数组的下标"><a href="#head与next数组中保存的是ver数组的下标" class="headerlink" title="head与next数组中保存的是ver数组的下标"></a>head与next数组中保存的是ver数组的下标</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//加入有向边(x, y)，权值为z；</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z)</span> </span>&#123;</span><br><span class="line">	ver[++tot] = y, edge[tot] = z; <span class="comment">//真实数据</span></span><br><span class="line">	next[tot] = head[x], head[x] = tot;</span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
+
+<h2 id="理解方法："><a href="#理解方法：" class="headerlink" title="理解方法："></a>理解方法：</h2><p>tot为每一个数据编号，从第一个输入开始一直往后排，至于数据的输入顺序有关，与数据本身的性质无关<br>ver[++tot]因此就表示新录入一个数据，编号tot++；<br>对于一个以邻接表表示的有向图而言，表头head的下表表示起点的值，head的内容指向该起点最新加入的一条邻边终点的编号（即输入时的tot），next[tot]表示下表为tot的数据的后面接的数的编号；因为表头指针更新的是最新插入的数据，所以无需查找到末尾直接更新表头指向即可，因此有了：<br>next[tot] &#x3D; head[x], head[x] &#x3D; tot; 这样的操作。</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>每日一题2022-10-30</title>
     <url>/2022/12/30/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982022-10-30/</url>
     <content><![CDATA[<h1 id="上课睡觉"><a href="#上课睡觉" class="headerlink" title="上课睡觉"></a>上课睡觉</h1><p>题目：<br><a href="https://www.acwing.com/problem/content/description/4369/">https://www.acwing.com/problem/content/description/4369/</a></p>
@@ -146,6 +146,23 @@
       </categories>
       <tags>
         <tag>练习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>背包问题：能量石</title>
+    <url>/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/</url>
+    <content><![CDATA[<h1 id="能量石"><a href="#能量石" class="headerlink" title="能量石"></a>能量石</h1><p>链接： <a href="https://www.acwing.com/problem/content/736/">734. 能量石 - AcWing题库</a></p>
+<p>思路： 因为吃能量石的顺序会对物品的价值产生影响，所以要考虑的维度增多了，这时候要首先利用贪心的思路对能量石进行预先排序，注意到对于两件物品时，全部吃掉的情况下，<code>s[ i ] * l[ i+1 ] </code>即为当前顺序下会损失的能量值，这个值当然越小越好，所以对于假设要吃的所有物品，s&#x2F;l的值越小就说明它一定要先吃。<br>之前的考虑中没有考虑能量不能将为负数的情况，实际上只要将状态表达设置为时间恰好为j时的总能量值那么当能量降低为负数时就会对f产生负影响，只要遍历一遍求最大值就是题目所需的答案。</p>
+<span id="more"></span>
+
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10010</span>;</span><br><span class="line"><span class="type">int</span> f[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Stone</span>&#123;</span><br><span class="line">    <span class="type">int</span> s, e, l;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&lt; (<span class="type">const</span> Stone &amp;W) <span class="type">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> s * W.l &lt; l * W.s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;stone[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> C=<span class="number">0</span>; C&lt;T; C++) &#123;</span><br><span class="line">        <span class="type">int</span> m = <span class="number">0</span>;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s, e, l;</span><br><span class="line">            cin&gt;&gt;s&gt;&gt;e&gt;&gt;l;</span><br><span class="line">            stone[i] = &#123;s, e, l&#125;;</span><br><span class="line">            m += s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(stone, stone+n);</span><br><span class="line">    </span><br><span class="line">        <span class="built_in">memset</span>(f, <span class="number">-0x3f</span>, <span class="keyword">sizeof</span> f);</span><br><span class="line">        f[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s = stone[i].s, e = stone[i].e, l = stone[i].l;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=s; j--) &#123;</span><br><span class="line">                f[j] = <span class="built_in">max</span>(f[j], f[j-s]+e-(j-s)*l); <span class="comment">//在所有能量石降为负数时就自然不是最大值了，这样就省去了判断不能小于0的情况；</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;=m; i++) &#123;</span><br><span class="line">            res = <span class="built_in">max</span>(res, f[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Case #%d: %d\n&quot;</span>, C+<span class="number">1</span>, res);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
       </tags>
   </entry>
 </search>

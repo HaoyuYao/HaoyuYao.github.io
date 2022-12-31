@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"xiwen1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":2,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="一些碎碎念10号到现在20天完全就是一个比放寒假还摆烂的颓废状态hh，倒不是要忏悔什么，已经习惯了。">
+  <meta name="description" content="能量石链接： 734. 能量石 - AcWing题库 思路： 因为吃能量石的顺序会对物品的价值产生影响，所以要考虑的维度增多了，这时候要首先利用贪心的思路对能量石进行预先排序，注意到对于两件物品时，全部吃掉的情况下，s[ i ] * l[ i+1 ] 即为当前顺序下会损失的能量值，这个值当然越小越好，所以对于假设要吃的所有物品，s&#x2F;l的值越小就说明它一定要先吃。之前的考虑中没有考虑能量不">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2022-12-30一些感想和碎碎念">
-<meta property="og:url" content="http://xiwen1.github.io/2022/12/30/2022-12-30%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E7%A2%8E%E7%A2%8E%E5%BF%B5/index.html">
+<meta property="og:title" content="背包问题：能量石">
+<meta property="og:url" content="http://xiwen1.github.io/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/index.html">
 <meta property="og:site_name" content="徯璺">
-<meta property="og:description" content="一些碎碎念10号到现在20天完全就是一个比放寒假还摆烂的颓废状态hh，倒不是要忏悔什么，已经习惯了。">
+<meta property="og:description" content="能量石链接： 734. 能量石 - AcWing题库 思路： 因为吃能量石的顺序会对物品的价值产生影响，所以要考虑的维度增多了，这时候要首先利用贪心的思路对能量石进行预先排序，注意到对于两件物品时，全部吃掉的情况下，s[ i ] * l[ i+1 ] 即为当前顺序下会损失的能量值，这个值当然越小越好，所以对于假设要吃的所有物品，s&#x2F;l的值越小就说明它一定要先吃。之前的考虑中没有考虑能量不">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-12-30T14:57:36.000Z">
-<meta property="article:modified_time" content="2022-12-30T15:23:43.192Z">
+<meta property="article:published_time" content="2022-12-31T11:32:11.000Z">
+<meta property="article:modified_time" content="2022-12-31T11:34:04.498Z">
 <meta property="article:author" content="xiwen_youmu">
-<meta property="article:tag" content="日常">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://xiwen1.github.io/2022/12/30/2022-12-30%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E7%A2%8E%E7%A2%8E%E5%BF%B5/">
+<link rel="canonical" href="http://xiwen1.github.io/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>2022-12-30一些感想和碎碎念 | 徯璺</title>
+  <title>背包问题：能量石 | 徯璺</title>
   
 
 
@@ -192,7 +192,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xiwen1.github.io/2022/12/30/2022-12-30%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E7%A2%8E%E7%A2%8E%E5%BF%B5/">
+    <link itemprop="mainEntityOfPage" href="http://xiwen1.github.io/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/touxiang.png">
@@ -205,7 +205,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          2022-12-30一些感想和碎碎念
+          背包问题：能量石
         </h1>
 
         <div class="post-meta">
@@ -216,7 +216,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-12-30 22:57:36 / 修改时间：23:23:43" itemprop="dateCreated datePublished" datetime="2022-12-30T22:57:36+08:00">2022-12-30</time>
+              <time title="创建时间：2022-12-31 19:32:11 / 修改时间：19:34:04" itemprop="dateCreated datePublished" datetime="2022-12-31T19:32:11+08:00">2022-12-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -224,7 +224,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9A%8F%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">随记</span></a>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
             </span>
 
@@ -239,20 +239,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="一些碎碎念"><a href="#一些碎碎念" class="headerlink" title="一些碎碎念"></a>一些碎碎念</h1><p>10号到现在20天完全就是一个比放寒假还摆烂的颓废状态hh，倒不是要忏悔什么，已经习惯了。</p>
+        <h1 id="能量石"><a href="#能量石" class="headerlink" title="能量石"></a>能量石</h1><p>链接： <a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/736/">734. 能量石 - AcWing题库</a></p>
+<p>思路： 因为吃能量石的顺序会对物品的价值产生影响，所以要考虑的维度增多了，这时候要首先利用贪心的思路对能量石进行预先排序，注意到对于两件物品时，全部吃掉的情况下，<code>s[ i ] * l[ i+1 ] </code>即为当前顺序下会损失的能量值，这个值当然越小越好，所以对于假设要吃的所有物品，s&#x2F;l的值越小就说明它一定要先吃。<br>之前的考虑中没有考虑能量不能将为负数的情况，实际上只要将状态表达设置为时间恰好为j时的总能量值那么当能量降低为负数时就会对f产生负影响，只要遍历一遍求最大值就是题目所需的答案。</p>
 <span id="more"></span>
 
-<p>原因想了想，有很多，反正结果就是整个人被满满的负能量充斥，做什么事情都没有动力，然后负能量逐渐转化为失败感，开始emo，但是还是什么都不想做。</p>
-<p>今天上午考了思修，但是nb的我完全没有复习，全靠临时发挥，现在才感觉自己真的是胆子大，还是说已经摆烂到逃避现实了。</p>
-<p>我这个人真的就不能停下来，一停下来，整个人就会立马朝着死气沉沉的方向发展，必须不断的被人push，不然只能等到自己也都无法忍受的时候再亲自push自己；我这个人也是禁不住一点夸，做了一点点事情就会开心的不得了，觉得自己很了不起可以随便放松了，然后抱着手机玩几天后才发现自己什么都不是还在洋洋得意浪费生命。</p>
-<p>我要是会玩也不错，但是抱歉，一个宅男好像这个都做不到。我所做的恐怕只能叫颓废。</p>
-<p>我必须将每一天的任务安排的满满当当，预判到我会做的每一件事，确定我需要做的每一件事，然后不断push自己这样去做，这样我才能对自己的生活有些许的把握感。当然每一天的任务我都必然做不完，还是给自己积累焦虑了。</p>
-<p>但是一旦我自己停下来了，那一切就会朝着崩坏的方向发展，知道变成被负能量充满的样子然后向我现在这样做深刻的忏悔。</p>
-<p>我愿称之为张可为周期律。但是这样不行，因为一个周期中我摆烂的时间总是远远超过努力的时间，这样下去我会一次次的变成对一切失去把控的loser。</p>
-<p>没想到到了武大还是生活在被大佬支配的恐惧之中，但是我想这主要是我自己的问题，不要再摆烂辣。</p>
-<p>别恐惧了，有这时间不如多做一点事情，多做一点，最起码的好处是能对自己的生活多一份掌控感，这当然会不舒服，但是停下来也不是那么舒服（我只想舒服呃呃）。</p>
-<p>所以说写下这些记录一下，我想见证一下自己的这个周期律能不能在努力的时候再稍稍延长一下。</p>
-<p>希望以后也能认真写更多的笔记，整理更多的心得，水更多的碎碎念，欸嘿</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10010</span>;</span><br><span class="line"><span class="type">int</span> f[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Stone</span>&#123;</span><br><span class="line">    <span class="type">int</span> s, e, l;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&lt; (<span class="type">const</span> Stone &amp;W) <span class="type">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> s * W.l &lt; l * W.s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;stone[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> C=<span class="number">0</span>; C&lt;T; C++) &#123;</span><br><span class="line">        <span class="type">int</span> m = <span class="number">0</span>;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s, e, l;</span><br><span class="line">            cin&gt;&gt;s&gt;&gt;e&gt;&gt;l;</span><br><span class="line">            stone[i] = &#123;s, e, l&#125;;</span><br><span class="line">            m += s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(stone, stone+n);</span><br><span class="line">    </span><br><span class="line">        <span class="built_in">memset</span>(f, <span class="number">-0x3f</span>, <span class="keyword">sizeof</span> f);</span><br><span class="line">        f[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s = stone[i].s, e = stone[i].e, l = stone[i].l;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=s; j--) &#123;</span><br><span class="line">                f[j] = <span class="built_in">max</span>(f[j], f[j-s]+e-(j-s)*l); <span class="comment">//在所有能量石降为负数时就自然不是最大值了，这样就省去了判断不能小于0的情况；</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;=m; i++) &#123;</span><br><span class="line">            res = <span class="built_in">max</span>(res, f[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Case #%d: %d\n&quot;</span>, C+<span class="number">1</span>, res);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -268,7 +260,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://xiwen1.github.io/2022/12/30/2022-12-30%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E7%A2%8E%E7%A2%8E%E5%BF%B5/" title="2022-12-30一些感想和碎碎念">http://xiwen1.github.io/2022/12/30/2022-12-30一些感想和碎碎念/</a>
+    <a href="http://xiwen1.github.io/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/" title="背包问题：能量石">http://xiwen1.github.io/2022/12/31/背包问题：能量石/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -279,7 +271,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%97%A5%E5%B8%B8/" rel="tag"># 日常</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
           </div>
 
         
@@ -288,13 +280,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/12/30/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982022-10-30/" rel="prev" title="每日一题2022-10-30">
-      <i class="fa fa-chevron-left"></i> 每日一题2022-10-30
+    <a href="/2022/12/30/2022-12-30%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E7%A2%8E%E7%A2%8E%E5%BF%B5/" rel="prev" title="2022-12-30一些感想和碎碎念">
+      <i class="fa fa-chevron-left"></i> 2022-12-30一些感想和碎碎念
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/" rel="next" title="背包问题：能量石">
-      背包问题：能量石 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -354,7 +343,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">一些碎碎念</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%BD%E9%87%8F%E7%9F%B3"><span class="nav-number">1.</span> <span class="nav-text">能量石</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -189,6 +189,83 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xiwen1.github.io/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/touxiang.png">
+      <meta itemprop="name" content="xiwen_youmu">
+      <meta itemprop="description" content="张可为的个人博客，快给我关注（批脸）">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徯璺">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/" class="post-title-link" itemprop="url">背包问题：能量石</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-31 19:32:11 / 修改时间：19:34:04" itemprop="dateCreated datePublished" datetime="2022-12-31T19:32:11+08:00">2022-12-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="能量石"><a href="#能量石" class="headerlink" title="能量石"></a>能量石</h1><p>链接： <a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/736/">734. 能量石 - AcWing题库</a></p>
+<p>思路： 因为吃能量石的顺序会对物品的价值产生影响，所以要考虑的维度增多了，这时候要首先利用贪心的思路对能量石进行预先排序，注意到对于两件物品时，全部吃掉的情况下，<code>s[ i ] * l[ i+1 ] </code>即为当前顺序下会损失的能量值，这个值当然越小越好，所以对于假设要吃的所有物品，s&#x2F;l的值越小就说明它一定要先吃。<br>之前的考虑中没有考虑能量不能将为负数的情况，实际上只要将状态表达设置为时间恰好为j时的总能量值那么当能量降低为负数时就会对f产生负影响，只要遍历一遍求最大值就是题目所需的答案。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://xiwen1.github.io/2022/12/30/2022-12-30%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E7%A2%8E%E7%A2%8E%E5%BF%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -730,7 +807,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
