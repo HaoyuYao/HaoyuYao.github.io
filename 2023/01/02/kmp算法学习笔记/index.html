@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"xiwen1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":2,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="能量石链接： 734. 能量石 - AcWing题库 思路： 因为吃能量石的顺序会对物品的价值产生影响，所以要考虑的维度增多了，这时候要首先利用贪心的思路对能量石进行预先排序，注意到对于两件物品时，全部吃掉的情况下，s[ i ] * l[ i+1 ] 即为当前顺序下会损失的能量值，这个值当然越小越好，所以对于假设要吃的所有物品，s&#x2F;l的值越小就说明它一定要先吃。之前的考虑中没有考虑能量不">
+  <meta name="description" content="kmp算法学习状态机的题目时，遇到一道题需要使用到kmp的知识，于是上csdn学习了一下并整理了如下笔记。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="背包问题：能量石">
-<meta property="og:url" content="http://xiwen1.github.io/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/index.html">
+<meta property="og:title" content="kmp算法学习笔记">
+<meta property="og:url" content="http://xiwen1.github.io/2023/01/02/kmp%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="徯璺">
-<meta property="og:description" content="能量石链接： 734. 能量石 - AcWing题库 思路： 因为吃能量石的顺序会对物品的价值产生影响，所以要考虑的维度增多了，这时候要首先利用贪心的思路对能量石进行预先排序，注意到对于两件物品时，全部吃掉的情况下，s[ i ] * l[ i+1 ] 即为当前顺序下会损失的能量值，这个值当然越小越好，所以对于假设要吃的所有物品，s&#x2F;l的值越小就说明它一定要先吃。之前的考虑中没有考虑能量不">
+<meta property="og:description" content="kmp算法学习状态机的题目时，遇到一道题需要使用到kmp的知识，于是上csdn学习了一下并整理了如下笔记。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-12-31T11:32:11.000Z">
-<meta property="article:modified_time" content="2022-12-31T11:34:04.498Z">
+<meta property="article:published_time" content="2023-01-02T12:15:35.000Z">
+<meta property="article:modified_time" content="2023-01-02T12:16:10.629Z">
 <meta property="article:author" content="xiwen_youmu">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://xiwen1.github.io/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/">
+<link rel="canonical" href="http://xiwen1.github.io/2023/01/02/kmp%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>背包问题：能量石 | 徯璺</title>
+  <title>kmp算法学习笔记 | 徯璺</title>
   
 
 
@@ -192,7 +192,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xiwen1.github.io/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/">
+    <link itemprop="mainEntityOfPage" href="http://xiwen1.github.io/2023/01/02/kmp%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/touxiang.png">
@@ -205,7 +205,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          背包问题：能量石
+          kmp算法学习笔记
         </h1>
 
         <div class="post-meta">
@@ -216,7 +216,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-12-31 19:32:11 / 修改时间：19:34:04" itemprop="dateCreated datePublished" datetime="2022-12-31T19:32:11+08:00">2022-12-31</time>
+              <time title="创建时间：2023-01-02 20:15:35 / 修改时间：20:16:10" itemprop="dateCreated datePublished" datetime="2023-01-02T20:15:35+08:00">2023-01-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -239,12 +239,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="能量石"><a href="#能量石" class="headerlink" title="能量石"></a>能量石</h1><p>链接： <a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/736/">734. 能量石 - AcWing题库</a></p>
-<p>思路： 因为吃能量石的顺序会对物品的价值产生影响，所以要考虑的维度增多了，这时候要首先利用贪心的思路对能量石进行预先排序，注意到对于两件物品时，全部吃掉的情况下，<code>s[ i ] * l[ i+1 ] </code>即为当前顺序下会损失的能量值，这个值当然越小越好，所以对于假设要吃的所有物品，s&#x2F;l的值越小就说明它一定要先吃。<br>之前的考虑中没有考虑能量不能将为负数的情况，实际上只要将状态表达设置为时间恰好为j时的总能量值那么当能量降低为负数时就会对f产生负影响，只要遍历一遍求最大值就是题目所需的答案。</p>
+        <h1 id="kmp算法"><a href="#kmp算法" class="headerlink" title="kmp算法"></a>kmp算法</h1><p>学习状态机的题目时，遇到一道题需要使用到kmp的知识，于是上csdn学习了一下并整理了如下笔记。</p>
 <span id="more"></span>
-
-<p>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10010</span>;</span><br><span class="line"><span class="type">int</span> f[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Stone</span>&#123;</span><br><span class="line">    <span class="type">int</span> s, e, l;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&lt; (<span class="type">const</span> Stone &amp;W) <span class="type">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> s * W.l &lt; l * W.s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;stone[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> C=<span class="number">0</span>; C&lt;T; C++) &#123;</span><br><span class="line">        <span class="type">int</span> m = <span class="number">0</span>;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s, e, l;</span><br><span class="line">            cin&gt;&gt;s&gt;&gt;e&gt;&gt;l;</span><br><span class="line">            stone[i] = &#123;s, e, l&#125;;</span><br><span class="line">            m += s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(stone, stone+n);</span><br><span class="line">    </span><br><span class="line">        <span class="built_in">memset</span>(f, <span class="number">-0x3f</span>, <span class="keyword">sizeof</span> f);</span><br><span class="line">        f[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s = stone[i].s, e = stone[i].e, l = stone[i].l;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=s; j--) &#123;</span><br><span class="line">                f[j] = <span class="built_in">max</span>(f[j], f[j-s]+e-(j-s)*l); <span class="comment">//在所有能量石降为负数时就自然不是最大值了，这样就省去了判断不能小于0的情况；</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;=m; i++) &#123;</span><br><span class="line">            res = <span class="built_in">max</span>(res, f[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Case #%d: %d\n&quot;</span>, C+<span class="number">1</span>, res);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>讲解视频： <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1234y1y7pm">https://www.bilibili.com/video/BV1234y1y7pm</a></p>
+<p>kmp: 一个人能能走的多远不在于他在顺境时能走的多快，而在于他在逆境时多久能找到曾经的自己。  ————KMP</p>
+<p>kmp算法用于匹配字符串位置。<br>给定两个字符串：a, b 定义a为主串，b为模板串，kmp的任务就是检查主串中是否存在等同于b的字串。</p>
+<h2 id="传统暴力方法"><a href="#传统暴力方法" class="headerlink" title="传统暴力方法"></a>传统暴力方法</h2><p>设定两个指针i, j，分别指向两个字符串的开头，然后一次向后匹配，若没有匹配，那么i回溯到原本的位置+1，j回溯到最开始继续匹配，直到完全匹配。<br>这样的方法完全没有从之前的失败经历中吸取到信息从而采取更好的策略，所以世间复杂度很高。</p>
+<h2 id="kmp给出的答案"><a href="#kmp给出的答案" class="headerlink" title="kmp给出的答案"></a>kmp给出的答案</h2><p>kmp定义了一个字符串的前缀与后缀，在上述的方案中，回溯指针时是从头开始的，但是kmp不是这样的，在上述的匹配方案中，遇到第一个未匹配的字符时其前面的子串是完全相同的。我们要做的是找到该字串前缀与后缀相同的位置，然后将指针回溯到这里，这样，前后缀的部分一定是匹配的，可以省去许多无用功。<br>当回溯一次是若发现下一个字符还是不匹配，那么就让当前匹配的子串（即先前的前后缀）继续查找相同的前后缀，并回溯到这个位置，直到 j 指针指向0，就令i指针持续后移，直到i指针所指的对象与模板串的第一个字符相同。</p>
+<p>那么如何查找上述方案中相同前后缀的位置呢，这里我们使用一个ne[]数组对模板串采用dp的方式进行记录其每个子串的前后缀长度情况。具体方法实际上还是kmp的思想。<br>具体方法如下：</p>
+<ol>
+<li>设置两个指针i，j，i&#x3D;2，j&#x3D;0；检查pi &#x3D;&#x3D; pj+1;</li>
+<li>如果匹配，那么对于1-i的子串，他的最长公共前后缀的长度就是ne[]，而ne[i] &#x3D; j+1.</li>
+<li>如果不匹配，则回溯j指针，使j &#x3D; ne[j]，直到匹配成功（kmp思想，这里将1-j的子串看作当前的前后公共子串）</li>
+</ol>
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1e7</span>+<span class="number">10</span>;</span><br><span class="line"><span class="type">char</span> p[N],s[N];</span><br><span class="line"><span class="comment">//next数组表示的是不匹配时子串下标退回的位置</span></span><br><span class="line"><span class="comment">//比如next[i]=j就表示在子串中p[1~j]=p[i-j+1~i]</span></span><br><span class="line"><span class="comment">//所以子串直接退回到j下标继续和主串进行模式匹配直到匹配成功为止</span></span><br><span class="line"><span class="type">int</span> ne[N];</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;p+<span class="number">1</span>&gt;&gt;m&gt;&gt;s+<span class="number">1</span>;</span><br><span class="line">    <span class="comment">//求next数组的过程</span></span><br><span class="line">    <span class="comment">//类似于KMP匹配过程</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>,j=<span class="number">0</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(j&amp;&amp;p[i]!=p[j+<span class="number">1</span>]) j=ne[j];</span><br><span class="line">        <span class="keyword">if</span>(p[i]==p[j+<span class="number">1</span>]) j++;</span><br><span class="line">        ne[i]=j;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//KMP匹配过程</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>,j=<span class="number">0</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//如果子串没有退回到起点，并且主串和子串不匹配</span></span><br><span class="line">        <span class="keyword">while</span>(j&amp;&amp;s[i]!=p[j+<span class="number">1</span>]) j=ne[j];<span class="comment">//j退回到重合部分的终点位置</span></span><br><span class="line">        <span class="keyword">if</span>(s[i]==p[j+<span class="number">1</span>]) j++;</span><br><span class="line">        <span class="comment">//匹配成功</span></span><br><span class="line">        <span class="keyword">if</span>(j==n)</span><br><span class="line">        &#123;</span><br><span class="line">            cout&lt;&lt;i-n&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">            j=ne[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -260,7 +269,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://xiwen1.github.io/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/" title="背包问题：能量石">http://xiwen1.github.io/2022/12/31/背包问题：能量石/</a>
+    <a href="http://xiwen1.github.io/2023/01/02/kmp%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="kmp算法学习笔记">http://xiwen1.github.io/2023/01/02/kmp算法学习笔记/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -280,13 +289,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/12/30/2022-12-30%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E7%A2%8E%E7%A2%8E%E5%BF%B5/" rel="prev" title="2022-12-30一些感想和碎碎念">
-      <i class="fa fa-chevron-left"></i> 2022-12-30一些感想和碎碎念
+    <a href="/2023/01/01/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E7%AC%AC%E4%BA%8C%E5%91%A8/" rel="prev" title="每日一题 第二周">
+      <i class="fa fa-chevron-left"></i> 每日一题 第二周
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/01/01/%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BC%98%E5%8C%96/" rel="next" title="多重背包的二进制优化">
-      多重背包的二进制优化 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -346,7 +352,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%BD%E9%87%8F%E7%9F%B3"><span class="nav-number">1.</span> <span class="nav-text">能量石</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#kmp%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">kmp算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E6%9A%B4%E5%8A%9B%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">传统暴力方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kmp%E7%BB%99%E5%87%BA%E7%9A%84%E7%AD%94%E6%A1%88"><span class="nav-number">1.2.</span> <span class="nav-text">kmp给出的答案</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
