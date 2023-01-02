@@ -43,6 +43,13 @@
 </ol>
 <p>代码：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1e7</span>+<span class="number">10</span>;</span><br><span class="line"><span class="type">char</span> p[N],s[N];</span><br><span class="line"><span class="comment">//next数组表示的是不匹配时子串下标退回的位置</span></span><br><span class="line"><span class="comment">//比如next[i]=j就表示在子串中p[1~j]=p[i-j+1~i]</span></span><br><span class="line"><span class="comment">//所以子串直接退回到j下标继续和主串进行模式匹配直到匹配成功为止</span></span><br><span class="line"><span class="type">int</span> ne[N];</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;p+<span class="number">1</span>&gt;&gt;m&gt;&gt;s+<span class="number">1</span>;</span><br><span class="line">    <span class="comment">//求next数组的过程</span></span><br><span class="line">    <span class="comment">//类似于KMP匹配过程</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>,j=<span class="number">0</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(j&amp;&amp;p[i]!=p[j+<span class="number">1</span>]) j=ne[j];</span><br><span class="line">        <span class="keyword">if</span>(p[i]==p[j+<span class="number">1</span>]) j++;</span><br><span class="line">        ne[i]=j;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//KMP匹配过程</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>,j=<span class="number">0</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//如果子串没有退回到起点，并且主串和子串不匹配</span></span><br><span class="line">        <span class="keyword">while</span>(j&amp;&amp;s[i]!=p[j+<span class="number">1</span>]) j=ne[j];<span class="comment">//j退回到重合部分的终点位置</span></span><br><span class="line">        <span class="keyword">if</span>(s[i]==p[j+<span class="number">1</span>]) j++;</span><br><span class="line">        <span class="comment">//匹配成功</span></span><br><span class="line">        <span class="keyword">if</span>(j==n)</span><br><span class="line">        &#123;</span><br><span class="line">            cout&lt;&lt;i-n&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">            j=ne[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="示例题目：周期"><a href="#示例题目：周期" class="headerlink" title="示例题目：周期"></a>示例题目：周期</h1><p>题目链接： <a href="https://www.acwing.com/problem/content/143/">141. 周期 - AcWing题库</a></p>
+<h2 id="题目思路："><a href="#题目思路：" class="headerlink" title="题目思路："></a>题目思路：</h2><p>需要注意到kmp中的前缀ne[]函数与循环节之间的关系，如果在某一个前缀长度为s中存在长度为三的循环节，那么对应到该前缀子串的ne[]数组的特征就是s % (s-ne[s]) &#x3D;&#x3D; 0，且ne[s]不等于0；<br>证明：<br>作图，暂且称子串减去公共前后缀的部分为循环节，那么就可以发现循环节一定等于其后的一段等长的节，因为前后缀相等，循环节后面一节就是后缀开头的一节，而这一节同时又是前缀的第二节，那么可以得到前缀中第一节等于第二节，后缀则也是如此，而后缀的第二节又是前缀的第三节···如此这般，可以推导出当整除关系下，我们假设的循环节就是真正的循环节。</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="type">int</span> t,i,j,n,nex[<span class="number">1000005</span>];<span class="type">char</span> a[<span class="number">1000005</span>];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n),n)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,a+<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Test case #%d\n&quot;</span>,++t);</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">2</span>,j=<span class="number">0</span>;i&lt;=n;i++)&#123;<span class="comment">//最基本的 next[] 数组求法</span></span><br><span class="line">            <span class="keyword">while</span>(j&amp;&amp;a[i]!=a[j+<span class="number">1</span>])j=nex[j];</span><br><span class="line">            <span class="keyword">if</span>(a[i]==a[j+<span class="number">1</span>])j++;nex[i]=j;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=n;i++)<span class="comment">//由于1～1只有一个字母，只能是它本身构成长度为1的循环，所以从2开始枚举</span></span><br><span class="line">            <span class="keyword">if</span>(i%(i-nex[i])==<span class="number">0</span>&amp;&amp;nex[i])<span class="comment">//判断时还要注意nex[i]是否为0</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,i,i/(i-nex[i]));</span><br><span class="line"><span class="comment">//如果i含有长度大于1的最小循环元，输出i的长度(即i)以及最大循环次数K(即i-nex[i])</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);<span class="comment">//记得输出一个空行</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>算法</category>
@@ -92,35 +99,6 @@
       </tags>
   </entry>
   <entry>
-    <title>关于django用户系统的搭建流程</title>
-    <url>/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="用户系统的搭建和登录界面的完成"><a href="#用户系统的搭建和登录界面的完成" class="headerlink" title="用户系统的搭建和登录界面的完成"></a>用户系统的搭建和登录界面的完成</h1><h2 id="1-1-向django自带数据库中添加自定义的类时需要注意的操作"><a href="#1-1-向django自带数据库中添加自定义的类时需要注意的操作" class="headerlink" title="1.1 向django自带数据库中添加自定义的类时需要注意的操作"></a>1.1 向django自带数据库中添加自定义的类时需要注意的操作</h2><p>启动uwsgi.ini服务之后<code>sudo uwsgi --ini scripts/uwsgi.ini</code>不要直接关闭终端，这样导致服务难以被关闭</p>
-<span id="more"></span>
-
-<p>如果无法关闭，则使用<code>sudo fuser -k 8000/tcp</code>杀死在8000端口的进程，在运行ini</p>
-<p>登陆界面中的每个函数都要实现三个部分：</p>
-<ol>
-<li>views实现函数的本体</li>
-<li>urls中实现函数的映射</li>
-<li>js中实现对应的调用</li>
-</ol>
-<p>每一个处理请求的函数都要传入一个参数:request，请求登陆也是如此，并且导入包：<code>from django.http import JsonResponse</code></p>
-<p>json文件：通用的序列化存储字典等内容的文件</p>
-<p>path中填写的url最后一定带上&#x2F;，否则后面接新的东西时会出错</p>
-<p>注意为文件添加可执行权限的操作是 chmod +x filename</p>
-<p>js实现三秒后刷新：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>科技</category>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>关于本博客的一些希望</title>
     <url>/2022/12/16/%E5%85%B3%E4%BA%8E%E6%9C%AC%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%8C%E6%9C%9B/</url>
     <content><![CDATA[<p><em>关于本博客的一些初衷，首先写在这里，以勉励自己</em></p>
@@ -156,6 +134,49 @@
       </tags>
   </entry>
   <entry>
+    <title>关于django用户系统的搭建流程</title>
+    <url>/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="用户系统的搭建和登录界面的完成"><a href="#用户系统的搭建和登录界面的完成" class="headerlink" title="用户系统的搭建和登录界面的完成"></a>用户系统的搭建和登录界面的完成</h1><h2 id="1-1-向django自带数据库中添加自定义的类时需要注意的操作"><a href="#1-1-向django自带数据库中添加自定义的类时需要注意的操作" class="headerlink" title="1.1 向django自带数据库中添加自定义的类时需要注意的操作"></a>1.1 向django自带数据库中添加自定义的类时需要注意的操作</h2><p>启动uwsgi.ini服务之后<code>sudo uwsgi --ini scripts/uwsgi.ini</code>不要直接关闭终端，这样导致服务难以被关闭</p>
+<span id="more"></span>
+
+<p>如果无法关闭，则使用<code>sudo fuser -k 8000/tcp</code>杀死在8000端口的进程，在运行ini</p>
+<p>登陆界面中的每个函数都要实现三个部分：</p>
+<ol>
+<li>views实现函数的本体</li>
+<li>urls中实现函数的映射</li>
+<li>js中实现对应的调用</li>
+</ol>
+<p>每一个处理请求的函数都要传入一个参数:request，请求登陆也是如此，并且导入包：<code>from django.http import JsonResponse</code></p>
+<p>json文件：通用的序列化存储字典等内容的文件</p>
+<p>path中填写的url最后一定带上&#x2F;，否则后面接新的东西时会出错</p>
+<p>注意为文件添加可执行权限的操作是 chmod +x filename</p>
+<p>js实现三秒后刷新：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>科技</category>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>初学数组模拟邻接表的一些理解</title>
+    <url>/2022/12/24/%E5%88%9D%E5%AD%A6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<h2 id="head与next数组中保存的是ver数组的下标"><a href="#head与next数组中保存的是ver数组的下标" class="headerlink" title="head与next数组中保存的是ver数组的下标"></a>head与next数组中保存的是ver数组的下标</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//加入有向边(x, y)，权值为z；</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z)</span> </span>&#123;</span><br><span class="line">	ver[++tot] = y, edge[tot] = z; <span class="comment">//真实数据</span></span><br><span class="line">	next[tot] = head[x], head[x] = tot;</span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
+
+<h2 id="理解方法："><a href="#理解方法：" class="headerlink" title="理解方法："></a>理解方法：</h2><p>tot为每一个数据编号，从第一个输入开始一直往后排，至于数据的输入顺序有关，与数据本身的性质无关<br>ver[++tot]因此就表示新录入一个数据，编号tot++；<br>对于一个以邻接表表示的有向图而言，表头head的下表表示起点的值，head的内容指向该起点最新加入的一条邻边终点的编号（即输入时的tot），next[tot]表示下表为tot的数据的后面接的数的编号；因为表头指针更新的是最新插入的数据，所以无需查找到末尾直接更新表头指向即可，因此有了：<br>next[tot] &#x3D; head[x], head[x] &#x3D; tot; 这样的操作。</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>每日一题 第二周</title>
     <url>/2023/01/01/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E7%AC%AC%E4%BA%8C%E5%91%A8/</url>
     <content><![CDATA[<h1 id="选数异或"><a href="#选数异或" class="headerlink" title="选数异或"></a>选数异或</h1><p>题目： <a href="https://www.acwing.com/activity/content/problem/content/7908/">https://www.acwing.com/activity/content/problem/content/7908/</a></p>
@@ -173,6 +194,10 @@
 <p>代码实现<br>用哈希表last[i]记录值i最后一次出现时的位置下标， dp[i]的求法是： 若ai⊕xai⊕x最后一次出现的下标要大于dp[i-1]， 则dp[i] &#x3D; last[ai⊕x]last[ai⊕x], 否则dp[i] &#x3D; dp[i-1]     </p>
 <p>即<code> dp[i]=max(dp[i−1],last[a⊕x])</code></p>
 <h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> dp[<span class="number">100010</span>];</span><br><span class="line"><span class="comment">//使用一种类似于前缀和加dp的方法</span></span><br><span class="line"><span class="comment">//代码中使用了unordered_map，可以直接朴素地理解为一种不用担心越界的数组，方便你打hash表</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n, m, x;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m&gt;&gt;x;</span><br><span class="line">    unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; last;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> a;</span><br><span class="line">        cin&gt;&gt;a;</span><br><span class="line">        dp[i] = <span class="built_in">max</span>(dp[i<span class="number">-1</span>], last[x ^ a]);</span><br><span class="line">        last[a] = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> l, r;</span><br><span class="line">        cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">        cout&lt;&lt;(dp[r] &gt;= l ? <span class="string">&quot;yes&quot;</span> : <span class="string">&quot;no&quot;</span>)&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h1><p>题目： <a href="https://www.acwing.com/problem/content/description/4647/">4644. 求和 - AcWing题库</a></p>
+<p>使用了前缀和，但是实际上可以不用，求出总和依次相乘后除以2即可</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">200010</span>;</span><br><span class="line"><span class="type">int</span> sum[N];</span><br><span class="line"><span class="type">int</span> a[N];</span><br><span class="line">ll ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cin&gt;&gt;a[i];</span><br><span class="line">        sum[i] = sum[i<span class="number">-1</span>] + a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ll cheng = (ll)(sum[n] - sum[i]);</span><br><span class="line">        ans += (ll)cheng * a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -213,20 +238,6 @@
 
 <p>代码如下：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10010</span>;</span><br><span class="line"><span class="type">int</span> f[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Stone</span>&#123;</span><br><span class="line">    <span class="type">int</span> s, e, l;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&lt; (<span class="type">const</span> Stone &amp;W) <span class="type">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> s * W.l &lt; l * W.s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;stone[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> C=<span class="number">0</span>; C&lt;T; C++) &#123;</span><br><span class="line">        <span class="type">int</span> m = <span class="number">0</span>;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s, e, l;</span><br><span class="line">            cin&gt;&gt;s&gt;&gt;e&gt;&gt;l;</span><br><span class="line">            stone[i] = &#123;s, e, l&#125;;</span><br><span class="line">            m += s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(stone, stone+n);</span><br><span class="line">    </span><br><span class="line">        <span class="built_in">memset</span>(f, <span class="number">-0x3f</span>, <span class="keyword">sizeof</span> f);</span><br><span class="line">        f[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s = stone[i].s, e = stone[i].e, l = stone[i].l;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=s; j--) &#123;</span><br><span class="line">                f[j] = <span class="built_in">max</span>(f[j], f[j-s]+e-(j-s)*l); <span class="comment">//在所有能量石降为负数时就自然不是最大值了，这样就省去了判断不能小于0的情况；</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;=m; i++) &#123;</span><br><span class="line">            res = <span class="built_in">max</span>(res, f[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Case #%d: %d\n&quot;</span>, C+<span class="number">1</span>, res);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>初学数组模拟邻接表的一些理解</title>
-    <url>/2022/12/24/%E5%88%9D%E5%AD%A6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[<h2 id="head与next数组中保存的是ver数组的下标"><a href="#head与next数组中保存的是ver数组的下标" class="headerlink" title="head与next数组中保存的是ver数组的下标"></a>head与next数组中保存的是ver数组的下标</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//加入有向边(x, y)，权值为z；</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z)</span> </span>&#123;</span><br><span class="line">	ver[++tot] = y, edge[tot] = z; <span class="comment">//真实数据</span></span><br><span class="line">	next[tot] = head[x], head[x] = tot;</span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
-
-<h2 id="理解方法："><a href="#理解方法：" class="headerlink" title="理解方法："></a>理解方法：</h2><p>tot为每一个数据编号，从第一个输入开始一直往后排，至于数据的输入顺序有关，与数据本身的性质无关<br>ver[++tot]因此就表示新录入一个数据，编号tot++；<br>对于一个以邻接表表示的有向图而言，表头head的下表表示起点的值，head的内容指向该起点最新加入的一条邻边终点的编号（即输入时的tot），next[tot]表示下表为tot的数据的后面接的数的编号；因为表头指针更新的是最新插入的数据，所以无需查找到末尾直接更新表头指向即可，因此有了：<br>next[tot] &#x3D; head[x], head[x] &#x3D; tot; 这样的操作。</p>
 ]]></content>
       <categories>
         <category>算法</category>
