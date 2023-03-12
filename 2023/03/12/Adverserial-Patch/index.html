@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.jpg">
+  <link rel="mask-icon" href="/images/icon.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiwen1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":2,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="l2距离https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40714949&#x2F;article&#x2F;details&#x2F;122373929 tie-dye pattern就是一种彩虹状的图像 攻击方法分类标准： 假正性攻击(false positive)与伪负性攻击(false negative)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Adverserial Patch">
+<meta property="og:url" content="http://xiwen1.github.io/2023/03/12/Adverserial-Patch/index.html">
+<meta property="og:site_name" content="徯璺">
+<meta property="og:description" content="l2距离https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40714949&#x2F;article&#x2F;details&#x2F;122373929 tie-dye pattern就是一种彩虹状的图像 攻击方法分类标准： 假正性攻击(false positive)与伪负性攻击(false negative)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:\Users\xiwen\desktop\blog\source_posts\image-20230312220339004.png">
+<meta property="og:image" content="c:\Users\xiwen\desktop\blog\source_posts\image-20230312222034645.png">
+<meta property="og:image" content="c:\Users\xiwen\desktop\blog\source_posts\image-20230312222420698.png">
+<meta property="og:image" content="c:\Users\xiwen\desktop\blog\source_posts\image-20230312222652314.png">
+<meta property="og:image" content="c:\Users\xiwen\desktop\blog\source_posts\image-20230312224047785.png">
+<meta property="article:published_time" content="2023-03-12T15:02:58.000Z">
+<meta property="article:modified_time" content="2023-03-12T15:06:24.350Z">
+<meta property="article:author" content="xiwen_youmu">
+<meta property="article:tag" content="Adverserial Attack">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:\Users\xiwen\desktop\blog\source_posts\image-20230312220339004.png">
+
+<link rel="canonical" href="http://xiwen1.github.io/2023/03/12/Adverserial-Patch/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Adverserial Patch | 徯璺</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">徯璺</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">我将悄悄离开此处</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xiwen1.github.io/2023/03/12/Adverserial-Patch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/touxiang.png">
+      <meta itemprop="name" content="xiwen_youmu">
+      <meta itemprop="description" content="张可为的个人博客，快给我关注（批脸）">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徯璺">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Adverserial Patch
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-03-12 23:02:58 / 修改时间：23:06:24" itemprop="dateCreated datePublished" datetime="2023-03-12T23:02:58+08:00">2023-03-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="l2距离"><a href="#l2距离" class="headerlink" title="l2距离"></a>l2距离</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40714949/article/details/122373929">https://blog.csdn.net/qq_40714949/article/details/122373929</a></p>
+<p>tie-dye pattern就是一种彩虹状的图像</p>
+<p>攻击方法分类标准：</p>
+<h2 id="假正性攻击-false-positive-与伪负性攻击-false-negative"><a href="#假正性攻击-false-positive-与伪负性攻击-false-negative" class="headerlink" title="假正性攻击(false positive)与伪负性攻击(false negative)"></a>假正性攻击(false positive)与伪负性攻击(false negative)</h2><span id="more"></span>
+
+<p>假正性攻击：原本是错误的但被被攻击模型识别为正例的攻击(eg: 一张人类不可识别的图像，被DNN以高置信度分类为某一类)；<br>伪负性攻击：原本应该被正常识别但被被攻击模型识别错误的攻击(eg: 原本能够被正确的样本，在遭到对抗攻击后，被攻击模型无法对其正确分类)。ps: 我现在做的遇到的大部分攻击算法都是伪负性攻击算法。</p>
+<h2 id="白盒攻击-white-box-与黑盒攻击-black-box-："><a href="#白盒攻击-white-box-与黑盒攻击-black-box-：" class="headerlink" title="白盒攻击(white box)与黑盒攻击(black box)："></a>白盒攻击(white box)与黑盒攻击(black box)：</h2><p>被攻击模型的模型参数可以被获取的被称为白盒攻击；<br>模型参数不可见的被称为黑盒攻击。</p>
+<h2 id="有目标攻击-target-attack-和无目标攻击-non-target-attack-："><a href="#有目标攻击-target-attack-和无目标攻击-non-target-attack-：" class="headerlink" title="有目标攻击(target attack)和无目标攻击(non-target attack)："></a>有目标攻击(target attack)和无目标攻击(non-target attack)：</h2><p>有目标攻击：期望对抗样本被定向误识别为某一特定类别；<br>无目标攻击：仅仅希望对抗样本不能被识别的而没有指定目标类别。</p>
+<h2 id="单步攻击-One-time-attack-和迭代攻击-Iteration-attack-："><a href="#单步攻击-One-time-attack-和迭代攻击-Iteration-attack-：" class="headerlink" title="单步攻击(One-time attack)和迭代攻击(Iteration attack)："></a>单步攻击(One-time attack)和迭代攻击(Iteration attack)：</h2><p>最典型的就是之前实现过过的FGSM([2])<br>I-FGSM([3])</p>
+<h2 id="个体攻击-Individual-attack-和普适性攻击-Universal-attack-："><a href="#个体攻击-Individual-attack-和普适性攻击-Universal-attack-：" class="headerlink" title="个体攻击(Individual attack)和普适性攻击(Universal attack)："></a>个体攻击(Individual attack)和普适性攻击(Universal attack)：</h2><p>个体攻击向每个样本添加不同的扰动，大多数攻击方法都属于个体攻击(典型算法可见[4],[5])；<br>普适性攻击训练一个整个数据集通用的扰动。</p>
+<h2 id="优化扰动-optimized-perturbation-和约束扰动-constrained-perturbation-："><a href="#优化扰动-optimized-perturbation-和约束扰动-constrained-perturbation-：" class="headerlink" title="优化扰动(optimized perturbation)和约束扰动(constrained perturbation)："></a>优化扰动(optimized perturbation)和约束扰动(constrained perturbation)：</h2><p>优化扰动表示扰动大小作为优化过程中的优化目标(典型算法算法可参考[6])，C&amp;W攻击（白盒攻击）算法是一种基于迭代优化的低扰动对抗样本生成算法。该算法设计了一个损失函数，它在对抗样本中有较小的值，但在原始样本中有较大的值，因此通过最小化该损失函数即可搜寻到对抗样本；<br>约束扰动表示所添加扰动仅需满足约束即可。<br>数据集和被攻击模型：</p>
+<p>目前该领域最常用的数据集为MNIST, CIFAR 和ImageNet；<br>最常用的被攻击模型为LeNet, VGG, AlexNet,GoogLeNet, CaffeNet, and ResNet等</p>
+<h1 id="单词补充"><a href="#单词补充" class="headerlink" title="单词补充"></a>单词补充</h1><ol>
+<li>classifier : 分类的概念是在已有数据的基础上学会一个分类函数或构造出一个分类模型（即我们通常所说的分类器(Classifier)）。该函数或模型能够把数据库中的数据纪录映射到给定类别中的某一个，从而可以应用于数据预测。总之，分类器是数据挖掘中对样本进行分类的方法的统称，包含决策树、逻辑回归、朴素贝叶斯、神经网络等算法。</li>
+<li>generalize 推广</li>
+<li>network 在这里指神经网络</li>
+<li>perturb 扰乱</li>
+<li>imperceptible 感觉不到的，十分细微的</li>
+<li>image-independent 与图片无关的</li>
+<li>salient 显著的</li>
+<li>state-of-the art 使用最先进技术的</li>
+<li>varient 多样的</li>
+<li>camouflaged 伪装的</li>
+<li>constraint 约束，限制</li>
+<li>control 对照组</li>
+<li>appendix 附录</li>
+</ol>
+<h1 id="文章对照翻译"><a href="#文章对照翻译" class="headerlink" title="文章对照翻译"></a>文章对照翻译</h1><p>We present a method to create universal, robust, targeted adversarial image patches in the real world. The patches are universal because they can be used to attack any scene, robust because they work under a wide variety of transformations, and targeted because they can cause a classifier to output any target class. These adversarial patches can be printed, added to any scene, photographed, and presented to image classifiers; even when the patches are small, they cause the classifiers to ignore the other items in the scene and report a chosen target class</p>
+<p>我们提出了一种在现实世界中创建通用的、鲁棒的、有针对性的对抗图像补丁的方法。补丁是通用的，因为它们可以用来攻击任何场景;健壮的，因为它们可以在各种各样的转换下工作;有针对性的，因为它们可以导致分类器输出任何目标类。这些对抗补丁可以打印，添加到任何场景，拍摄，并呈现给图像分类器;即使补丁很小，它们也会导致分类器忽略场景中的其他项目，并报告选定的目标类</p>
+<h2 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h2><p>Deep learning systems are broadly vulnerable to adversarial examples, carefully chosen inputs that cause the network to change output without a visible change to a human [15, 5]. These adversarial examples most commonly modify each pixel by only a small amount and can be found using a number of optimization strategies such as L-BFGS [15], Fast Gradient Sign Method (FGSM) [5], DeepFool [10], Projected Gradient Descent (PGD) [8], as well as the recently proposed Logit-space Projected Gradient Ascent (LS-PGA) [2] for discretized inputs. Other attack methods seek to modify only a small number of pixels in the image (Jacobian-based saliency map [11]), or a small patch at a fixed location of the image [13].</p>
+<p>深度学习系统普遍容易受到对抗性例子的攻击，精心选择的输入会导致网络改变输出，而不会对人类产生可见的变化[15,5]。这些对抗的例子通常只对每个像素进行少量修改，并且可以使用许多优化策略，如L-BFGS[15]，快速梯度符号方法(FGSM) [5]， DeepFool[10]，投影梯度下降(PGD)[8]，以及最近提出的用于离散输入的logit空间投影梯度上升(LS-PGA)[2]。其他攻击方法只寻求修改图像中的少量像素(基于雅可比矩阵的显著图[11])，或图像[13]固定位置的小补丁。</p>
+<p>Adversarial examples have been shown to generalize to the real world. Kurakin et al [7] demonstrated that when printed out, an adversarially constructed image will continue to be adversarial to classifiers even under different lighting and orientations. Athalye et al [3] recently demonstrated adversarial objects which can be 3d printed and misclassified by networks at different orientations and scales.</p>
+<p>Their adversarial objects are designed to be subtle perturbations of a normal object (e.g. a turtle that has been adversarially perturbed to be classified as a rifle). Another work [13] showed that one can fool facial recognition software by constructing adversarial glasses. These glasses were targeted in that they could be constructed to impersonate any person, but were custom made for the attacker’s face, and were designed with a fixed orientation in mind. Even more recently, Evtimov et al [4] demonstrated various methods for constructing stop signs that are misclassified by models, either by printing out a large poster that looks like a stop sign, or by placing various stickers on a stop sign. In terms of defenses there has been substantial work on increasing the adversarial robustness of image models to small Lp perturbations of the input [8, 12, 16, 2].</p>
+<p>对抗性的例子已经被证明可以推广到现实世界。Kurakin等[7]证明，当打印出来时，即使在不同的光照和方向下，对抗构造的图像也将继续对抗分类器。Athalye等[3]最近展示了可以在不同方向和规模上被网络3d打印和错误分类的对抗性物体。</p>
+<p>它们的对抗性物体被设计成对正常物体的轻微扰动(例如，一只乌龟被对抗性扰动后被归类为步枪)。另一项研究[13]表明，人们可以通过构建对抗性眼镜来欺骗面部识别软件。这些眼镜是有针对性的，因为它们可以模仿任何人，但是为攻击者的脸定制的，并且在设计时考虑了固定的方向。甚至在最近，Evtimov等人[4]演示了各种构建被模型错误分类的停止标志的方法，要么打印出一个看起来像停止标志的大海报，要么在停止标志上放置各种贴纸。在防御方面，已经有大量工作用于提高图像模型对输入的小Lp扰动的对抗鲁棒性[8,12,16,2]。</p>
+<p>As seen above, a majority of prior work has focused on attacking with and defending against either small or imperceptible changes to the input. In this work we explore what is possible if an attacker no longer restricts themselves to imperceptible changes. We construct an attack that does not attempt to subtly transform an existing item into another. Instead, this attack generates an image-independent patch that is extremely salient to a neural network. This patch can then be placed anywhere within the field of view of the classifier, and causes the classifier to output a targeted class. Because this patch is scene-independent, it allows attackers to create a physical-world attack without prior knowledge of the lighting conditions, camera angle, type of classifier being attacked, or even the other items within the scene</p>
+<p>如上所述，大多数先前的工作都集中在对输入的微小或难以察觉的变化进行攻击和防御。在这项工作中，我们探索了如果攻击者不再局限于难以察觉的变化，那么可能会发生什么。我们构建的攻击不会试图巧妙地将现有物品转化为另一个。相反，这种攻击会生成一个与图像无关的补丁，这对神经网络来说非常显著。然后，这个补丁可以放在分类器视野范围内的任何地方，并使分类器输出一个目标类。因为这个补丁是独立于场景的，它允许攻击者创建一个物理世界的攻击，而不需要事先了解照明条件、摄像机角度、被攻击的分类器类型，甚至场景中的其他项目.</p>
+<p><img src="C:\Users\xiwen\desktop\blog\source_posts\image-20230312220339004.png" alt="image-20230312220339004"></p>
+<p>This attack is significant because the attacker does not need to know what image they are attacking when constructing the attack. After generating an adversarial patch, the patch could be widely distributed across the Internet for other attackers to print out and use. Additionally, because the attack uses a large perturbation, the existing defense techniques which focus on defending against small perturbations may not be robust to larger perturbations such as these. Indeed recent work has demonstrated that state-of-the art adversarially trained models on MNIST are still vulnerable to larger perturbations than those used in training either by searching for a nearby adversarial example using a different metric for distance [14], or by applying large perturbations in the background [1].</p>
+<p>这种攻击很重要，因为攻击者在构建攻击时不需要知道他们攻击的是什么映像。生成对抗性补丁后，该补丁可以在互联网上广泛分发，供其他攻击者打印和使用。此外，由于攻击使用了较大的扰动，现有的防御技术侧重于防御小扰动，可能对诸如此类的较大扰动并不健壮。事实上，最近的工作已经证明，与训练中使用的模型相比，MNIST上最先进的对抗训练模型仍然容易受到更大的扰动，无论是通过使用距离[14]的不同度量来搜索附近的对抗示例，还是通过在背景[1]中应用大扰动。</p>
+<h2 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h2><p>The traditional strategy for finding a targeted adversarial example is as follows: given some classifier P [y | x], some input x ∈ Rn, some target class by and a maximum perturbation ε, we want to find the input bx that maximizes log (P [by | bx]), subject to the constraint that kx − bxk∞ ≤ ε. When P [y | x] is parameterized by a neural network, an attacker with access to the model can perform iterated gradient descent on x in order to find a suitable input bx. This strategy can produce a well camouflaged attack, but requires modifying the target image.</p>
+<p>Instead, we create our attack by completely replacing a part of the image with our patch. We mask our patch to allow it to take any shape, and then train over a variety of images, applying a random translation, scaling, and rotation on the patch in each image, optimizing using gradient descent. In particular for a given image x ∈ Rw×h×c, patch p, patch location l, and patch transformations t (e.g. rotations or scaling) we define a patch application operator A(p, x, l, t) which first applies the transformations t to the patch p, and then applies the transformed patch p to the image x at location l (see figure 2).</p>
+<p>寻找目标对抗示例的传统策略如下:给定一些分类器P [y | x]，一些输入x∈Rn，一些目标类by和一个最大扰动ε，我们想要找到最大log (P [by | bx])的输入bx，受kx−bxk∞≤ε的约束。当P [y | x]被神经网络参数化时，可以访问模型的攻击者可以对x进行迭代梯度下降，以找到合适的输入bx。这种策略可以产生很好的伪装攻击，但需要修改目标图像。</p>
+<p>相反，我们通过用补丁完全替换图像的一部分来创建攻击。我们对我们的补丁进行遮罩，使其能够呈现任何形状，然后在各种图像上进行训练，对每个图像中的补丁应用随机平移、缩放和旋转，使用梯度下降进行优化。特别是对于给定的图像x∈Rw×h×c、补丁p、补丁位置l和补丁变换t(例如旋转或缩放)，我们定义了一个补丁应用算子a (p, x, l, t)，它首先将变换t应用于补丁p，然后将变换后的补丁p应用于位置l的图像x(见图2)。</p>
+<p><img src="C:\Users\xiwen\desktop\blog\source_posts\image-20230312222034645.png" alt="image-20230312222034645"></p>
+<p><img src="C:\Users\xiwen\desktop\blog\source_posts\image-20230312222420698.png" alt="image-20230312222420698"></p>
+<p>where X is a training set of images, T is a distribution over transformations of the patch, and L is a distribution over locations in the image. Note that this expectation is over images, which encourages the trained patch to work regardless of what is in the background. This departs from most prior work on adversarial perturbations in the fact that this perturbation is universal in that it works for any background. Universal perturbations were identified in [9], but these required changing every pixel in the image and results were not given in the physical world.</p>
+<p>其中X是图像的训练集，T是补丁变换的分布，L是图像中位置的分布。注意，这个期望是针对图像的，这鼓励训练过的补丁不管背景是什么都能工作。这与大多数先前关于对抗性扰动的工作不同，事实上这种扰动是普遍的，因为它适用于任何背景。在[9]中确定了普遍扰动，但这些扰动需要改变图像中的每个像素，并且在物理世界中没有给出结果。</p>
+<p>We also consider camouflaged patches which are forced to look like a given starting image. Here we simply add a constraint of the form ||p − porig||∞ &lt; ? to the patch objective. This will force the final patch to be within ? in the L∞ norm of some starting patch porig.</p>
+<p><img src="C:\Users\xiwen\desktop\blog\source_posts\image-20230312222652314.png" alt="image-20230312222652314"></p>
+<p>我们还考虑了伪装补丁，这些补丁被迫看起来像给定的起始图像。这里我们只需添加一个形式为||p−porig||∞&lt; ?到补丁目标。这将迫使最终补丁在?的L∞范数。</p>
+<p>我们认为这种攻击利用了图像分类任务的构造方式。虽然图像可能包含多个项目，但只有一个目标标签被认为是正确的，因此网络必须学会检测帧中最“突出”的项目。对抗性补丁通过产生比现实世界中的物体更显著的输入来利用这一特性。因此，当攻击目标检测或图像分割模型时，我们期望目标面包机补丁被归类为面包机，而不影响图像的其他部分。</p>
+<h2 id="Experimental-Results"><a href="#Experimental-Results" class="headerlink" title="Experimental Results"></a>Experimental Results</h2><p>To test our attack, we compare the efficacy of two whitebox attacks, a blackbox attack, and a control patch. The white box ensemble attack jointly trains a single patch across five ImageNet models: inceptionv3, resnet50, xception, VGG16, and VGG19. We then evaluate the attack by averaging the win rate across all five models. The white box single model attack does the same but only trains and evaluates on a single model. The blackbox attack jointly trains a single patch across four of the ImageNet models, and then evaluates the blackbox attack on a fifth model, which we did not access during training. The control is a picture of a toaster.</p>
+<p>为了测试我们的攻击，我们比较了两个白盒攻击、一个黑盒攻击和一个控制补丁的效果。白盒集合攻击在五个ImageNet模型(inceptionv3、resnet50、xception、VGG16和VGG19)上联合训练一个补丁。然后，我们通过平均所有五个模型的胜率来评估攻击。白盒单模型攻击也做同样的事情，但只在单个模型上训练和评估。黑盒攻击在四个ImageNet模型上联合训练一个补丁，然后在我们在训练期间没有访问的第五个模型上评估黑盒攻击。控件是一个烤面包机的图片。</p>
+<p>During training and evaluation, the patches are rescaled and then digitally inserted on a random location on a random ImageNet image. Figure 2 shows the results.</p>
+<p>Note that the patch size required to reliably fool the model in this universal setting (black box, on a targeted class, and over all images, locations and transformations) is significantly larger than those required to perform a non-targeted attack on a single image and a single location in the whitebox setting. For example, Su et al [6] recently demonstrated that modifying 1 pixel on a 32x32 pixel CIFAR-10 image (0.1% of the pixels in the image) suffices to fool the majority of images with a non-targeted, non-universal whitebox attack. However, our attacks are still far more effective</p>
+<p>在训练和评估期间，补丁被重新缩放，然后以数字方式插入随机ImageNet图像上的随机位置。图2显示了结果。</p>
+<p>请注意，在这个通用设置(黑盒，目标类，以及所有图像，位置和转换)中可靠地欺骗模型所需的补丁大小明显大于在白盒设置中对单个图像和单个位置执行非定向攻击所需的补丁大小。例如，Su等人[6]最近证明，在32x32像素的CIFAR-10图像上修改1个像素(图像中像素的0.1%)足以用非定向的、非通用的白盒攻击欺骗大多数图像。然而，我们的攻击仍然有效得多</p>
+<p><img src="C:\Users\xiwen\desktop\blog\source_posts\image-20230312224047785.png" alt="image-20230312224047785"></p>
+<p>图3:创建对抗补丁的不同方法的比较。注意，这些成功率是随机放置在图像顶部的补丁。图中的每个点都是通过将补丁应用于400个随机选择的测试图像中的随机位置来计算的。这是对图像大小的一小部分的不同比例的补丁进行的，每个比例在400张图像上进行独立测试。</p>
+<p>We also tested the black box + physical world effectiveness of the patch on the third party Demitasse application2 and found some transferability of the patch but only when the patch takes up a significant fraction of the image. We did not optimize the patch for print-ability as in [13], which perhaps explains why the patch is not as effective as in Figure 3, which tests black box for different models and not in the physical world. We invite curious readers to try the patch out for themselves by printing out this paper and using the patch in the Appendix.</p>
+<p>我们还在第三方Demitasse应用程序上测试了补丁的黑盒+物理世界的有效性，并发现了补丁的一些可移植性，但仅当补丁占用图像的很大一部分时。我们没有像[13]中那样优化补丁的打印能力，这可能解释了为什么补丁没有图3中那么有效，图3测试了不同模型的黑盒，而不是在物理世界中。我们邀请好奇的读者通过打印出这篇论文并使用附录中的补丁来尝试自己的补丁。</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>We show that we can generate a universal, robust, targeted patch that fools classifiers regardless of the scale or location of the patch, and does not require knowledge of the other items in the scene that it is attacking. Our attack works in the real world, and can be disguised as an innocuous sticker.</p>
+<p>These results demonstrate an attack that could be created offline, and then broadly shared.</p>
+<p>我们展示了我们可以生成一个通用的、健壮的、有针对性的补丁，无论补丁的规模或位置如何，它都可以欺骗分类器，并且不需要了解它正在攻击的场景中的其他项目。我们的攻击在现实世界中起作用，可以伪装成一个无害的贴纸。</p>
+<p>这些结果证明了一种可以离线发起并广泛共享的攻击。</p>
+<p>There has been substantial work on defending against small Lp perturbations to natural images, at least partially motivated by security concerns [12, 8, 2]. Part of the motivation of this work is that potential malicious attackers may not be concerned with generating small or imperceptible perturbations to a natural image, but may instead opt for larger more effective but noticeable perturbations to the input especially if a model has been designed to resist small Lp perturbations.</p>
+<p>已经有大量的工作用于防御自然图像的小Lp扰动，至少部分是出于安全考虑[12,8,2]。这项工作的部分动机是，潜在的恶意攻击者可能不关心对自然图像产生小的或难以察觉的扰动，而是可能选择对输入产生更大、更有效但明显的扰动，特别是如果模型被设计为抵抗小的Lp扰动。</p>
+<p>Many ML models operate without human validation of every input and thus malicious attackers may not be concerned with the imperceptibility of their attacks. Even if humans are able to notice these patches, they may not understand the intent of the patch and instead view it as a form of art. This work shows that focusing only on defending against small perturbations is insufficient, as large, local perturbations can also break classifiers.</p>
+<p>许多ML模型在运行时没有对每个输入进行人工验证，因此恶意攻击者可能不关心其攻击的不可察觉性。即使人类能够注意到这些补丁，他们也可能不理解补丁的意图，而是将其视为一种艺术形式。这项工作表明，只专注于防御小扰动是不够的，因为大的局部扰动也可以破坏分类器。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>xiwen_youmu
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://xiwen1.github.io/2023/03/12/Adverserial-Patch/" title="Adverserial Patch">http://xiwen1.github.io/2023/03/12/Adverserial-Patch/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Adverserial-Attack/" rel="tag"># Adverserial Attack</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/02/16/%E2%80%9C%E5%85%B3%E4%BA%8E%E5%A4%9A%E5%B7%B4%E8%83%BA%E8%84%B1%E7%98%BE%E2%80%9D/" rel="prev" title="“关于多巴胺脱瘾”">
+      <i class="fa fa-chevron-left"></i> “关于多巴胺脱瘾”
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#l2%E8%B7%9D%E7%A6%BB"><span class="nav-number">1.</span> <span class="nav-text">l2距离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%87%E6%AD%A3%E6%80%A7%E6%94%BB%E5%87%BB-false-positive-%E4%B8%8E%E4%BC%AA%E8%B4%9F%E6%80%A7%E6%94%BB%E5%87%BB-false-negative"><span class="nav-number">1.1.</span> <span class="nav-text">假正性攻击(false positive)与伪负性攻击(false negative)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BD%E7%9B%92%E6%94%BB%E5%87%BB-white-box-%E4%B8%8E%E9%BB%91%E7%9B%92%E6%94%BB%E5%87%BB-black-box-%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">白盒攻击(white box)与黑盒攻击(black box)：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB-target-attack-%E5%92%8C%E6%97%A0%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB-non-target-attack-%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">有目标攻击(target attack)和无目标攻击(non-target attack)：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E6%AD%A5%E6%94%BB%E5%87%BB-One-time-attack-%E5%92%8C%E8%BF%AD%E4%BB%A3%E6%94%BB%E5%87%BB-Iteration-attack-%EF%BC%9A"><span class="nav-number">1.4.</span> <span class="nav-text">单步攻击(One-time attack)和迭代攻击(Iteration attack)：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AA%E4%BD%93%E6%94%BB%E5%87%BB-Individual-attack-%E5%92%8C%E6%99%AE%E9%80%82%E6%80%A7%E6%94%BB%E5%87%BB-Universal-attack-%EF%BC%9A"><span class="nav-number">1.5.</span> <span class="nav-text">个体攻击(Individual attack)和普适性攻击(Universal attack)：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E6%89%B0%E5%8A%A8-optimized-perturbation-%E5%92%8C%E7%BA%A6%E6%9D%9F%E6%89%B0%E5%8A%A8-constrained-perturbation-%EF%BC%9A"><span class="nav-number">1.6.</span> <span class="nav-text">优化扰动(optimized perturbation)和约束扰动(constrained perturbation)：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E8%AF%8D%E8%A1%A5%E5%85%85"><span class="nav-number">2.</span> <span class="nav-text">单词补充</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E5%AF%B9%E7%85%A7%E7%BF%BB%E8%AF%91"><span class="nav-number">3.</span> <span class="nav-text">文章对照翻译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">3.1.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Approach"><span class="nav-number">3.2.</span> <span class="nav-text">Approach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experimental-Results"><span class="nav-number">3.3.</span> <span class="nav-text">Experimental Results</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">3.4.</span> <span class="nav-text">Conclusion</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="xiwen_youmu"
+      src="/images/touxiang.png">
+  <p class="site-author-name" itemprop="name">xiwen_youmu</p>
+  <div class="site-description" itemprop="description">张可为的个人博客，快给我关注（批脸）</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiwen1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiwen1" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/1597083201@qq.com.com" title="E-Mail → 1597083201@qq.com.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiwen_youmu</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
