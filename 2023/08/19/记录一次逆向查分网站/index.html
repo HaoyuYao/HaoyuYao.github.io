@@ -20,20 +20,22 @@
     var CONFIG = {"hostname":"xiwen1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":2,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="用户系统的搭建和登录界面的完成1.1 向django自带数据库中添加自定义的类时需要注意的操作启动uwsgi.ini服务之后sudo uwsgi --ini scripts&#x2F;uwsgi.ini不要直接关闭终端，这样导致服务难以被关闭">
+  <meta name="description" content="今天打算将一个学校学生自己做的查询老师给分情况的网站爬了（因为实在联系不上原网站作者，迫不得已出此下策），这是一个根据输入的信息，如教师名称、课程名称、课程号等查询信息并返回的网站，为了覆盖到本学校全部的课程，我首先去学校的教务系统通过课表查询系统轻松拿到了全部课程的信息（没有任何反爬措施），根据全部课程的课程号，我开始设计爬取查给分网站的代码。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于django用户系统的搭建流程">
-<meta property="og:url" content="http://xiwen1.github.io/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:title" content="记录一次逆向查分网站">
+<meta property="og:url" content="http://xiwen1.github.io/2023/08/19/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E9%80%86%E5%90%91%E6%9F%A5%E5%88%86%E7%BD%91%E7%AB%99/index.html">
 <meta property="og:site_name" content="徯璺">
-<meta property="og:description" content="用户系统的搭建和登录界面的完成1.1 向django自带数据库中添加自定义的类时需要注意的操作启动uwsgi.ini服务之后sudo uwsgi --ini scripts&#x2F;uwsgi.ini不要直接关闭终端，这样导致服务难以被关闭">
+<meta property="og:description" content="今天打算将一个学校学生自己做的查询老师给分情况的网站爬了（因为实在联系不上原网站作者，迫不得已出此下策），这是一个根据输入的信息，如教师名称、课程名称、课程号等查询信息并返回的网站，为了覆盖到本学校全部的课程，我首先去学校的教务系统通过课表查询系统轻松拿到了全部课程的信息（没有任何反爬措施），根据全部课程的课程号，我开始设计爬取查给分网站的代码。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-12-18T09:09:30.000Z">
-<meta property="article:modified_time" content="2022-12-30T14:54:18.063Z">
+<meta property="article:published_time" content="2023-08-19T05:10:22.000Z">
+<meta property="article:modified_time" content="2023-08-19T13:28:43.756Z">
 <meta property="article:author" content="xiwen_youmu">
-<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="spider">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://xiwen1.github.io/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/">
+<link rel="canonical" href="http://xiwen1.github.io/2023/08/19/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E9%80%86%E5%90%91%E6%9F%A5%E5%88%86%E7%BD%91%E7%AB%99/">
 
 
 <script id="page-configurations">
@@ -46,7 +48,7 @@
   };
 </script>
 
-  <title>关于django用户系统的搭建流程 | 徯璺</title>
+  <title>记录一次逆向查分网站 | 徯璺</title>
   
 
 
@@ -192,7 +194,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xiwen1.github.io/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="http://xiwen1.github.io/2023/08/19/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E9%80%86%E5%90%91%E6%9F%A5%E5%88%86%E7%BD%91%E7%AB%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/touxiang.png">
@@ -205,7 +207,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          关于django用户系统的搭建流程
+          记录一次逆向查分网站
         </h1>
 
         <div class="post-meta">
@@ -214,16 +216,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2022-12-18 17:09:30" itemprop="dateCreated datePublished" datetime="2022-12-18T17:09:30+08:00">2022-12-18</time>
+              <time title="创建时间：2023-08-19 13:10:22 / 修改时间：21:28:43" itemprop="dateCreated datePublished" datetime="2023-08-19T13:10:22+08:00">2023-08-19</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-12-30 22:54:18" itemprop="dateModified" datetime="2022-12-30T22:54:18+08:00">2022-12-30</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -231,10 +227,6 @@
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/%E7%A7%91%E6%8A%80/" itemprop="url" rel="index"><span itemprop="name">科技</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%A7%91%E6%8A%80/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
                 </span>
             </span>
 
@@ -249,23 +241,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="用户系统的搭建和登录界面的完成"><a href="#用户系统的搭建和登录界面的完成" class="headerlink" title="用户系统的搭建和登录界面的完成"></a>用户系统的搭建和登录界面的完成</h1><h2 id="1-1-向django自带数据库中添加自定义的类时需要注意的操作"><a href="#1-1-向django自带数据库中添加自定义的类时需要注意的操作" class="headerlink" title="1.1 向django自带数据库中添加自定义的类时需要注意的操作"></a>1.1 向django自带数据库中添加自定义的类时需要注意的操作</h2><p>启动uwsgi.ini服务之后<code>sudo uwsgi --ini scripts/uwsgi.ini</code>不要直接关闭终端，这样导致服务难以被关闭</p>
+        <p>今天打算将一个学校学生自己做的查询老师给分情况的网站爬了（因为实在联系不上原网站作者，迫不得已出此下策），这是一个根据输入的信息，如教师名称、课程名称、课程号等查询信息并返回的网站，为了覆盖到本学校全部的课程，我首先去学校的教务系统通过课表查询系统轻松拿到了全部课程的信息（没有任何反爬措施），根据全部课程的课程号，我开始设计爬取查给分网站的代码。</p>
 <span id="more"></span>
+<p>我首先想当然的打开dev tools，将需要的headers全部写入config.json，然后直接requests.get，最后发现什么也没有拿到，原来headers里有一个anthorization的字段，而这个字段里的signature会随着请求信息，cookie以及时间变动，说明接下来到了JS逆向的环节了。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Accept: application/json, text/javascript, */*; q=0.01</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6</span><br><span class="line">Authorization:</span><br><span class="line">hmac id=&quot;AKID5t23df2wfg2r98i5599nadhfmiehiigkgif&quot;, algorithm=&quot;hmac-sha1&quot;, headers=&quot;x-date source&quot;, signature=&quot;2IEpu2dJidmh2vcg7UimNu/YsR8=&quot;</span><br><span class="line">Origin: https://s.ringjoys.com</span><br><span class="line">Referer: https://s.ringjoys.com/</span><br><span class="line">Sec-Ch-Ua: &quot;Not/A)Brand&quot;;v=&quot;99&quot;, &quot;Microsoft Edge&quot;;v=&quot;115&quot;, &quot;Chromium&quot;;v=&quot;115&quot;</span><br><span class="line">Sec-Ch-Ua-Mobile: ?0</span><br><span class="line">Sec-Ch-Ua-Platform: &quot;Windows&quot;</span><br><span class="line">Sec-Fetch-Dest: empty</span><br><span class="line">Sec-Fetch-Mode: cors</span><br><span class="line">Sec-Fetch-Site: cross-site</span><br><span class="line">Source: s</span><br><span class="line">User-Agent:</span><br><span class="line">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36 Edg/115.0.1901.203</span><br><span class="line">X-Date: Sat, 19 Aug 2023 12:30:56 GMT</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>如果无法关闭，则使用<code>sudo fuser -k 8000/tcp</code>杀死在8000端口的进程，在运行ini</p>
-<p>登陆界面中的每个函数都要实现三个部分：</p>
+<p>这并不是一个好消息，因为我几乎没有相关的经验，我首先再dev tools的源代码一栏中搜索signature, date, secret等信息，结果一无所获。然后我查看了页面元素，发现表单提交里的input元素里有这样一个属性：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">id</span>=<span class="string">&quot;submitbutton&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;login(1,true)&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我又到源代码中去搜索login这个函数，不出意外，0个匹配。</p>
+<p>这属于超出我贫瘠的知识范围的情况了，不得已求出openai，我得到了这样的回复：</p>
+<blockquote>
+<p>如果你在网站的开发者工具中搜索不到login函数，有几个可能的原因：</p>
 <ol>
-<li>views实现函数的本体</li>
-<li>urls中实现函数的映射</li>
-<li>js中实现对应的调用</li>
+<li>函数不是在页面加载时直接定义的：如果login函数是在异步加载或动态生成的代码中定义的，它可能不会在页面初始加载时出现在开发者工具的源代码中。你可以尝试在网页加载完成后再次搜索。</li>
+<li>函数可能被压缩或混淆：有些网站会对JavaScript代码进行压缩或混淆，以减少文件大小或保护代码。这可能会导致函数名发生变化，使其难以在源代码中直接搜索到。</li>
+<li>函数可能是从外部资源加载的：login函数可能是从其他文件或外部资源（如CDN）加载的，这样它就不会出现在当前页面的源代码中。你可以尝试追踪网页中加载的脚本文件，查找是否有包含login函数的文件。</li>
 </ol>
-<p>每一个处理请求的函数都要传入一个参数:request，请求登陆也是如此，并且导入包：<code>from django.http import JsonResponse</code></p>
-<p>json文件：通用的序列化存储字典等内容的文件</p>
-<p>path中填写的url最后一定带上&#x2F;，否则后面接新的东西时会出错</p>
-<p>注意为文件添加可执行权限的操作是 chmod +x filename</p>
-<p>js实现三秒后刷新：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
-
+</blockquote>
+<p>dev tools获得不了？我当即放弃了逆向加密算法的尝试，转而看看有没有其他漏洞，事实证明，这是一个错误的决定。</p>
+<p>我尝试控制请求的全部header信息与一个真实发送的请求一致，仅仅替换request url param中的课程号。这个策略一开始起效了，但我随即又遇到了问题：</p>
+<ol>
+<li><p>这个api对于x-date这个字段有校验，与x-date当前时间差距稍远的请求会被拒绝</p>
+</li>
+<li><p>这个服务器对于过于频繁的请求会直接拒绝，我不得不再两个请求之间添加time.sleep</p>
+</li>
+</ol>
+<p>这就导致了我的一套真实signature是能供我发送600左右个请求，而总共的课程号大约有5000个。虽然只要这样重复操作不到10次就可以完成任务，但这样一点都不DRY，有违我的个人原则。</p>
+<p>我又将目光放在了逆向js上，摸索dev tools的过程中我才以外发现原来可以直接在html上打断点（是的我这个铸币这都不知道），然后终于通过再submit input上打断点我找到了login这个函数。</p>
+<p>我迅速将这个函数添加到了我的代码中，随即又有一个问题出现：这段代码中使用了CryptoJS这个库，而PyExecJS提供的运行环境貌似并不能调用外部库。</p>
+<p>铸币的我首先尝试自创hmacsha1编码代码，又踩了几个坑之后直接从crypto-js.js源代码中摘出了模组相关代码复制粘贴进了login函数所在的文件，历经千辛万苦，终于完成了我人生中第一个逆向。（鼓掌）</p>
+<p>虽然事后看来感觉自己十分的铸币，这个逆向实际上也非常简单，只需要找到login这个函数就可以解决问题，但是这次的逆向经历对我而言还是意义非凡，故作此留念。</p>
 
     </div>
 
@@ -281,7 +287,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://xiwen1.github.io/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/" title="关于django用户系统的搭建流程">http://xiwen1.github.io/2022/12/18/关于django用户系统的搭建流程/</a>
+    <a href="http://xiwen1.github.io/2023/08/19/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E9%80%86%E5%90%91%E6%9F%A5%E5%88%86%E7%BD%91%E7%AB%99/" title="记录一次逆向查分网站">http://xiwen1.github.io/2023/08/19/记录一次逆向查分网站/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -292,7 +298,9 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"># 笔记</a>
+              <a href="/tags/javascript/" rel="tag"># javascript</a>
+              <a href="/tags/spider/" rel="tag"># spider</a>
+              <a href="/tags/python/" rel="tag"># python</a>
           </div>
 
         
@@ -301,13 +309,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/12/17/%E4%BD%BF%E7%94%A8django-canvas%E5%AE%8C%E6%88%90%E7%AE%80%E5%8D%95%E7%9A%84%E7%BD%91%E9%A1%B5%E6%B8%B8%E6%88%8F/" rel="prev" title="使用django+canvas完成简单的网页游戏">
-      <i class="fa fa-chevron-left"></i> 使用django+canvas完成简单的网页游戏
+    <a href="/2023/07/11/yolov7%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/" rel="prev" title="yolo系列以及mmdetection代码阅读">
+      <i class="fa fa-chevron-left"></i> yolo系列以及mmdetection代码阅读
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/12/24/%E5%88%9D%E5%AD%A6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/" rel="next" title="初学数组模拟邻接表的一些理解">
-      初学数组模拟邻接表的一些理解 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -367,7 +372,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E5%92%8C%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2%E7%9A%84%E5%AE%8C%E6%88%90"><span class="nav-number">1.</span> <span class="nav-text">用户系统的搭建和登录界面的完成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%90%91django%E8%87%AA%E5%B8%A6%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E7%B1%BB%E6%97%B6%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 向django自带数据库中添加自定义的类时需要注意的操作</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
