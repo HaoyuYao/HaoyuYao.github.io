@@ -195,6 +195,16 @@
       </tags>
   </entry>
   <entry>
+    <title>yolo系列以及mmdetection代码阅读</title>
+    <url>/2023/07/11/yolov7%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/</url>
+    <content><![CDATA[<p>最近一个工作需要大量对比不同的计算机视觉检测模型，需要使用到一个指标ASR，即Attack Successful Rate, 攻击成功率，这个指标需要使用到tp(true positives), 然而tp这个指标通常大部分检测模型不会默认给出, 在yolov5等系列中, 你可以在val.py中轻松找到相应的指标并手动打印, yolov7中并没有给出tp这个变量, 但是依然可以依葫芦画瓢拿到这一变量, 然而事情到了mmdetection中就大为不同, 不同于专精于行人检测的yolo系列, mmdetection是一个极为庞大包罗万象的检测库, 其代码层次结构复杂, 想获得对应的指标, 少不了一场代码阅读.</p>
+<h1 id="计算tp-true-positives-的方法"><a href="#计算tp-true-positives-的方法" class="headerlink" title="计算tp(true positives)的方法"></a>计算tp(true positives)的方法</h1><p>在yolov5中，正例数是直接通过<code>tp = (recall * number_targets).round()</code>计算得到的，在各个检测库中，recall通常是会给出的，这时候只需要想办法获得number_targets的值也就是真正例数的数量，就可以计算出tp(recall(召回率) &#x3D; tp &#x2F; (tp + fn)，tp + fn即是真正正例的个数) </p>
+<h2 id="关于视觉检测库常见指标的解释"><a href="#关于视觉检测库常见指标的解释" class="headerlink" title="关于视觉检测库常见指标的解释"></a>关于视觉检测库常见指标的解释</h2>]]></content>
+      <tags>
+        <tag>科技</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>kmp算法学习笔记</title>
     <url>/2023/01/02/kmp%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="kmp算法"><a href="#kmp算法" class="headerlink" title="kmp算法"></a>kmp算法</h1><p>学习状态机的题目时，遇到一道题需要使用到kmp的知识，于是上csdn学习了一下并整理了如下笔记。</p>
@@ -228,29 +238,6 @@
       </tags>
   </entry>
   <entry>
-    <title>yolo系列以及mmdetection代码阅读</title>
-    <url>/2023/07/11/yolov7%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/</url>
-    <content><![CDATA[<p>最近一个工作需要大量对比不同的计算机视觉检测模型，需要使用到一个指标ASR，即Attack Successful Rate, 攻击成功率，这个指标需要使用到tp(true positives), 然而tp这个指标通常大部分检测模型不会默认给出, 在yolov5等系列中, 你可以在val.py中轻松找到相应的指标并手动打印, yolov7中并没有给出tp这个变量, 但是依然可以依葫芦画瓢拿到这一变量, 然而事情到了mmdetection中就大为不同, 不同于专精于行人检测的yolo系列, mmdetection是一个极为庞大包罗万象的检测库, 其代码层次结构复杂, 想获得对应的指标, 少不了一场代码阅读.</p>
-<h1 id="计算tp-true-positives-的方法"><a href="#计算tp-true-positives-的方法" class="headerlink" title="计算tp(true positives)的方法"></a>计算tp(true positives)的方法</h1><p>在yolov5中，正例数是直接通过<code>tp = (recall * number_targets).round()</code>计算得到的，在各个检测库中，recall通常是会给出的，这时候只需要想办法获得number_targets的值也就是真正例数的数量，就可以计算出tp(recall(召回率) &#x3D; tp &#x2F; (tp + fn)，tp + fn即是真正正例的个数) </p>
-<h2 id="关于视觉检测库常见指标的解释"><a href="#关于视觉检测库常见指标的解释" class="headerlink" title="关于视觉检测库常见指标的解释"></a>关于视觉检测库常见指标的解释</h2>]]></content>
-      <tags>
-        <tag>科技</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>“关于多巴胺脱瘾”</title>
-    <url>/2023/02/16/%E2%80%9C%E5%85%B3%E4%BA%8E%E5%A4%9A%E5%B7%B4%E8%83%BA%E8%84%B1%E7%98%BE%E2%80%9D/</url>
-    <content><![CDATA[<h2 id="每天都上自己的博客看看吧"><a href="#每天都上自己的博客看看吧" class="headerlink" title="每天都上自己的博客看看吧"></a>每天都上自己的博客看看吧</h2><p>  当代互联网上琳琅满目的娱乐方式极大的提高了线代人们的多巴胺阈值, 在我自己的人生经历中, 这种感觉变得愈发的明显<span id="more"></span> 从小时候能够看到电视就会十分兴奋, 再到对b站的各种视频持续性的上瘾, 再到这些东西不再能让我感到快乐, 每一天都生活变得愈发麻木, 这样的坏处显而易见, 那就是我对于学习这样的事情的耐心和兴趣变得愈发的淡薄, 对于在学习技术与编程的过程中所遇到的困难愈发变得抗拒.</p>
-<p>  于是, 多巴胺脱瘾, 这就是我为自己所指定的目标, 就是要培养自己的自控能力, 并在这个过程中努力避免来自新媒体以及游戏的高多巴胺刺激内容的诱惑, 这个过程会无聊到感到痛苦, 但是, 痛苦本身就往往意味着成长. 成长并不都是好事, 但是时间不会等人, 走到现在, 我愈发感觉到, 想要被自己真正认可究竟是多么困难的一件事情, 我已经让自己失望过了无数次, 前面的无数次我也是这么说的, 但是没有外界明显的压力的情况下人就是会这样不断的朝着低级娱乐的方向前进, 但这和我们自己的目标是绝对相互矛盾的, 我们不能被别人逼着走, 我尤为讨厌这种失去控制权的感觉, 所以, 我定下每天日记的计划, 让每一天的我都能够回顾自己前一天的所思所想, 自己逼迫自己去不断的反思纠正, 一旦发现有堕落的迹象就要以此文为例, 勉励自己.</p>
-]]></content>
-      <categories>
-        <category>diary</category>
-      </categories>
-      <tags>
-        <tag>随记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>不开long long见祖宗</title>
     <url>/2023/01/04/%E4%B8%8D%E5%BC%80long-long%E8%A7%81%E7%A5%96%E5%AE%97/</url>
     <content><![CDATA[<h1 id="感受差分的威力吧"><a href="#感受差分的威力吧" class="headerlink" title="感受差分的威力吧"></a>感受差分的威力吧</h1><p>题目链接： <a href="https://www.acwing.com/problem/content/description/4658/">4655. 重新排序 - AcWing题库</a></p>
@@ -280,6 +267,19 @@
       </categories>
       <tags>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>“关于多巴胺脱瘾”</title>
+    <url>/2023/02/16/%E2%80%9C%E5%85%B3%E4%BA%8E%E5%A4%9A%E5%B7%B4%E8%83%BA%E8%84%B1%E7%98%BE%E2%80%9D/</url>
+    <content><![CDATA[<h2 id="每天都上自己的博客看看吧"><a href="#每天都上自己的博客看看吧" class="headerlink" title="每天都上自己的博客看看吧"></a>每天都上自己的博客看看吧</h2><p>  当代互联网上琳琅满目的娱乐方式极大的提高了线代人们的多巴胺阈值, 在我自己的人生经历中, 这种感觉变得愈发的明显<span id="more"></span> 从小时候能够看到电视就会十分兴奋, 再到对b站的各种视频持续性的上瘾, 再到这些东西不再能让我感到快乐, 每一天都生活变得愈发麻木, 这样的坏处显而易见, 那就是我对于学习这样的事情的耐心和兴趣变得愈发的淡薄, 对于在学习技术与编程的过程中所遇到的困难愈发变得抗拒.</p>
+<p>  于是, 多巴胺脱瘾, 这就是我为自己所指定的目标, 就是要培养自己的自控能力, 并在这个过程中努力避免来自新媒体以及游戏的高多巴胺刺激内容的诱惑, 这个过程会无聊到感到痛苦, 但是, 痛苦本身就往往意味着成长. 成长并不都是好事, 但是时间不会等人, 走到现在, 我愈发感觉到, 想要被自己真正认可究竟是多么困难的一件事情, 我已经让自己失望过了无数次, 前面的无数次我也是这么说的, 但是没有外界明显的压力的情况下人就是会这样不断的朝着低级娱乐的方向前进, 但这和我们自己的目标是绝对相互矛盾的, 我们不能被别人逼着走, 我尤为讨厌这种失去控制权的感觉, 所以, 我定下每天日记的计划, 让每一天的我都能够回顾自己前一天的所思所想, 自己逼迫自己去不断的反思纠正, 一旦发现有堕落的迹象就要以此文为例, 勉励自己.</p>
+]]></content>
+      <categories>
+        <category>diary</category>
+      </categories>
+      <tags>
+        <tag>随记</tag>
       </tags>
   </entry>
   <entry>
@@ -392,6 +392,20 @@
       </tags>
   </entry>
   <entry>
+    <title>初学数组模拟邻接表的一些理解</title>
+    <url>/2022/12/24/%E5%88%9D%E5%AD%A6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<h2 id="head与next数组中保存的是ver数组的下标"><a href="#head与next数组中保存的是ver数组的下标" class="headerlink" title="head与next数组中保存的是ver数组的下标"></a>head与next数组中保存的是ver数组的下标</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//加入有向边(x, y)，权值为z；</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z)</span> </span>&#123;</span><br><span class="line">	ver[++tot] = y, edge[tot] = z; <span class="comment">//真实数据</span></span><br><span class="line">	next[tot] = head[x], head[x] = tot;</span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
+
+<h2 id="理解方法："><a href="#理解方法：" class="headerlink" title="理解方法："></a>理解方法：</h2><p>tot为每一个数据编号，从第一个输入开始一直往后排，至于数据的输入顺序有关，与数据本身的性质无关<br>ver[++tot]因此就表示新录入一个数据，编号tot++；<br>对于一个以邻接表表示的有向图而言，表头head的下表表示起点的值，head的内容指向该起点最新加入的一条邻边终点的编号（即输入时的tot），next[tot]表示下表为tot的数据的后面接的数的编号；因为表头指针更新的是最新插入的数据，所以无需查找到末尾直接更新表头指向即可，因此有了：<br>next[tot] &#x3D; head[x], head[x] &#x3D; tot; 这样的操作。</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>关于本博客的一些希望</title>
     <url>/2022/12/16/%E5%85%B3%E4%BA%8E%E6%9C%AC%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%8C%E6%9C%9B/</url>
     <content><![CDATA[<p><em>关于本博客的一些初衷，首先写在这里，以勉励自己</em></p>
@@ -418,20 +432,6 @@
 <p>代码：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2010</span>, M = <span class="number">12010</span>;</span><br><span class="line"><span class="type">int</span> f[N], v[M], w[M];</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> a, b, s;</span><br><span class="line">        cin&gt;&gt;a&gt;&gt;b&gt;&gt;s;</span><br><span class="line">        <span class="type">int</span> k=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(k &lt;= s)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt ++;</span><br><span class="line">            v[cnt] = a * k;</span><br><span class="line">            w[cnt] = b * k;</span><br><span class="line">            s -= k;</span><br><span class="line">            k *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(s &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt ++;</span><br><span class="line">            v[cnt] = a * s;</span><br><span class="line">            w[cnt] = b * s;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    n = cnt;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=v[i]; j--)</span><br><span class="line">        &#123;</span><br><span class="line">            f[j] = <span class="built_in">max</span>(f[j], f[j-v[i]]+w[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;f[m];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>初学数组模拟邻接表的一些理解</title>
-    <url>/2022/12/24/%E5%88%9D%E5%AD%A6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[<h2 id="head与next数组中保存的是ver数组的下标"><a href="#head与next数组中保存的是ver数组的下标" class="headerlink" title="head与next数组中保存的是ver数组的下标"></a>head与next数组中保存的是ver数组的下标</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//加入有向边(x, y)，权值为z；</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z)</span> </span>&#123;</span><br><span class="line">	ver[++tot] = y, edge[tot] = z; <span class="comment">//真实数据</span></span><br><span class="line">	next[tot] = head[x], head[x] = tot;</span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
-
-<h2 id="理解方法："><a href="#理解方法：" class="headerlink" title="理解方法："></a>理解方法：</h2><p>tot为每一个数据编号，从第一个输入开始一直往后排，至于数据的输入顺序有关，与数据本身的性质无关<br>ver[++tot]因此就表示新录入一个数据，编号tot++；<br>对于一个以邻接表表示的有向图而言，表头head的下表表示起点的值，head的内容指向该起点最新加入的一条邻边终点的编号（即输入时的tot），next[tot]表示下表为tot的数据的后面接的数的编号；因为表头指针更新的是最新插入的数据，所以无需查找到末尾直接更新表头指向即可，因此有了：<br>next[tot] &#x3D; head[x], head[x] &#x3D; tot; 这样的操作。</p>
 ]]></content>
       <categories>
         <category>算法</category>
@@ -544,7 +544,7 @@
 <p>我迅速将这个函数添加到了我的代码中，随即又有一个问题出现：这段代码中使用了CryptoJS这个库，而PyExecJS提供的运行环境貌似并不能调用外部库。</p>
 <p>铸币的我首先尝试自创hmacsha1编码代码，又踩了几个坑之后直接从crypto-js.js源代码中摘出了模组相关代码复制粘贴进了login函数所在的文件，历经千辛万苦，终于完成了我人生中第一个逆向。（鼓掌）</p>
 <p>最后的代码也十分的朴实无华：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> execjs</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;course_number.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    numbers = f.readlines()</span><br><span class="line"></span><br><span class="line">log = <span class="built_in">open</span>(<span class="string">&#x27;log.txt&#x27;</span>, <span class="string">&#x27;a+&#x27;</span>)</span><br><span class="line">data = <span class="built_in">open</span>(<span class="string">&#x27;scores.json&#x27;</span>, <span class="string">&#x27;a+&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">scores = []</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;login_cp.js&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    jscode = f.read()</span><br><span class="line">context = execjs.<span class="built_in">compile</span>(jscode)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, number <span class="keyword">in</span> <span class="built_in">enumerate</span>(numbers):</span><br><span class="line">    number = number.strip()</span><br><span class="line">    <span class="built_in">print</span>(number)</span><br><span class="line">    result = context.call(<span class="string">&#x27;login&#x27;</span>, number, <span class="number">1</span>)</span><br><span class="line">    new_url = result[<span class="string">&#x27;url&#x27;</span>]</span><br><span class="line">    headers = result[<span class="string">&#x27;headers&#x27;</span>]</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        time.sleep(<span class="number">0.3</span>) <span class="comment"># avoid request rate detection</span></span><br><span class="line">        response = requests.get(new_url, headers=headers)</span><br><span class="line">        json_response = response.json()</span><br><span class="line">        total = <span class="built_in">int</span>(json_response[<span class="string">&#x27;total&#x27;</span>])</span><br><span class="line">        <span class="keyword">if</span> total &gt; <span class="number">10</span>:</span><br><span class="line">            tot = <span class="built_in">int</span>(total / <span class="number">10</span> + <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, tot + <span class="number">1</span>):</span><br><span class="line">                time.sleep(<span class="number">0.3</span>)</span><br><span class="line">                result = context.call(<span class="string">&#x27;login&#x27;</span>, number, i)</span><br><span class="line">                new_url = result[<span class="string">&#x27;url&#x27;</span>]</span><br><span class="line">                headers = result[<span class="string">&#x27;headers&#x27;</span>]</span><br><span class="line">                response = requests.get(new_url, headers=headers)</span><br><span class="line">                extra = response.json()</span><br><span class="line">                <span class="built_in">print</span>(extra)</span><br><span class="line">                scores = scores + extra[<span class="string">&#x27;score&#x27;</span>]</span><br><span class="line">        <span class="built_in">print</span>(i, json_response)</span><br><span class="line">        scores = scores + json_response[<span class="string">&#x27;score&#x27;</span>]</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">data.write(json.dumps(&#123;<span class="string">&quot;score&quot;</span>: scores&#125;, indent=<span class="number">4</span> ,ensure_ascii=<span class="literal">False</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> execjs</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;course_number.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    numbers = f.readlines()</span><br><span class="line"></span><br><span class="line">data = <span class="built_in">open</span>(<span class="string">&#x27;scores.json&#x27;</span>, <span class="string">&#x27;a+&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">scores = []</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;login_cp.js&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    jscode = f.read()</span><br><span class="line">context = execjs.<span class="built_in">compile</span>(jscode)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, number <span class="keyword">in</span> <span class="built_in">enumerate</span>(numbers):</span><br><span class="line">    number = number.strip()</span><br><span class="line">    <span class="built_in">print</span>(number)</span><br><span class="line">    result = context.call(<span class="string">&#x27;login&#x27;</span>, number, <span class="number">1</span>)</span><br><span class="line">    new_url = result[<span class="string">&#x27;url&#x27;</span>]</span><br><span class="line">    headers = result[<span class="string">&#x27;headers&#x27;</span>]</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        time.sleep(<span class="number">0.3</span>) <span class="comment"># avoid request rate detection</span></span><br><span class="line">        response = requests.get(new_url, headers=headers)</span><br><span class="line">        json_response = response.json()</span><br><span class="line">        total = <span class="built_in">int</span>(json_response[<span class="string">&#x27;total&#x27;</span>])</span><br><span class="line">        <span class="keyword">if</span> total &gt; <span class="number">10</span>:</span><br><span class="line">            tot = <span class="built_in">int</span>(total / <span class="number">10</span> + <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, tot + <span class="number">1</span>):</span><br><span class="line">                time.sleep(<span class="number">0.3</span>)</span><br><span class="line">                result = context.call(<span class="string">&#x27;login&#x27;</span>, number, i)</span><br><span class="line">                new_url = result[<span class="string">&#x27;url&#x27;</span>]</span><br><span class="line">                headers = result[<span class="string">&#x27;headers&#x27;</span>]</span><br><span class="line">                response = requests.get(new_url, headers=headers)</span><br><span class="line">                extra = response.json()</span><br><span class="line">                <span class="built_in">print</span>(extra)</span><br><span class="line">                scores = scores + extra[<span class="string">&#x27;score&#x27;</span>]</span><br><span class="line">        <span class="built_in">print</span>(i, json_response)</span><br><span class="line">        scores = scores + json_response[<span class="string">&#x27;score&#x27;</span>]</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">data.write(json.dumps(&#123;<span class="string">&quot;score&quot;</span>: scores&#125;, indent=<span class="number">4</span> ,ensure_ascii=<span class="literal">False</span>))</span><br></pre></td></tr></table></figure>
 
 <p>虽然事后看来感觉自己十分的铸币，这个逆向实际上也非常简单，只需要找到login这个函数就可以解决问题，但是这次的逆向经历对我而言还是意义非凡，故作此留念。</p>
 ]]></content>
