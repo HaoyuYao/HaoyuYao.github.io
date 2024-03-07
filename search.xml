@@ -14,197 +14,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Adverserial Patch</title>
-    <url>/2023/03/12/Adverserial-Patch/</url>
-    <content><![CDATA[<h1 id="l2距离"><a href="#l2距离" class="headerlink" title="l2距离"></a>l2距离</h1><p><a href="https://blog.csdn.net/qq_40714949/article/details/122373929">https://blog.csdn.net/qq_40714949/article/details/122373929</a></p>
-<p>tie-dye pattern就是一种彩虹状的图像</p>
-<p>攻击方法分类标准：</p>
-<h2 id="假正性攻击-false-positive-与伪负性攻击-false-negative"><a href="#假正性攻击-false-positive-与伪负性攻击-false-negative" class="headerlink" title="假正性攻击(false positive)与伪负性攻击(false negative)"></a>假正性攻击(false positive)与伪负性攻击(false negative)</h2><span id="more"></span>
-
-<p>假正性攻击：原本是错误的但被被攻击模型识别为正例的攻击(eg: 一张人类不可识别的图像，被DNN以高置信度分类为某一类)；<br>伪负性攻击：原本应该被正常识别但被被攻击模型识别错误的攻击(eg: 原本能够被正确的样本，在遭到对抗攻击后，被攻击模型无法对其正确分类)。ps: 我现在做的遇到的大部分攻击算法都是伪负性攻击算法。</p>
-<h2 id="白盒攻击-white-box-与黑盒攻击-black-box-："><a href="#白盒攻击-white-box-与黑盒攻击-black-box-：" class="headerlink" title="白盒攻击(white box)与黑盒攻击(black box)："></a>白盒攻击(white box)与黑盒攻击(black box)：</h2><p>被攻击模型的模型参数可以被获取的被称为白盒攻击；<br>模型参数不可见的被称为黑盒攻击。</p>
-<h2 id="有目标攻击-target-attack-和无目标攻击-non-target-attack-："><a href="#有目标攻击-target-attack-和无目标攻击-non-target-attack-：" class="headerlink" title="有目标攻击(target attack)和无目标攻击(non-target attack)："></a>有目标攻击(target attack)和无目标攻击(non-target attack)：</h2><p>有目标攻击：期望对抗样本被定向误识别为某一特定类别；<br>无目标攻击：仅仅希望对抗样本不能被识别的而没有指定目标类别。</p>
-<h2 id="单步攻击-One-time-attack-和迭代攻击-Iteration-attack-："><a href="#单步攻击-One-time-attack-和迭代攻击-Iteration-attack-：" class="headerlink" title="单步攻击(One-time attack)和迭代攻击(Iteration attack)："></a>单步攻击(One-time attack)和迭代攻击(Iteration attack)：</h2><p>最典型的就是之前实现过过的FGSM([2])<br>I-FGSM([3])</p>
-<h2 id="个体攻击-Individual-attack-和普适性攻击-Universal-attack-："><a href="#个体攻击-Individual-attack-和普适性攻击-Universal-attack-：" class="headerlink" title="个体攻击(Individual attack)和普适性攻击(Universal attack)："></a>个体攻击(Individual attack)和普适性攻击(Universal attack)：</h2><p>个体攻击向每个样本添加不同的扰动，大多数攻击方法都属于个体攻击(典型算法可见[4],[5])；<br>普适性攻击训练一个整个数据集通用的扰动。</p>
-<h2 id="优化扰动-optimized-perturbation-和约束扰动-constrained-perturbation-："><a href="#优化扰动-optimized-perturbation-和约束扰动-constrained-perturbation-：" class="headerlink" title="优化扰动(optimized perturbation)和约束扰动(constrained perturbation)："></a>优化扰动(optimized perturbation)和约束扰动(constrained perturbation)：</h2><p>优化扰动表示扰动大小作为优化过程中的优化目标(典型算法算法可参考[6])，C&amp;W攻击（白盒攻击）算法是一种基于迭代优化的低扰动对抗样本生成算法。该算法设计了一个损失函数，它在对抗样本中有较小的值，但在原始样本中有较大的值，因此通过最小化该损失函数即可搜寻到对抗样本；<br>约束扰动表示所添加扰动仅需满足约束即可。<br>数据集和被攻击模型：</p>
-<p>目前该领域最常用的数据集为MNIST, CIFAR 和ImageNet；<br>最常用的被攻击模型为LeNet, VGG, AlexNet,GoogLeNet, CaffeNet, and ResNet等</p>
-<h1 id="单词补充"><a href="#单词补充" class="headerlink" title="单词补充"></a>单词补充</h1><ol>
-<li>classifier : 分类的概念是在已有数据的基础上学会一个分类函数或构造出一个分类模型（即我们通常所说的分类器(Classifier)）。该函数或模型能够把数据库中的数据纪录映射到给定类别中的某一个，从而可以应用于数据预测。总之，分类器是数据挖掘中对样本进行分类的方法的统称，包含决策树、逻辑回归、朴素贝叶斯、神经网络等算法。</li>
-<li>generalize 推广</li>
-<li>network 在这里指神经网络</li>
-<li>perturb 扰乱</li>
-<li>imperceptible 感觉不到的，十分细微的</li>
-<li>image-independent 与图片无关的</li>
-<li>salient 显著的</li>
-<li>state-of-the art 使用最先进技术的</li>
-<li>varient 多样的</li>
-<li>camouflaged 伪装的</li>
-<li>constraint 约束，限制</li>
-<li>control 对照组</li>
-<li>appendix 附录</li>
-</ol>
-<h1 id="文章对照翻译"><a href="#文章对照翻译" class="headerlink" title="文章对照翻译"></a>文章对照翻译</h1><p>We present a method to create universal, robust, targeted adversarial image patches in the real world. The patches are universal because they can be used to attack any scene, robust because they work under a wide variety of transformations, and targeted because they can cause a classifier to output any target class. These adversarial patches can be printed, added to any scene, photographed, and presented to image classifiers; even when the patches are small, they cause the classifiers to ignore the other items in the scene and report a chosen target class</p>
-<p>我们提出了一种在现实世界中创建通用的、鲁棒的、有针对性的对抗图像补丁的方法。补丁是通用的，因为它们可以用来攻击任何场景;健壮的，因为它们可以在各种各样的转换下工作;有针对性的，因为它们可以导致分类器输出任何目标类。这些对抗补丁可以打印，添加到任何场景，拍摄，并呈现给图像分类器;即使补丁很小，它们也会导致分类器忽略场景中的其他项目，并报告选定的目标类</p>
-<h2 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h2><p>Deep learning systems are broadly vulnerable to adversarial examples, carefully chosen inputs that cause the network to change output without a visible change to a human [15, 5]. These adversarial examples most commonly modify each pixel by only a small amount and can be found using a number of optimization strategies such as L-BFGS [15], Fast Gradient Sign Method (FGSM) [5], DeepFool [10], Projected Gradient Descent (PGD) [8], as well as the recently proposed Logit-space Projected Gradient Ascent (LS-PGA) [2] for discretized inputs. Other attack methods seek to modify only a small number of pixels in the image (Jacobian-based saliency map [11]), or a small patch at a fixed location of the image [13].</p>
-<p>深度学习系统普遍容易受到对抗性例子的攻击，精心选择的输入会导致网络改变输出，而不会对人类产生可见的变化[15,5]。这些对抗的例子通常只对每个像素进行少量修改，并且可以使用许多优化策略，如L-BFGS[15]，快速梯度符号方法(FGSM) [5]， DeepFool[10]，投影梯度下降(PGD)[8]，以及最近提出的用于离散输入的logit空间投影梯度上升(LS-PGA)[2]。其他攻击方法只寻求修改图像中的少量像素(基于雅可比矩阵的显著图[11])，或图像[13]固定位置的小补丁。</p>
-<p>Adversarial examples have been shown to generalize to the real world. Kurakin et al [7] demonstrated that when printed out, an adversarially constructed image will continue to be adversarial to classifiers even under different lighting and orientations. Athalye et al [3] recently demonstrated adversarial objects which can be 3d printed and misclassified by networks at different orientations and scales.</p>
-<p>Their adversarial objects are designed to be subtle perturbations of a normal object (e.g. a turtle that has been adversarially perturbed to be classified as a rifle). Another work [13] showed that one can fool facial recognition software by constructing adversarial glasses. These glasses were targeted in that they could be constructed to impersonate any person, but were custom made for the attacker’s face, and were designed with a fixed orientation in mind. Even more recently, Evtimov et al [4] demonstrated various methods for constructing stop signs that are misclassified by models, either by printing out a large poster that looks like a stop sign, or by placing various stickers on a stop sign. In terms of defenses there has been substantial work on increasing the adversarial robustness of image models to small Lp perturbations of the input [8, 12, 16, 2].</p>
-<p>对抗性的例子已经被证明可以推广到现实世界。Kurakin等[7]证明，当打印出来时，即使在不同的光照和方向下，对抗构造的图像也将继续对抗分类器。Athalye等[3]最近展示了可以在不同方向和规模上被网络3d打印和错误分类的对抗性物体。</p>
-<p>它们的对抗性物体被设计成对正常物体的轻微扰动(例如，一只乌龟被对抗性扰动后被归类为步枪)。另一项研究[13]表明，人们可以通过构建对抗性眼镜来欺骗面部识别软件。这些眼镜是有针对性的，因为它们可以模仿任何人，但是为攻击者的脸定制的，并且在设计时考虑了固定的方向。甚至在最近，Evtimov等人[4]演示了各种构建被模型错误分类的停止标志的方法，要么打印出一个看起来像停止标志的大海报，要么在停止标志上放置各种贴纸。在防御方面，已经有大量工作用于提高图像模型对输入的小Lp扰动的对抗鲁棒性[8,12,16,2]。</p>
-<p>As seen above, a majority of prior work has focused on attacking with and defending against either small or imperceptible changes to the input. In this work we explore what is possible if an attacker no longer restricts themselves to imperceptible changes. We construct an attack that does not attempt to subtly transform an existing item into another. Instead, this attack generates an image-independent patch that is extremely salient to a neural network. This patch can then be placed anywhere within the field of view of the classifier, and causes the classifier to output a targeted class. Because this patch is scene-independent, it allows attackers to create a physical-world attack without prior knowledge of the lighting conditions, camera angle, type of classifier being attacked, or even the other items within the scene</p>
-<p>如上所述，大多数先前的工作都集中在对输入的微小或难以察觉的变化进行攻击和防御。在这项工作中，我们探索了如果攻击者不再局限于难以察觉的变化，那么可能会发生什么。我们构建的攻击不会试图巧妙地将现有物品转化为另一个。相反，这种攻击会生成一个与图像无关的补丁，这对神经网络来说非常显著。然后，这个补丁可以放在分类器视野范围内的任何地方，并使分类器输出一个目标类。因为这个补丁是独立于场景的，它允许攻击者创建一个物理世界的攻击，而不需要事先了解照明条件、摄像机角度、被攻击的分类器类型，甚至场景中的其他项目.</p>
-<p><img src="/.io//Users\xiwen\desktop\blog\source_posts\image-20230312220339004.png" alt="image-20230312220339004"></p>
-<p>This attack is significant because the attacker does not need to know what image they are attacking when constructing the attack. After generating an adversarial patch, the patch could be widely distributed across the Internet for other attackers to print out and use. Additionally, because the attack uses a large perturbation, the existing defense techniques which focus on defending against small perturbations may not be robust to larger perturbations such as these. Indeed recent work has demonstrated that state-of-the art adversarially trained models on MNIST are still vulnerable to larger perturbations than those used in training either by searching for a nearby adversarial example using a different metric for distance [14], or by applying large perturbations in the background [1].</p>
-<p>这种攻击很重要，因为攻击者在构建攻击时不需要知道他们攻击的是什么映像。生成对抗性补丁后，该补丁可以在互联网上广泛分发，供其他攻击者打印和使用。此外，由于攻击使用了较大的扰动，现有的防御技术侧重于防御小扰动，可能对诸如此类的较大扰动并不健壮。事实上，最近的工作已经证明，与训练中使用的模型相比，MNIST上最先进的对抗训练模型仍然容易受到更大的扰动，无论是通过使用距离[14]的不同度量来搜索附近的对抗示例，还是通过在背景[1]中应用大扰动。</p>
-<h2 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h2><p>The traditional strategy for finding a targeted adversarial example is as follows: given some classifier P [y | x], some input x ∈ Rn, some target class by and a maximum perturbation ε, we want to find the input bx that maximizes log (P [by | bx]), subject to the constraint that kx − bxk∞ ≤ ε. When P [y | x] is parameterized by a neural network, an attacker with access to the model can perform iterated gradient descent on x in order to find a suitable input bx. This strategy can produce a well camouflaged attack, but requires modifying the target image.</p>
-<p>Instead, we create our attack by completely replacing a part of the image with our patch. We mask our patch to allow it to take any shape, and then train over a variety of images, applying a random translation, scaling, and rotation on the patch in each image, optimizing using gradient descent. In particular for a given image x ∈ Rw×h×c, patch p, patch location l, and patch transformations t (e.g. rotations or scaling) we define a patch application operator A(p, x, l, t) which first applies the transformations t to the patch p, and then applies the transformed patch p to the image x at location l (see figure 2).</p>
-<p>寻找目标对抗示例的传统策略如下:给定一些分类器P [y | x]，一些输入x∈Rn，一些目标类by和一个最大扰动ε，我们想要找到最大log (P [by | bx])的输入bx，受kx−bxk∞≤ε的约束。当P [y | x]被神经网络参数化时，可以访问模型的攻击者可以对x进行迭代梯度下降，以找到合适的输入bx。这种策略可以产生很好的伪装攻击，但需要修改目标图像。</p>
-<p>相反，我们通过用补丁完全替换图像的一部分来创建攻击。我们对我们的补丁进行遮罩，使其能够呈现任何形状，然后在各种图像上进行训练，对每个图像中的补丁应用随机平移、缩放和旋转，使用梯度下降进行优化。特别是对于给定的图像x∈Rw×h×c、补丁p、补丁位置l和补丁变换t(例如旋转或缩放)，我们定义了一个补丁应用算子a (p, x, l, t)，它首先将变换t应用于补丁p，然后将变换后的补丁p应用于位置l的图像x(见图2)。</p>
-<p><img src="/.io//Users\xiwen\desktop\blog\source_posts\image-20230312222034645.png" alt="image-20230312222034645"></p>
-<p><img src="/.io//Users\xiwen\desktop\blog\source_posts\image-20230312222420698.png" alt="image-20230312222420698"></p>
-<p>where X is a training set of images, T is a distribution over transformations of the patch, and L is a distribution over locations in the image. Note that this expectation is over images, which encourages the trained patch to work regardless of what is in the background. This departs from most prior work on adversarial perturbations in the fact that this perturbation is universal in that it works for any background. Universal perturbations were identified in [9], but these required changing every pixel in the image and results were not given in the physical world.</p>
-<p>其中X是图像的训练集，T是补丁变换的分布，L是图像中位置的分布。注意，这个期望是针对图像的，这鼓励训练过的补丁不管背景是什么都能工作。这与大多数先前关于对抗性扰动的工作不同，事实上这种扰动是普遍的，因为它适用于任何背景。在[9]中确定了普遍扰动，但这些扰动需要改变图像中的每个像素，并且在物理世界中没有给出结果。</p>
-<p>We also consider camouflaged patches which are forced to look like a given starting image. Here we simply add a constraint of the form ||p − porig||∞ &lt; ? to the patch objective. This will force the final patch to be within ? in the L∞ norm of some starting patch porig.</p>
-<p><img src="/.io//Users\xiwen\desktop\blog\source_posts\image-20230312222652314.png" alt="image-20230312222652314"></p>
-<p>我们还考虑了伪装补丁，这些补丁被迫看起来像给定的起始图像。这里我们只需添加一个形式为||p−porig||∞&lt; ?到补丁目标。这将迫使最终补丁在?的L∞范数。</p>
-<p>我们认为这种攻击利用了图像分类任务的构造方式。虽然图像可能包含多个项目，但只有一个目标标签被认为是正确的，因此网络必须学会检测帧中最“突出”的项目。对抗性补丁通过产生比现实世界中的物体更显著的输入来利用这一特性。因此，当攻击目标检测或图像分割模型时，我们期望目标面包机补丁被归类为面包机，而不影响图像的其他部分。</p>
-<h2 id="Experimental-Results"><a href="#Experimental-Results" class="headerlink" title="Experimental Results"></a>Experimental Results</h2><p>To test our attack, we compare the efficacy of two whitebox attacks, a blackbox attack, and a control patch. The white box ensemble attack jointly trains a single patch across five ImageNet models: inceptionv3, resnet50, xception, VGG16, and VGG19. We then evaluate the attack by averaging the win rate across all five models. The white box single model attack does the same but only trains and evaluates on a single model. The blackbox attack jointly trains a single patch across four of the ImageNet models, and then evaluates the blackbox attack on a fifth model, which we did not access during training. The control is a picture of a toaster.</p>
-<p>为了测试我们的攻击，我们比较了两个白盒攻击、一个黑盒攻击和一个控制补丁的效果。白盒集合攻击在五个ImageNet模型(inceptionv3、resnet50、xception、VGG16和VGG19)上联合训练一个补丁。然后，我们通过平均所有五个模型的胜率来评估攻击。白盒单模型攻击也做同样的事情，但只在单个模型上训练和评估。黑盒攻击在四个ImageNet模型上联合训练一个补丁，然后在我们在训练期间没有访问的第五个模型上评估黑盒攻击。控件是一个烤面包机的图片。</p>
-<p>During training and evaluation, the patches are rescaled and then digitally inserted on a random location on a random ImageNet image. Figure 2 shows the results.</p>
-<p>Note that the patch size required to reliably fool the model in this universal setting (black box, on a targeted class, and over all images, locations and transformations) is significantly larger than those required to perform a non-targeted attack on a single image and a single location in the whitebox setting. For example, Su et al [6] recently demonstrated that modifying 1 pixel on a 32x32 pixel CIFAR-10 image (0.1% of the pixels in the image) suffices to fool the majority of images with a non-targeted, non-universal whitebox attack. However, our attacks are still far more effective</p>
-<p>在训练和评估期间，补丁被重新缩放，然后以数字方式插入随机ImageNet图像上的随机位置。图2显示了结果。</p>
-<p>请注意，在这个通用设置(黑盒，目标类，以及所有图像，位置和转换)中可靠地欺骗模型所需的补丁大小明显大于在白盒设置中对单个图像和单个位置执行非定向攻击所需的补丁大小。例如，Su等人[6]最近证明，在32x32像素的CIFAR-10图像上修改1个像素(图像中像素的0.1%)足以用非定向的、非通用的白盒攻击欺骗大多数图像。然而，我们的攻击仍然有效得多</p>
-<p><img src="/.io//Users\xiwen\desktop\blog\source_posts\image-20230312224047785.png" alt="image-20230312224047785"></p>
-<p>图3:创建对抗补丁的不同方法的比较。注意，这些成功率是随机放置在图像顶部的补丁。图中的每个点都是通过将补丁应用于400个随机选择的测试图像中的随机位置来计算的。这是对图像大小的一小部分的不同比例的补丁进行的，每个比例在400张图像上进行独立测试。</p>
-<p>We also tested the black box + physical world effectiveness of the patch on the third party Demitasse application2 and found some transferability of the patch but only when the patch takes up a significant fraction of the image. We did not optimize the patch for print-ability as in [13], which perhaps explains why the patch is not as effective as in Figure 3, which tests black box for different models and not in the physical world. We invite curious readers to try the patch out for themselves by printing out this paper and using the patch in the Appendix.</p>
-<p>我们还在第三方Demitasse应用程序上测试了补丁的黑盒+物理世界的有效性，并发现了补丁的一些可移植性，但仅当补丁占用图像的很大一部分时。我们没有像[13]中那样优化补丁的打印能力，这可能解释了为什么补丁没有图3中那么有效，图3测试了不同模型的黑盒，而不是在物理世界中。我们邀请好奇的读者通过打印出这篇论文并使用附录中的补丁来尝试自己的补丁。</p>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>We show that we can generate a universal, robust, targeted patch that fools classifiers regardless of the scale or location of the patch, and does not require knowledge of the other items in the scene that it is attacking. Our attack works in the real world, and can be disguised as an innocuous sticker.</p>
-<p>These results demonstrate an attack that could be created offline, and then broadly shared.</p>
-<p>我们展示了我们可以生成一个通用的、健壮的、有针对性的补丁，无论补丁的规模或位置如何，它都可以欺骗分类器，并且不需要了解它正在攻击的场景中的其他项目。我们的攻击在现实世界中起作用，可以伪装成一个无害的贴纸。</p>
-<p>这些结果证明了一种可以离线发起并广泛共享的攻击。</p>
-<p>There has been substantial work on defending against small Lp perturbations to natural images, at least partially motivated by security concerns [12, 8, 2]. Part of the motivation of this work is that potential malicious attackers may not be concerned with generating small or imperceptible perturbations to a natural image, but may instead opt for larger more effective but noticeable perturbations to the input especially if a model has been designed to resist small Lp perturbations.</p>
-<p>已经有大量的工作用于防御自然图像的小Lp扰动，至少部分是出于安全考虑[12,8,2]。这项工作的部分动机是，潜在的恶意攻击者可能不关心对自然图像产生小的或难以察觉的扰动，而是可能选择对输入产生更大、更有效但明显的扰动，特别是如果模型被设计为抵抗小的Lp扰动。</p>
-<p>Many ML models operate without human validation of every input and thus malicious attackers may not be concerned with the imperceptibility of their attacks. Even if humans are able to notice these patches, they may not understand the intent of the patch and instead view it as a form of art. This work shows that focusing only on defending against small perturbations is insufficient, as large, local perturbations can also break classifiers.</p>
-<p>许多ML模型在运行时没有对每个输入进行人工验证，因此恶意攻击者可能不关心其攻击的不可察觉性。即使人类能够注意到这些补丁，他们也可能不理解补丁的意图，而是将其视为一种艺术形式。这项工作表明，只专注于防御小扰动是不够的，因为大的局部扰动也可以破坏分类器。</p>
-]]></content>
-      <tags>
-        <tag>Adverserial Attack</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Fooling automated surveillance cameras- adversarial patches to attack person detection</title>
-    <url>/2023/03/14/Fooling-automated-surveillance-cameras-adversarial-patches-to-attack-person-detection/</url>
-    <content><![CDATA[<h1 id="Essence"><a href="#Essence" class="headerlink" title="Essence"></a>Essence</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ol>
-<li>All the approached to make adverserial attack the works before propose barely contains <strong>intra-class variety</strong> <ol>
-<li>the objects like human have intra-class variety which may be harder to attack.<span id="more"></span></li>
-</ol>
-</li>
-<li>in this work, the author present an approach to <strong>generate patches to targets with lots of intra-class variety</strong> like person.</li>
-<li>Author realize a realtive small patch which is able to hide person from person detective systems.</li>
-</ol>
-<h2 id="preliminary"><a href="#preliminary" class="headerlink" title="preliminary"></a>preliminary</h2><h3 id="relative-works"><a href="#relative-works" class="headerlink" title="relative works"></a>relative works</h3><ol>
-<li>Adversarial attacks on classification tasks<ol>
-<li>slightly change the value of several pixels in an image</li>
-<li>a gradient sign method made the attacking process more faster.</li>
-<li>using hyper-planes to model the border between output classes.</li>
-<li>using patches: 1. stickers that can attack in many poses, 2. using a 3D sticker with robustness to different poses and lighting. 3. methods to generate a universarial image</li>
-</ol>
-</li>
-<li>Real-world adversarial attack for <strong>face recognition</strong><ol>
-<li>A pair of glasses the fool the facial recognition systems, which emphasize the practicability.</li>
-</ol>
-</li>
-<li>Real-world adversarial attacks for <strong>object detection</strong><ol>
-<li>for stop signs, using Expection over Transformation(EOT) to build in robustness for poses.</li>
-</ol>
-</li>
-<li>Object detection<br> YOLOv2’s principle:<ol>
-<li>every image is handled to an output grid with a resolution 32 times smaller than the input’s. Each cell in the output contains five predictions(anchor point) with bounding boxes with different aspect ratios. an anchor point has a vector describing the position of the bounding boxes and the possiblities of every class.</li>
-<li>![[Pasted image 20230314155737.png]]</li>
-</ol>
-</li>
-</ol>
-<h2 id="methods"><a href="#methods" class="headerlink" title="methods"></a>methods</h2><h3 id="goal"><a href="#goal" class="headerlink" title="goal :"></a>goal :</h3><p>The goal of this work is create a system that is able to generate printable adversarial patches that can be used to<br>fool person detectors.</p>
-<h3 id="innovation"><a href="#innovation" class="headerlink" title="innovation:"></a>innovation:</h3><p>the previous work only made real-world adverserial attack on <strong>uniform things like stop sign</strong>. author wanna do the same thing on person which is more various.</p>
-<h3 id="method"><a href="#method" class="headerlink" title="method:"></a>method:</h3><p>optimisation goal contains 3 parts:</p>
-<ol>
-<li>the printability of the patch.</li>
-<li>the <strong>variation of the image</strong>, this should be the smaller the better. our optimiser favours an <strong>image with smooth colour transitions and prevents noisy images.</strong></li>
-<li>to make the difficulty of detecting max.<br>![[Pasted image 20230314161043.png]]</li>
-</ol>
-<p>author tested 3 approached:</p>
-<ol>
-<li>minimize the classification probability of person.</li>
-<li>minimize the objectness score.</li>
-<li>the combination of both.</li>
-</ol>
-<p>and they found:</p>
-<ol>
-<li>the approach 2 perform best, for the patch it generate is more universal.</li>
-<li>the others had each limits because they cause the patch to resemble another class.(if a new detector doesn’t have such a class, the result may sucks)</li>
-</ol>
-<h3 id="preparing-the-training-datasets"><a href="#preparing-the-training-datasets" class="headerlink" title="preparing the training datasets"></a>preparing the training datasets</h3><p>there’s 4 chanllenges: </p>
-<ol>
-<li>people are more various.</li>
-<li>people can appear in various contexts.</li>
-<li>people can appear in various poses.</li>
-<li>patches can be attached to various position on person.<br>what the author do:</li>
-<li>use real images of different people, instead of doing transformation in a single image of the target object.</li>
-<li>use detector to find the position of human in each image, then attach patches on the image under various transformation.</li>
-<li>feed the patched images to detector and test the loss function.</li>
-</ol>
-<ul>
-<li>one side effect is that the author is not limited to annotated datasets. so that it can just apply to any available datasets.</li>
-</ul>
-<h3 id="making-patched-more-robust"><a href="#making-patched-more-robust" class="headerlink" title="making patched more robust"></a>making patched more robust</h3><ul>
-<li>reason: in reality, the various lighting and poses of the patch ask for more robustness of the patch.</li>
-<li>so author so some transformation on patch before it applied to image:<ul>
-<li>rotate</li>
-<li>scale up and down</li>
-<li>random noise</li>
-<li>various brightness and contrast</li>
-</ul>
-</li>
-</ul>
-<h2 id="results"><a href="#results" class="headerlink" title="results"></a>results</h2><ul>
-<li>using random noise as control to test the performance of patches.</li>
-<li>the result tell that minimizing the objectness score is best approach.</li>
-</ul>
-<h2 id="defect"><a href="#defect" class="headerlink" title="defect"></a>defect</h2><ol>
-<li>the patch only perform well while it attached to the center of human.</li>
-</ol>
-<h2 id="future-work"><a href="#future-work" class="headerlink" title="future work"></a>future work</h2><ol>
-<li>robust</li>
-<li>transformation</li>
-</ol>
-<h1 id="vocubulary"><a href="#vocubulary" class="headerlink" title="vocubulary"></a>vocubulary</h1><ol>
-<li>aspect retios 纵横比</li>
-</ol>
-<h1 id="problem"><a href="#problem" class="headerlink" title="problem"></a>problem</h1><ol>
-<li>what is an optimisation process?</li>
-<li>what is to freeze the weights in:The goal of our optimizer is to minimise the total loss L. During the optimisation process we freeze all weights in the network, and change only the values in the patch. The patch is initialised on random values at the beginning of the process.</li>
-<li>the principle of yolov2</li>
-<li>what is the different of object loss and class loss. and so of the object and class score.</li>
-<li>what is back propagation.</li>
-<li>what does this mean? :Through this entire process it is important to note that it has to remain possible to calculate a backwards gradient on all operations all the way towards the patch</li>
-<li>what is recall and precision?![[Pasted image 20230314170852.png]]</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>Adverserial attack</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>yolo系列以及mmdetection代码阅读</title>
-    <url>/2023/07/11/yolov7%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/</url>
-    <content><![CDATA[<p>最近一个工作需要大量对比不同的计算机视觉检测模型，需要使用到一个指标ASR，即Attack Successful Rate, 攻击成功率，这个指标需要使用到tp(true positives), 然而tp这个指标通常大部分检测模型不会默认给出, 在yolov5等系列中, 你可以在val.py中轻松找到相应的指标并手动打印, yolov7中并没有给出tp这个变量, 但是依然可以依葫芦画瓢拿到这一变量, 然而事情到了mmdetection中就大为不同, 不同于专精于行人检测的yolo系列, mmdetection是一个极为庞大包罗万象的检测库, 其代码层次结构复杂, 想获得对应的指标, 少不了一场代码阅读.</p>
-<h1 id="计算tp-true-positives-的方法"><a href="#计算tp-true-positives-的方法" class="headerlink" title="计算tp(true positives)的方法"></a>计算tp(true positives)的方法</h1><p>在yolov5中，正例数是直接通过<code>tp = (recall * number_targets).round()</code>计算得到的，在各个检测库中，recall通常是会给出的，这时候只需要想办法获得number_targets的值也就是真正例数的数量，就可以计算出tp(recall(召回率) &#x3D; tp &#x2F; (tp + fn)，tp + fn即是真正正例的个数) </p>
-<h2 id="关于视觉检测库常见指标的解释"><a href="#关于视觉检测库常见指标的解释" class="headerlink" title="关于视觉检测库常见指标的解释"></a>关于视觉检测库常见指标的解释</h2>]]></content>
-      <tags>
-        <tag>科技</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>kmp算法学习笔记</title>
     <url>/2023/01/02/kmp%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="kmp算法"><a href="#kmp算法" class="headerlink" title="kmp算法"></a>kmp算法</h1><p>学习状态机的题目时，遇到一道题需要使用到kmp的知识，于是上csdn学习了一下并整理了如下笔记。</p>
@@ -235,6 +44,23 @@
       </categories>
       <tags>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>home</title>
+    <url>/2024/03/07/home/</url>
+    <content><![CDATA[<h1 id="About-me"><a href="#About-me" class="headerlink" title="About me"></a>About me</h1><p>I am a undergrad student at the Wuhan University with <a href="https://wangzwhu.github.io/home/">Zheng Wang</a> starting from March 2023.</p>
+<h2 id="Key-words"><a href="#Key-words" class="headerlink" title="Key words"></a>Key words</h2><p>Trustworthy AI, Adversarial Attack, AIGC.</p>
+<h1 id="News"><a href="#News" class="headerlink" title="News"></a>News</h1>]]></content>
+  </entry>
+  <entry>
+    <title>yolo系列以及mmdetection代码阅读</title>
+    <url>/2023/07/11/yolov7%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/</url>
+    <content><![CDATA[<p>最近一个工作需要大量对比不同的计算机视觉检测模型，需要使用到一个指标ASR，即Attack Successful Rate, 攻击成功率，这个指标需要使用到tp(true positives), 然而tp这个指标通常大部分检测模型不会默认给出, 在yolov5等系列中, 你可以在val.py中轻松找到相应的指标并手动打印, yolov7中并没有给出tp这个变量, 但是依然可以依葫芦画瓢拿到这一变量, 然而事情到了mmdetection中就大为不同, 不同于专精于行人检测的yolo系列, mmdetection是一个极为庞大包罗万象的检测库, 其代码层次结构复杂, 想获得对应的指标, 少不了一场代码阅读.</p>
+<h1 id="计算tp-true-positives-的方法"><a href="#计算tp-true-positives-的方法" class="headerlink" title="计算tp(true positives)的方法"></a>计算tp(true positives)的方法</h1><p>在yolov5中，正例数是直接通过<code>tp = (recall * number_targets).round()</code>计算得到的，在各个检测库中，recall通常是会给出的，这时候只需要想办法获得number_targets的值也就是真正例数的数量，就可以计算出tp(recall(召回率) &#x3D; tp &#x2F; (tp + fn)，tp + fn即是真正正例的个数) </p>
+<h2 id="关于视觉检测库常见指标的解释"><a href="#关于视觉检测库常见指标的解释" class="headerlink" title="关于视觉检测库常见指标的解释"></a>关于视觉检测库常见指标的解释</h2>]]></content>
+      <tags>
+        <tag>科技</tag>
       </tags>
   </entry>
   <entry>
@@ -323,32 +149,21 @@
       </tags>
   </entry>
   <entry>
-    <title>关于django用户系统的搭建流程</title>
-    <url>/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="用户系统的搭建和登录界面的完成"><a href="#用户系统的搭建和登录界面的完成" class="headerlink" title="用户系统的搭建和登录界面的完成"></a>用户系统的搭建和登录界面的完成</h1><h2 id="1-1-向django自带数据库中添加自定义的类时需要注意的操作"><a href="#1-1-向django自带数据库中添加自定义的类时需要注意的操作" class="headerlink" title="1.1 向django自带数据库中添加自定义的类时需要注意的操作"></a>1.1 向django自带数据库中添加自定义的类时需要注意的操作</h2><p>启动uwsgi.ini服务之后<code>sudo uwsgi --ini scripts/uwsgi.ini</code>不要直接关闭终端，这样导致服务难以被关闭</p>
+    <title>关于本博客的一些希望</title>
+    <url>/2022/12/16/%E5%85%B3%E4%BA%8E%E6%9C%AC%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%8C%E6%9C%9B/</url>
+    <content><![CDATA[<p><em>关于本博客的一些初衷，首先写在这里，以勉励自己</em></p>
 <span id="more"></span>
 
-<p>如果无法关闭，则使用<code>sudo fuser -k 8000/tcp</code>杀死在8000端口的进程，在运行ini</p>
-<p>登陆界面中的每个函数都要实现三个部分：</p>
-<ol>
-<li>views实现函数的本体</li>
-<li>urls中实现函数的映射</li>
-<li>js中实现对应的调用</li>
-</ol>
-<p>每一个处理请求的函数都要传入一个参数:request，请求登陆也是如此，并且导入包：<code>from django.http import JsonResponse</code></p>
-<p>json文件：通用的序列化存储字典等内容的文件</p>
-<p>path中填写的url最后一定带上&#x2F;，否则后面接新的东西时会出错</p>
-<p>注意为文件添加可执行权限的操作是 chmod +x filename</p>
-<p>js实现三秒后刷新：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
 
+
+<h2 id="为什么要写博客"><a href="#为什么要写博客" class="headerlink" title="为什么要写博客"></a>为什么要写博客</h2><p>写博客的目的不在于给别人看，博客对我而言是一个特殊的笔记本，与普通的笔记本不同的是，博客中的内容并不是直接来源于一本书，一堂课，或者某一个视频，一篇博客的内容的直接生产者是我自己，一篇博客代表这我自己在这一段时间中获得的知识与感想的集合，它自成我的体系，它独属于我自己，写博客的过程，更似写一篇日记，我需要将自己的所思所想从心底全部引出，落在纸上（乐），这本身就是一种回顾，总结与加深，通过写博客，可以让一个人培养起不断反思，不断求深求全的习惯，我想这对自己的发展是大有脾益的。</p>
+<p>提示：<code>&lt;!-- more --&gt;</code>可以手动分割文章，善用</p>
 ]]></content>
       <categories>
-        <category>科技</category>
-        <category>笔记</category>
+        <category>随记</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
+        <tag>总结</tag>
       </tags>
   </entry>
   <entry>
@@ -392,55 +207,6 @@
       </tags>
   </entry>
   <entry>
-    <title>初学数组模拟邻接表的一些理解</title>
-    <url>/2022/12/24/%E5%88%9D%E5%AD%A6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[<h2 id="head与next数组中保存的是ver数组的下标"><a href="#head与next数组中保存的是ver数组的下标" class="headerlink" title="head与next数组中保存的是ver数组的下标"></a>head与next数组中保存的是ver数组的下标</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//加入有向边(x, y)，权值为z；</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z)</span> </span>&#123;</span><br><span class="line">	ver[++tot] = y, edge[tot] = z; <span class="comment">//真实数据</span></span><br><span class="line">	next[tot] = head[x], head[x] = tot;</span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
-
-<h2 id="理解方法："><a href="#理解方法：" class="headerlink" title="理解方法："></a>理解方法：</h2><p>tot为每一个数据编号，从第一个输入开始一直往后排，至于数据的输入顺序有关，与数据本身的性质无关<br>ver[++tot]因此就表示新录入一个数据，编号tot++；<br>对于一个以邻接表表示的有向图而言，表头head的下表表示起点的值，head的内容指向该起点最新加入的一条邻边终点的编号（即输入时的tot），next[tot]表示下表为tot的数据的后面接的数的编号；因为表头指针更新的是最新插入的数据，所以无需查找到末尾直接更新表头指向即可，因此有了：<br>next[tot] &#x3D; head[x], head[x] &#x3D; tot; 这样的操作。</p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于本博客的一些希望</title>
-    <url>/2022/12/16/%E5%85%B3%E4%BA%8E%E6%9C%AC%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%8C%E6%9C%9B/</url>
-    <content><![CDATA[<p><em>关于本博客的一些初衷，首先写在这里，以勉励自己</em></p>
-<span id="more"></span>
-
-
-
-<h2 id="为什么要写博客"><a href="#为什么要写博客" class="headerlink" title="为什么要写博客"></a>为什么要写博客</h2><p>写博客的目的不在于给别人看，博客对我而言是一个特殊的笔记本，与普通的笔记本不同的是，博客中的内容并不是直接来源于一本书，一堂课，或者某一个视频，一篇博客的内容的直接生产者是我自己，一篇博客代表这我自己在这一段时间中获得的知识与感想的集合，它自成我的体系，它独属于我自己，写博客的过程，更似写一篇日记，我需要将自己的所思所想从心底全部引出，落在纸上（乐），这本身就是一种回顾，总结与加深，通过写博客，可以让一个人培养起不断反思，不断求深求全的习惯，我想这对自己的发展是大有脾益的。</p>
-<p>提示：<code>&lt;!-- more --&gt;</code>可以手动分割文章，善用</p>
-]]></content>
-      <categories>
-        <category>随记</category>
-      </categories>
-      <tags>
-        <tag>总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>多重背包的二进制优化</title>
-    <url>/2023/01/01/%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BC%98%E5%8C%96/</url>
-    <content><![CDATA[<p>原理：对于任何一个数字而言，都可以分拆为几个单个的<code>2^k</code>相加，所以依据该物品的个数s，将其依次拆为若干个<code>2^k</code>组成的物品堆，将他们的体积和价值合并看待，之后再按照01背包的方法解决即可，因为这些<code>2^k</code>能够组合出0-s之间的任何一个数目</p>
-<span id="more"></span>
-
-<p>代码：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2010</span>, M = <span class="number">12010</span>;</span><br><span class="line"><span class="type">int</span> f[N], v[M], w[M];</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> a, b, s;</span><br><span class="line">        cin&gt;&gt;a&gt;&gt;b&gt;&gt;s;</span><br><span class="line">        <span class="type">int</span> k=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(k &lt;= s)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt ++;</span><br><span class="line">            v[cnt] = a * k;</span><br><span class="line">            w[cnt] = b * k;</span><br><span class="line">            s -= k;</span><br><span class="line">            k *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(s &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt ++;</span><br><span class="line">            v[cnt] = a * s;</span><br><span class="line">            w[cnt] = b * s;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    n = cnt;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=v[i]; j--)</span><br><span class="line">        &#123;</span><br><span class="line">            f[j] = <span class="built_in">max</span>(f[j], f[j-v[i]]+w[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;f[m];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>每日一题 第二周</title>
     <url>/2023/01/01/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E7%AC%AC%E4%BA%8C%E5%91%A8/</url>
     <content><![CDATA[<h1 id="选数异或"><a href="#选数异或" class="headerlink" title="选数异或"></a>选数异或</h1><p>题目： <a href="https://www.acwing.com/activity/content/problem/content/7908/">https://www.acwing.com/activity/content/problem/content/7908/</a></p>
@@ -472,6 +238,20 @@
       </tags>
   </entry>
   <entry>
+    <title>初学数组模拟邻接表的一些理解</title>
+    <url>/2022/12/24/%E5%88%9D%E5%AD%A6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<h2 id="head与next数组中保存的是ver数组的下标"><a href="#head与next数组中保存的是ver数组的下标" class="headerlink" title="head与next数组中保存的是ver数组的下标"></a>head与next数组中保存的是ver数组的下标</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//加入有向边(x, y)，权值为z；</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z)</span> </span>&#123;</span><br><span class="line">	ver[++tot] = y, edge[tot] = z; <span class="comment">//真实数据</span></span><br><span class="line">	next[tot] = head[x], head[x] = tot;</span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
+
+<h2 id="理解方法："><a href="#理解方法：" class="headerlink" title="理解方法："></a>理解方法：</h2><p>tot为每一个数据编号，从第一个输入开始一直往后排，至于数据的输入顺序有关，与数据本身的性质无关<br>ver[++tot]因此就表示新录入一个数据，编号tot++；<br>对于一个以邻接表表示的有向图而言，表头head的下表表示起点的值，head的内容指向该起点最新加入的一条邻边终点的编号（即输入时的tot），next[tot]表示下表为tot的数据的后面接的数的编号；因为表头指针更新的是最新插入的数据，所以无需查找到末尾直接更新表头指向即可，因此有了：<br>next[tot] &#x3D; head[x], head[x] &#x3D; tot; 这样的操作。</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>每日一题2022-10-30</title>
     <url>/2022/12/30/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982022-10-30/</url>
     <content><![CDATA[<h1 id="上课睡觉"><a href="#上课睡觉" class="headerlink" title="上课睡觉"></a>上课睡觉</h1><p>题目：<br><a href="https://www.acwing.com/problem/content/description/4369/">https://www.acwing.com/problem/content/description/4369/</a></p>
@@ -494,20 +274,32 @@
       </tags>
   </entry>
   <entry>
-    <title>背包问题：能量石</title>
-    <url>/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/</url>
-    <content><![CDATA[<h1 id="能量石"><a href="#能量石" class="headerlink" title="能量石"></a>能量石</h1><p>链接： <a href="https://www.acwing.com/problem/content/736/">734. 能量石 - AcWing题库</a></p>
-<p>思路： 因为吃能量石的顺序会对物品的价值产生影响，所以要考虑的维度增多了，这时候要首先利用贪心的思路对能量石进行预先排序，注意到对于两件物品时，全部吃掉的情况下，<code>s[ i ] * l[ i+1 ] </code>即为当前顺序下会损失的能量值，这个值当然越小越好，所以对于假设要吃的所有物品，s&#x2F;l的值越小就说明它一定要先吃。<br>之前的考虑中没有考虑能量不能将为负数的情况，实际上只要将状态表达设置为时间恰好为j时的总能量值那么当能量降低为负数时就会对f产生负影响，只要遍历一遍求最大值就是题目所需的答案。</p>
+    <title>关于django用户系统的搭建流程</title>
+    <url>/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="用户系统的搭建和登录界面的完成"><a href="#用户系统的搭建和登录界面的完成" class="headerlink" title="用户系统的搭建和登录界面的完成"></a>用户系统的搭建和登录界面的完成</h1><h2 id="1-1-向django自带数据库中添加自定义的类时需要注意的操作"><a href="#1-1-向django自带数据库中添加自定义的类时需要注意的操作" class="headerlink" title="1.1 向django自带数据库中添加自定义的类时需要注意的操作"></a>1.1 向django自带数据库中添加自定义的类时需要注意的操作</h2><p>启动uwsgi.ini服务之后<code>sudo uwsgi --ini scripts/uwsgi.ini</code>不要直接关闭终端，这样导致服务难以被关闭</p>
 <span id="more"></span>
 
-<p>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10010</span>;</span><br><span class="line"><span class="type">int</span> f[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Stone</span>&#123;</span><br><span class="line">    <span class="type">int</span> s, e, l;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&lt; (<span class="type">const</span> Stone &amp;W) <span class="type">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> s * W.l &lt; l * W.s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;stone[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> C=<span class="number">0</span>; C&lt;T; C++) &#123;</span><br><span class="line">        <span class="type">int</span> m = <span class="number">0</span>;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s, e, l;</span><br><span class="line">            cin&gt;&gt;s&gt;&gt;e&gt;&gt;l;</span><br><span class="line">            stone[i] = &#123;s, e, l&#125;;</span><br><span class="line">            m += s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(stone, stone+n);</span><br><span class="line">    </span><br><span class="line">        <span class="built_in">memset</span>(f, <span class="number">-0x3f</span>, <span class="keyword">sizeof</span> f);</span><br><span class="line">        f[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s = stone[i].s, e = stone[i].e, l = stone[i].l;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=s; j--) &#123;</span><br><span class="line">                f[j] = <span class="built_in">max</span>(f[j], f[j-s]+e-(j-s)*l); <span class="comment">//在所有能量石降为负数时就自然不是最大值了，这样就省去了判断不能小于0的情况；</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;=m; i++) &#123;</span><br><span class="line">            res = <span class="built_in">max</span>(res, f[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Case #%d: %d\n&quot;</span>, C+<span class="number">1</span>, res);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果无法关闭，则使用<code>sudo fuser -k 8000/tcp</code>杀死在8000端口的进程，在运行ini</p>
+<p>登陆界面中的每个函数都要实现三个部分：</p>
+<ol>
+<li>views实现函数的本体</li>
+<li>urls中实现函数的映射</li>
+<li>js中实现对应的调用</li>
+</ol>
+<p>每一个处理请求的函数都要传入一个参数:request，请求登陆也是如此，并且导入包：<code>from django.http import JsonResponse</code></p>
+<p>json文件：通用的序列化存储字典等内容的文件</p>
+<p>path中填写的url最后一定带上&#x2F;，否则后面接新的东西时会出错</p>
+<p>注意为文件添加可执行权限的操作是 chmod +x filename</p>
+<p>js实现三秒后刷新：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>科技</category>
+        <category>笔记</category>
       </categories>
       <tags>
-        <tag>算法</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -555,6 +347,40 @@
         <tag>javascript</tag>
         <tag>spider</tag>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>多重背包的二进制优化</title>
+    <url>/2023/01/01/%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<p>原理：对于任何一个数字而言，都可以分拆为几个单个的<code>2^k</code>相加，所以依据该物品的个数s，将其依次拆为若干个<code>2^k</code>组成的物品堆，将他们的体积和价值合并看待，之后再按照01背包的方法解决即可，因为这些<code>2^k</code>能够组合出0-s之间的任何一个数目</p>
+<span id="more"></span>
+
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2010</span>, M = <span class="number">12010</span>;</span><br><span class="line"><span class="type">int</span> f[N], v[M], w[M];</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> a, b, s;</span><br><span class="line">        cin&gt;&gt;a&gt;&gt;b&gt;&gt;s;</span><br><span class="line">        <span class="type">int</span> k=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(k &lt;= s)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt ++;</span><br><span class="line">            v[cnt] = a * k;</span><br><span class="line">            w[cnt] = b * k;</span><br><span class="line">            s -= k;</span><br><span class="line">            k *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(s &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt ++;</span><br><span class="line">            v[cnt] = a * s;</span><br><span class="line">            w[cnt] = b * s;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    n = cnt;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=v[i]; j--)</span><br><span class="line">        &#123;</span><br><span class="line">            f[j] = <span class="built_in">max</span>(f[j], f[j-v[i]]+w[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;f[m];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>背包问题：能量石</title>
+    <url>/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/</url>
+    <content><![CDATA[<h1 id="能量石"><a href="#能量石" class="headerlink" title="能量石"></a>能量石</h1><p>链接： <a href="https://www.acwing.com/problem/content/736/">734. 能量石 - AcWing题库</a></p>
+<p>思路： 因为吃能量石的顺序会对物品的价值产生影响，所以要考虑的维度增多了，这时候要首先利用贪心的思路对能量石进行预先排序，注意到对于两件物品时，全部吃掉的情况下，<code>s[ i ] * l[ i+1 ] </code>即为当前顺序下会损失的能量值，这个值当然越小越好，所以对于假设要吃的所有物品，s&#x2F;l的值越小就说明它一定要先吃。<br>之前的考虑中没有考虑能量不能将为负数的情况，实际上只要将状态表达设置为时间恰好为j时的总能量值那么当能量降低为负数时就会对f产生负影响，只要遍历一遍求最大值就是题目所需的答案。</p>
+<span id="more"></span>
+
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10010</span>;</span><br><span class="line"><span class="type">int</span> f[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Stone</span>&#123;</span><br><span class="line">    <span class="type">int</span> s, e, l;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&lt; (<span class="type">const</span> Stone &amp;W) <span class="type">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> s * W.l &lt; l * W.s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;stone[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> C=<span class="number">0</span>; C&lt;T; C++) &#123;</span><br><span class="line">        <span class="type">int</span> m = <span class="number">0</span>;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s, e, l;</span><br><span class="line">            cin&gt;&gt;s&gt;&gt;e&gt;&gt;l;</span><br><span class="line">            stone[i] = &#123;s, e, l&#125;;</span><br><span class="line">            m += s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(stone, stone+n);</span><br><span class="line">    </span><br><span class="line">        <span class="built_in">memset</span>(f, <span class="number">-0x3f</span>, <span class="keyword">sizeof</span> f);</span><br><span class="line">        f[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s = stone[i].s, e = stone[i].e, l = stone[i].l;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=s; j--) &#123;</span><br><span class="line">                f[j] = <span class="built_in">max</span>(f[j], f[j-s]+e-(j-s)*l); <span class="comment">//在所有能量石降为负数时就自然不是最大值了，这样就省去了判断不能小于0的情况；</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;=m; i++) &#123;</span><br><span class="line">            res = <span class="built_in">max</span>(res, f[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Case #%d: %d\n&quot;</span>, C+<span class="number">1</span>, res);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
       </tags>
   </entry>
 </search>
