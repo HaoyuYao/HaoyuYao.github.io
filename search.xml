@@ -14,6 +14,17 @@
       </tags>
   </entry>
   <entry>
+    <title>home</title>
+    <url>/2024/03/07/home/</url>
+    <content><![CDATA[<p>I am currently a undergraduate student in School of Computer Science at Wuhan University , advised by <a href="https://wangzwhu.github.io/home/">Zheng Wang</a>. My research interest focuses on adversarial attack and AIGC. </p>
+<p>Always feel free to contact me. Welcome any chat and collaboration🤗.</p>
+<h3 id="🔑Key-words"><a href="#🔑Key-words" class="headerlink" title="🔑Key words"></a>🔑Key words</h3><p>Trustworthy AI, Adversarial Attack, AIGC.</p>
+<h1 id="🔥News"><a href="#🔥News" class="headerlink" title="🔥News"></a>🔥News</h1><ul>
+<li>10&#x2F;2023: one <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=cFk7BcAAAAAJ&citation_for_view=cFk7BcAAAAAJ:u5HHmVD_uO8C">paper</a> is accepted by ACM MM 2023.</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>kmp算法学习笔记</title>
     <url>/2023/01/02/kmp%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="kmp算法"><a href="#kmp算法" class="headerlink" title="kmp算法"></a>kmp算法</h1><p>学习状态机的题目时，遇到一道题需要使用到kmp的知识，于是上csdn学习了一下并整理了如下笔记。</p>
@@ -47,17 +58,6 @@
       </tags>
   </entry>
   <entry>
-    <title>home</title>
-    <url>/2024/03/07/home/</url>
-    <content><![CDATA[<p>I am currently a undergraduate student in School of Computer Science at Wuhan University , advised by <a href="https://wangzwhu.github.io/home/">Zheng Wang</a>. My research interest focuses on adversarial attack and AIGC. </p>
-<p>Always feel free to contact me. Welcome any chat and collaboration🤗.</p>
-<h3 id="🔑Key-words"><a href="#🔑Key-words" class="headerlink" title="🔑Key words"></a>🔑Key words</h3><p>Trustworthy AI, Adversarial Attack, AIGC.</p>
-<h1 id="🔥News"><a href="#🔥News" class="headerlink" title="🔥News"></a>🔥News</h1><ul>
-<li>10&#x2F;2023: one <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=cFk7BcAAAAAJ&citation_for_view=cFk7BcAAAAAJ:u5HHmVD_uO8C">paper</a> is accepted by ACM MM 2023.</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>yolo系列以及mmdetection代码阅读</title>
     <url>/2023/07/11/yolov7%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/</url>
     <content><![CDATA[<p>最近一个工作需要大量对比不同的计算机视觉检测模型，需要使用到一个指标ASR，即Attack Successful Rate, 攻击成功率，这个指标需要使用到tp(true positives), 然而tp这个指标通常大部分检测模型不会默认给出, 在yolov5等系列中, 你可以在val.py中轻松找到相应的指标并手动打印, yolov7中并没有给出tp这个变量, 但是依然可以依葫芦画瓢拿到这一变量, 然而事情到了mmdetection中就大为不同, 不同于专精于行人检测的yolo系列, mmdetection是一个极为庞大包罗万象的检测库, 其代码层次结构复杂, 想获得对应的指标, 少不了一场代码阅读.</p>
@@ -78,6 +78,38 @@
       </categories>
       <tags>
         <tag>随记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>不开long long见祖宗</title>
+    <url>/2023/01/04/%E4%B8%8D%E5%BC%80long-long%E8%A7%81%E7%A5%96%E5%AE%97/</url>
+    <content><![CDATA[<h1 id="感受差分的威力吧"><a href="#感受差分的威力吧" class="headerlink" title="感受差分的威力吧"></a>感受差分的威力吧</h1><p>题目链接： <a href="https://www.acwing.com/problem/content/description/4658/">4655. 重新排序 - AcWing题库</a></p>
+<span id="more"></span>
+
+<p>题目思路一开始我就有了，我想的是贪心+桶排序</p>
+<p>贪心很好理解：我们将原数组排序，然后让重叠次数最多的地方填上最大的数字，然后依次后推，这样就得到了一开始最朴素的思路：</p>
+<ol>
+<li>使用前缀和计算出一般的sum</li>
+<li>将原数组从大到小排序</li>
+<li>使用桶排序统计出每个数字被检索的次数</li>
+<li>为桶排序的结果排序</li>
+<li>然后统计出排序后数组的答案：<code>res = a[i] * t[i]</code> 被检索几次就乘以几次加上去；</li>
+<li>相减得到正确答案</li>
+</ol>
+<p>需要注意的是: <code>res = a[i] * t[i]</code>会爆int，然后憨憨的我改写成了 <code>res = (ll)(a[i] * t[i])</code>这样写实际上还是会爆int，太蠢了，计算完括号里的内容才ll就晚了，实际上应该这么写： <code>res = (ll) a[i] * t[i]</code>；一定要牢记</p>
+<p>同时cmp 函数 return 时也要记得结果加上括号。</p>
+<p>但是结果TLE，看了题解发现思路基本一样，但是题解使用的是差分统计检索情况，我不服，但是试了一下确实过了；</p>
+<p>难道是因为比起桶排序，差分法少嵌套一层循环？我原本以为本题最吃时间复杂度的不是那里，现在想想确实有可能在那里被卡住；</p>
+<p>但是还是长个记性吧，以后遇到这种情况还是用差分吧；</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100010</span>;</span><br><span class="line">ll sum[N];</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"><span class="type">int</span> a[N], t[N];</span><br><span class="line">ll res;</span><br><span class="line">ll ress;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (a&gt;b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">        sum[i] = sum[i<span class="number">-1</span>] + a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cin&gt;&gt;m;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> l, r;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;l, &amp;r);</span><br><span class="line">        res += (sum[r] - sum[l<span class="number">-1</span>]);</span><br><span class="line">        t[l] ++, t[r+<span class="number">1</span>] --;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        t[i] += t[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sort</span>(a+<span class="number">1</span>, a+n+<span class="number">2</span>, cmp);</span><br><span class="line">    <span class="built_in">sort</span>(t+<span class="number">1</span>, t+n+<span class="number">2</span>, cmp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; t[i]; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ress += (ll)t[i] * a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ress - res&lt;&lt;endl;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -121,53 +153,32 @@
       </tags>
   </entry>
   <entry>
-    <title>不开long long见祖宗</title>
-    <url>/2023/01/04/%E4%B8%8D%E5%BC%80long-long%E8%A7%81%E7%A5%96%E5%AE%97/</url>
-    <content><![CDATA[<h1 id="感受差分的威力吧"><a href="#感受差分的威力吧" class="headerlink" title="感受差分的威力吧"></a>感受差分的威力吧</h1><p>题目链接： <a href="https://www.acwing.com/problem/content/description/4658/">4655. 重新排序 - AcWing题库</a></p>
+    <title>关于django用户系统的搭建流程</title>
+    <url>/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="用户系统的搭建和登录界面的完成"><a href="#用户系统的搭建和登录界面的完成" class="headerlink" title="用户系统的搭建和登录界面的完成"></a>用户系统的搭建和登录界面的完成</h1><h2 id="1-1-向django自带数据库中添加自定义的类时需要注意的操作"><a href="#1-1-向django自带数据库中添加自定义的类时需要注意的操作" class="headerlink" title="1.1 向django自带数据库中添加自定义的类时需要注意的操作"></a>1.1 向django自带数据库中添加自定义的类时需要注意的操作</h2><p>启动uwsgi.ini服务之后<code>sudo uwsgi --ini scripts/uwsgi.ini</code>不要直接关闭终端，这样导致服务难以被关闭</p>
 <span id="more"></span>
 
-<p>题目思路一开始我就有了，我想的是贪心+桶排序</p>
-<p>贪心很好理解：我们将原数组排序，然后让重叠次数最多的地方填上最大的数字，然后依次后推，这样就得到了一开始最朴素的思路：</p>
+<p>如果无法关闭，则使用<code>sudo fuser -k 8000/tcp</code>杀死在8000端口的进程，在运行ini</p>
+<p>登陆界面中的每个函数都要实现三个部分：</p>
 <ol>
-<li>使用前缀和计算出一般的sum</li>
-<li>将原数组从大到小排序</li>
-<li>使用桶排序统计出每个数字被检索的次数</li>
-<li>为桶排序的结果排序</li>
-<li>然后统计出排序后数组的答案：<code>res = a[i] * t[i]</code> 被检索几次就乘以几次加上去；</li>
-<li>相减得到正确答案</li>
+<li>views实现函数的本体</li>
+<li>urls中实现函数的映射</li>
+<li>js中实现对应的调用</li>
 </ol>
-<p>需要注意的是: <code>res = a[i] * t[i]</code>会爆int，然后憨憨的我改写成了 <code>res = (ll)(a[i] * t[i])</code>这样写实际上还是会爆int，太蠢了，计算完括号里的内容才ll就晚了，实际上应该这么写： <code>res = (ll) a[i] * t[i]</code>；一定要牢记</p>
-<p>同时cmp 函数 return 时也要记得结果加上括号。</p>
-<p>但是结果TLE，看了题解发现思路基本一样，但是题解使用的是差分统计检索情况，我不服，但是试了一下确实过了；</p>
-<p>难道是因为比起桶排序，差分法少嵌套一层循环？我原本以为本题最吃时间复杂度的不是那里，现在想想确实有可能在那里被卡住；</p>
-<p>但是还是长个记性吧，以后遇到这种情况还是用差分吧；</p>
-<p>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100010</span>;</span><br><span class="line">ll sum[N];</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"><span class="type">int</span> a[N], t[N];</span><br><span class="line">ll res;</span><br><span class="line">ll ress;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (a&gt;b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">        sum[i] = sum[i<span class="number">-1</span>] + a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cin&gt;&gt;m;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> l, r;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;l, &amp;r);</span><br><span class="line">        res += (sum[r] - sum[l<span class="number">-1</span>]);</span><br><span class="line">        t[l] ++, t[r+<span class="number">1</span>] --;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        t[i] += t[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sort</span>(a+<span class="number">1</span>, a+n+<span class="number">2</span>, cmp);</span><br><span class="line">    <span class="built_in">sort</span>(t+<span class="number">1</span>, t+n+<span class="number">2</span>, cmp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; t[i]; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ress += (ll)t[i] * a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ress - res&lt;&lt;endl;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每一个处理请求的函数都要传入一个参数:request，请求登陆也是如此，并且导入包：<code>from django.http import JsonResponse</code></p>
+<p>json文件：通用的序列化存储字典等内容的文件</p>
+<p>path中填写的url最后一定带上&#x2F;，否则后面接新的东西时会出错</p>
+<p>注意为文件添加可执行权限的操作是 chmod +x filename</p>
+<p>js实现三秒后刷新：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>科技</category>
+        <category>笔记</category>
       </categories>
       <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于本博客的一些希望</title>
-    <url>/2022/12/16/%E5%85%B3%E4%BA%8E%E6%9C%AC%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%8C%E6%9C%9B/</url>
-    <content><![CDATA[<p><em>关于本博客的一些初衷，首先写在这里，以勉励自己</em></p>
-<span id="more"></span>
-
-
-
-<h2 id="为什么要写博客"><a href="#为什么要写博客" class="headerlink" title="为什么要写博客"></a>为什么要写博客</h2><p>写博客的目的不在于给别人看，博客对我而言是一个特殊的笔记本，与普通的笔记本不同的是，博客中的内容并不是直接来源于一本书，一堂课，或者某一个视频，一篇博客的内容的直接生产者是我自己，一篇博客代表这我自己在这一段时间中获得的知识与感想的集合，它自成我的体系，它独属于我自己，写博客的过程，更似写一篇日记，我需要将自己的所思所想从心底全部引出，落在纸上（乐），这本身就是一种回顾，总结与加深，通过写博客，可以让一个人培养起不断反思，不断求深求全的习惯，我想这对自己的发展是大有脾益的。</p>
-<p>提示：<code>&lt;!-- more --&gt;</code>可以手动分割文章，善用</p>
-]]></content>
-      <categories>
-        <category>随记</category>
-      </categories>
-      <tags>
-        <tag>总结</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -211,32 +222,21 @@
       </tags>
   </entry>
   <entry>
-    <title>关于django用户系统的搭建流程</title>
-    <url>/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="用户系统的搭建和登录界面的完成"><a href="#用户系统的搭建和登录界面的完成" class="headerlink" title="用户系统的搭建和登录界面的完成"></a>用户系统的搭建和登录界面的完成</h1><h2 id="1-1-向django自带数据库中添加自定义的类时需要注意的操作"><a href="#1-1-向django自带数据库中添加自定义的类时需要注意的操作" class="headerlink" title="1.1 向django自带数据库中添加自定义的类时需要注意的操作"></a>1.1 向django自带数据库中添加自定义的类时需要注意的操作</h2><p>启动uwsgi.ini服务之后<code>sudo uwsgi --ini scripts/uwsgi.ini</code>不要直接关闭终端，这样导致服务难以被关闭</p>
+    <title>关于本博客的一些希望</title>
+    <url>/2022/12/16/%E5%85%B3%E4%BA%8E%E6%9C%AC%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%8C%E6%9C%9B/</url>
+    <content><![CDATA[<p><em>关于本博客的一些初衷，首先写在这里，以勉励自己</em></p>
 <span id="more"></span>
 
-<p>如果无法关闭，则使用<code>sudo fuser -k 8000/tcp</code>杀死在8000端口的进程，在运行ini</p>
-<p>登陆界面中的每个函数都要实现三个部分：</p>
-<ol>
-<li>views实现函数的本体</li>
-<li>urls中实现函数的映射</li>
-<li>js中实现对应的调用</li>
-</ol>
-<p>每一个处理请求的函数都要传入一个参数:request，请求登陆也是如此，并且导入包：<code>from django.http import JsonResponse</code></p>
-<p>json文件：通用的序列化存储字典等内容的文件</p>
-<p>path中填写的url最后一定带上&#x2F;，否则后面接新的东西时会出错</p>
-<p>注意为文件添加可执行权限的操作是 chmod +x filename</p>
-<p>js实现三秒后刷新：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
 
+
+<h2 id="为什么要写博客"><a href="#为什么要写博客" class="headerlink" title="为什么要写博客"></a>为什么要写博客</h2><p>写博客的目的不在于给别人看，博客对我而言是一个特殊的笔记本，与普通的笔记本不同的是，博客中的内容并不是直接来源于一本书，一堂课，或者某一个视频，一篇博客的内容的直接生产者是我自己，一篇博客代表这我自己在这一段时间中获得的知识与感想的集合，它自成我的体系，它独属于我自己，写博客的过程，更似写一篇日记，我需要将自己的所思所想从心底全部引出，落在纸上（乐），这本身就是一种回顾，总结与加深，通过写博客，可以让一个人培养起不断反思，不断求深求全的习惯，我想这对自己的发展是大有脾益的。</p>
+<p>提示：<code>&lt;!-- more --&gt;</code>可以手动分割文章，善用</p>
 ]]></content>
       <categories>
-        <category>科技</category>
-        <category>笔记</category>
+        <category>随记</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
+        <tag>总结</tag>
       </tags>
   </entry>
   <entry>
@@ -262,23 +262,6 @@
 <p>代码：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2010</span>, M = <span class="number">12010</span>;</span><br><span class="line"><span class="type">int</span> f[N], v[M], w[M];</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> a, b, s;</span><br><span class="line">        cin&gt;&gt;a&gt;&gt;b&gt;&gt;s;</span><br><span class="line">        <span class="type">int</span> k=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(k &lt;= s)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt ++;</span><br><span class="line">            v[cnt] = a * k;</span><br><span class="line">            w[cnt] = b * k;</span><br><span class="line">            s -= k;</span><br><span class="line">            k *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(s &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt ++;</span><br><span class="line">            v[cnt] = a * s;</span><br><span class="line">            w[cnt] = b * s;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    n = cnt;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=v[i]; j--)</span><br><span class="line">        &#123;</span><br><span class="line">            f[j] = <span class="built_in">max</span>(f[j], f[j-v[i]]+w[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;f[m];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>背包问题：能量石</title>
-    <url>/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/</url>
-    <content><![CDATA[<h1 id="能量石"><a href="#能量石" class="headerlink" title="能量石"></a>能量石</h1><p>链接： <a href="https://www.acwing.com/problem/content/736/">734. 能量石 - AcWing题库</a></p>
-<p>思路： 因为吃能量石的顺序会对物品的价值产生影响，所以要考虑的维度增多了，这时候要首先利用贪心的思路对能量石进行预先排序，注意到对于两件物品时，全部吃掉的情况下，<code>s[ i ] * l[ i+1 ] </code>即为当前顺序下会损失的能量值，这个值当然越小越好，所以对于假设要吃的所有物品，s&#x2F;l的值越小就说明它一定要先吃。<br>之前的考虑中没有考虑能量不能将为负数的情况，实际上只要将状态表达设置为时间恰好为j时的总能量值那么当能量降低为负数时就会对f产生负影响，只要遍历一遍求最大值就是题目所需的答案。</p>
-<span id="more"></span>
-
-<p>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10010</span>;</span><br><span class="line"><span class="type">int</span> f[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Stone</span>&#123;</span><br><span class="line">    <span class="type">int</span> s, e, l;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&lt; (<span class="type">const</span> Stone &amp;W) <span class="type">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> s * W.l &lt; l * W.s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;stone[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> C=<span class="number">0</span>; C&lt;T; C++) &#123;</span><br><span class="line">        <span class="type">int</span> m = <span class="number">0</span>;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s, e, l;</span><br><span class="line">            cin&gt;&gt;s&gt;&gt;e&gt;&gt;l;</span><br><span class="line">            stone[i] = &#123;s, e, l&#125;;</span><br><span class="line">            m += s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(stone, stone+n);</span><br><span class="line">    </span><br><span class="line">        <span class="built_in">memset</span>(f, <span class="number">-0x3f</span>, <span class="keyword">sizeof</span> f);</span><br><span class="line">        f[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s = stone[i].s, e = stone[i].e, l = stone[i].l;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=s; j--) &#123;</span><br><span class="line">                f[j] = <span class="built_in">max</span>(f[j], f[j-s]+e-(j-s)*l); <span class="comment">//在所有能量石降为负数时就自然不是最大值了，这样就省去了判断不能小于0的情况；</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;=m; i++) &#123;</span><br><span class="line">            res = <span class="built_in">max</span>(res, f[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Case #%d: %d\n&quot;</span>, C+<span class="number">1</span>, res);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>算法</category>
@@ -338,6 +321,23 @@
       </categories>
       <tags>
         <tag>练习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>背包问题：能量石</title>
+    <url>/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/</url>
+    <content><![CDATA[<h1 id="能量石"><a href="#能量石" class="headerlink" title="能量石"></a>能量石</h1><p>链接： <a href="https://www.acwing.com/problem/content/736/">734. 能量石 - AcWing题库</a></p>
+<p>思路： 因为吃能量石的顺序会对物品的价值产生影响，所以要考虑的维度增多了，这时候要首先利用贪心的思路对能量石进行预先排序，注意到对于两件物品时，全部吃掉的情况下，<code>s[ i ] * l[ i+1 ] </code>即为当前顺序下会损失的能量值，这个值当然越小越好，所以对于假设要吃的所有物品，s&#x2F;l的值越小就说明它一定要先吃。<br>之前的考虑中没有考虑能量不能将为负数的情况，实际上只要将状态表达设置为时间恰好为j时的总能量值那么当能量降低为负数时就会对f产生负影响，只要遍历一遍求最大值就是题目所需的答案。</p>
+<span id="more"></span>
+
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10010</span>;</span><br><span class="line"><span class="type">int</span> f[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Stone</span>&#123;</span><br><span class="line">    <span class="type">int</span> s, e, l;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&lt; (<span class="type">const</span> Stone &amp;W) <span class="type">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> s * W.l &lt; l * W.s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;stone[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> C=<span class="number">0</span>; C&lt;T; C++) &#123;</span><br><span class="line">        <span class="type">int</span> m = <span class="number">0</span>;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s, e, l;</span><br><span class="line">            cin&gt;&gt;s&gt;&gt;e&gt;&gt;l;</span><br><span class="line">            stone[i] = &#123;s, e, l&#125;;</span><br><span class="line">            m += s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(stone, stone+n);</span><br><span class="line">    </span><br><span class="line">        <span class="built_in">memset</span>(f, <span class="number">-0x3f</span>, <span class="keyword">sizeof</span> f);</span><br><span class="line">        f[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s = stone[i].s, e = stone[i].e, l = stone[i].l;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=s; j--) &#123;</span><br><span class="line">                f[j] = <span class="built_in">max</span>(f[j], f[j-s]+e-(j-s)*l); <span class="comment">//在所有能量石降为负数时就自然不是最大值了，这样就省去了判断不能小于0的情况；</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;=m; i++) &#123;</span><br><span class="line">            res = <span class="built_in">max</span>(res, f[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Case #%d: %d\n&quot;</span>, C+<span class="number">1</span>, res);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
