@@ -25,6 +25,39 @@
 ]]></content>
   </entry>
   <entry>
+    <title>kmp算法学习笔记</title>
+    <url>/2023/01/02/kmp%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="kmp算法"><a href="#kmp算法" class="headerlink" title="kmp算法"></a>kmp算法</h1><p>学习状态机的题目时，遇到一道题需要使用到kmp的知识，于是上csdn学习了一下并整理了如下笔记。</p>
+<span id="more"></span>
+<p>讲解视频： <a href="https://www.bilibili.com/video/BV1234y1y7pm">https://www.bilibili.com/video/BV1234y1y7pm</a></p>
+<p>kmp: 一个人能能走的多远不在于他在顺境时能走的多快，而在于他在逆境时多久能找到曾经的自己。  ————KMP</p>
+<p>kmp算法用于匹配字符串位置。<br>给定两个字符串：a, b 定义a为主串，b为模板串，kmp的任务就是检查主串中是否存在等同于b的字串。</p>
+<h2 id="传统暴力方法"><a href="#传统暴力方法" class="headerlink" title="传统暴力方法"></a>传统暴力方法</h2><p>设定两个指针i, j，分别指向两个字符串的开头，然后一次向后匹配，若没有匹配，那么i回溯到原本的位置+1，j回溯到最开始继续匹配，直到完全匹配。<br>这样的方法完全没有从之前的失败经历中吸取到信息从而采取更好的策略，所以世间复杂度很高。</p>
+<h2 id="kmp给出的答案"><a href="#kmp给出的答案" class="headerlink" title="kmp给出的答案"></a>kmp给出的答案</h2><p>kmp定义了一个字符串的前缀与后缀，在上述的方案中，回溯指针时是从头开始的，但是kmp不是这样的，在上述的匹配方案中，遇到第一个未匹配的字符时其前面的子串是完全相同的。我们要做的是找到该字串前缀与后缀相同的位置，然后将指针回溯到这里，这样，前后缀的部分一定是匹配的，可以省去许多无用功。<br>当回溯一次是若发现下一个字符还是不匹配，那么就让当前匹配的子串（即先前的前后缀）继续查找相同的前后缀，并回溯到这个位置，直到 j 指针指向0，就令i指针持续后移，直到i指针所指的对象与模板串的第一个字符相同。</p>
+<p>那么如何查找上述方案中相同前后缀的位置呢，这里我们使用一个ne[]数组对模板串采用dp的方式进行记录其每个子串的前后缀长度情况。具体方法实际上还是kmp的思想。<br>具体方法如下：</p>
+<ol>
+<li>设置两个指针i，j，i&#x3D;2，j&#x3D;0；检查pi &#x3D;&#x3D; pj+1;</li>
+<li>如果匹配，那么对于1-i的子串，他的最长公共前后缀的长度就是ne[]，而ne[i] &#x3D; j+1.</li>
+<li>如果不匹配，则回溯j指针，使j &#x3D; ne[j]，直到匹配成功（kmp思想，这里将1-j的子串看作当前的前后公共子串）</li>
+</ol>
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1e7</span>+<span class="number">10</span>;</span><br><span class="line"><span class="type">char</span> p[N],s[N];</span><br><span class="line"><span class="comment">//next数组表示的是不匹配时子串下标退回的位置</span></span><br><span class="line"><span class="comment">//比如next[i]=j就表示在子串中p[1~j]=p[i-j+1~i]</span></span><br><span class="line"><span class="comment">//所以子串直接退回到j下标继续和主串进行模式匹配直到匹配成功为止</span></span><br><span class="line"><span class="type">int</span> ne[N];</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;p+<span class="number">1</span>&gt;&gt;m&gt;&gt;s+<span class="number">1</span>;</span><br><span class="line">    <span class="comment">//求next数组的过程</span></span><br><span class="line">    <span class="comment">//类似于KMP匹配过程</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>,j=<span class="number">0</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(j&amp;&amp;p[i]!=p[j+<span class="number">1</span>]) j=ne[j];</span><br><span class="line">        <span class="keyword">if</span>(p[i]==p[j+<span class="number">1</span>]) j++;</span><br><span class="line">        ne[i]=j;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//KMP匹配过程</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>,j=<span class="number">0</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//如果子串没有退回到起点，并且主串和子串不匹配</span></span><br><span class="line">        <span class="keyword">while</span>(j&amp;&amp;s[i]!=p[j+<span class="number">1</span>]) j=ne[j];<span class="comment">//j退回到重合部分的终点位置</span></span><br><span class="line">        <span class="keyword">if</span>(s[i]==p[j+<span class="number">1</span>]) j++;</span><br><span class="line">        <span class="comment">//匹配成功</span></span><br><span class="line">        <span class="keyword">if</span>(j==n)</span><br><span class="line">        &#123;</span><br><span class="line">            cout&lt;&lt;i-n&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">            j=ne[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="示例题目：周期"><a href="#示例题目：周期" class="headerlink" title="示例题目：周期"></a>示例题目：周期</h1><p>题目链接： <a href="https://www.acwing.com/problem/content/143/">141. 周期 - AcWing题库</a></p>
+<h2 id="题目思路："><a href="#题目思路：" class="headerlink" title="题目思路："></a>题目思路：</h2><p>需要注意到kmp中的前缀ne[]函数与循环节之间的关系，如果在某一个前缀长度为s中存在长度为三的循环节，那么对应到该前缀子串的ne[]数组的特征就是s % (s-ne[s]) &#x3D;&#x3D; 0，且ne[s]不等于0；<br>证明：<br>作图，暂且称子串减去公共前后缀的部分为循环节，那么就可以发现循环节一定等于其后的一段等长的节，因为前后缀相等，循环节后面一节就是后缀开头的一节，而这一节同时又是前缀的第二节，那么可以得到前缀中第一节等于第二节，后缀则也是如此，而后缀的第二节又是前缀的第三节···如此这般，可以推导出当整除关系下，我们假设的循环节就是真正的循环节。</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="type">int</span> t,i,j,n,nex[<span class="number">1000005</span>];<span class="type">char</span> a[<span class="number">1000005</span>];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n),n)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,a+<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Test case #%d\n&quot;</span>,++t);</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">2</span>,j=<span class="number">0</span>;i&lt;=n;i++)&#123;<span class="comment">//最基本的 next[] 数组求法</span></span><br><span class="line">            <span class="keyword">while</span>(j&amp;&amp;a[i]!=a[j+<span class="number">1</span>])j=nex[j];</span><br><span class="line">            <span class="keyword">if</span>(a[i]==a[j+<span class="number">1</span>])j++;nex[i]=j;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=n;i++)<span class="comment">//由于1～1只有一个字母，只能是它本身构成长度为1的循环，所以从2开始枚举</span></span><br><span class="line">            <span class="keyword">if</span>(i%(i-nex[i])==<span class="number">0</span>&amp;&amp;nex[i])<span class="comment">//判断时还要注意nex[i]是否为0</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,i,i/(i-nex[i]));</span><br><span class="line"><span class="comment">//如果i含有长度大于1的最小循环元，输出i的长度(即i)以及最大循环次数K(即i-nex[i])</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);<span class="comment">//记得输出一个空行</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>yolo系列以及mmdetection代码阅读</title>
     <url>/2023/07/11/yolov7%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/</url>
     <content><![CDATA[<p>最近一个工作需要大量对比不同的计算机视觉检测模型，需要使用到一个指标ASR，即Attack Successful Rate, 攻击成功率，这个指标需要使用到tp(true positives), 然而tp这个指标通常大部分检测模型不会默认给出, 在yolov5等系列中, 你可以在val.py中轻松找到相应的指标并手动打印, yolov7中并没有给出tp这个变量, 但是依然可以依葫芦画瓢拿到这一变量, 然而事情到了mmdetection中就大为不同, 不同于专精于行人检测的yolo系列, mmdetection是一个极为庞大包罗万象的检测库, 其代码层次结构复杂, 想获得对应的指标, 少不了一场代码阅读.</p>
@@ -77,68 +110,6 @@
       </categories>
       <tags>
         <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>kmp算法学习笔记</title>
-    <url>/2023/01/02/kmp%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="kmp算法"><a href="#kmp算法" class="headerlink" title="kmp算法"></a>kmp算法</h1><p>学习状态机的题目时，遇到一道题需要使用到kmp的知识，于是上csdn学习了一下并整理了如下笔记。</p>
-<span id="more"></span>
-<p>讲解视频： <a href="https://www.bilibili.com/video/BV1234y1y7pm">https://www.bilibili.com/video/BV1234y1y7pm</a></p>
-<p>kmp: 一个人能能走的多远不在于他在顺境时能走的多快，而在于他在逆境时多久能找到曾经的自己。  ————KMP</p>
-<p>kmp算法用于匹配字符串位置。<br>给定两个字符串：a, b 定义a为主串，b为模板串，kmp的任务就是检查主串中是否存在等同于b的字串。</p>
-<h2 id="传统暴力方法"><a href="#传统暴力方法" class="headerlink" title="传统暴力方法"></a>传统暴力方法</h2><p>设定两个指针i, j，分别指向两个字符串的开头，然后一次向后匹配，若没有匹配，那么i回溯到原本的位置+1，j回溯到最开始继续匹配，直到完全匹配。<br>这样的方法完全没有从之前的失败经历中吸取到信息从而采取更好的策略，所以世间复杂度很高。</p>
-<h2 id="kmp给出的答案"><a href="#kmp给出的答案" class="headerlink" title="kmp给出的答案"></a>kmp给出的答案</h2><p>kmp定义了一个字符串的前缀与后缀，在上述的方案中，回溯指针时是从头开始的，但是kmp不是这样的，在上述的匹配方案中，遇到第一个未匹配的字符时其前面的子串是完全相同的。我们要做的是找到该字串前缀与后缀相同的位置，然后将指针回溯到这里，这样，前后缀的部分一定是匹配的，可以省去许多无用功。<br>当回溯一次是若发现下一个字符还是不匹配，那么就让当前匹配的子串（即先前的前后缀）继续查找相同的前后缀，并回溯到这个位置，直到 j 指针指向0，就令i指针持续后移，直到i指针所指的对象与模板串的第一个字符相同。</p>
-<p>那么如何查找上述方案中相同前后缀的位置呢，这里我们使用一个ne[]数组对模板串采用dp的方式进行记录其每个子串的前后缀长度情况。具体方法实际上还是kmp的思想。<br>具体方法如下：</p>
-<ol>
-<li>设置两个指针i，j，i&#x3D;2，j&#x3D;0；检查pi &#x3D;&#x3D; pj+1;</li>
-<li>如果匹配，那么对于1-i的子串，他的最长公共前后缀的长度就是ne[]，而ne[i] &#x3D; j+1.</li>
-<li>如果不匹配，则回溯j指针，使j &#x3D; ne[j]，直到匹配成功（kmp思想，这里将1-j的子串看作当前的前后公共子串）</li>
-</ol>
-<p>代码：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1e7</span>+<span class="number">10</span>;</span><br><span class="line"><span class="type">char</span> p[N],s[N];</span><br><span class="line"><span class="comment">//next数组表示的是不匹配时子串下标退回的位置</span></span><br><span class="line"><span class="comment">//比如next[i]=j就表示在子串中p[1~j]=p[i-j+1~i]</span></span><br><span class="line"><span class="comment">//所以子串直接退回到j下标继续和主串进行模式匹配直到匹配成功为止</span></span><br><span class="line"><span class="type">int</span> ne[N];</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;p+<span class="number">1</span>&gt;&gt;m&gt;&gt;s+<span class="number">1</span>;</span><br><span class="line">    <span class="comment">//求next数组的过程</span></span><br><span class="line">    <span class="comment">//类似于KMP匹配过程</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>,j=<span class="number">0</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(j&amp;&amp;p[i]!=p[j+<span class="number">1</span>]) j=ne[j];</span><br><span class="line">        <span class="keyword">if</span>(p[i]==p[j+<span class="number">1</span>]) j++;</span><br><span class="line">        ne[i]=j;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//KMP匹配过程</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>,j=<span class="number">0</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//如果子串没有退回到起点，并且主串和子串不匹配</span></span><br><span class="line">        <span class="keyword">while</span>(j&amp;&amp;s[i]!=p[j+<span class="number">1</span>]) j=ne[j];<span class="comment">//j退回到重合部分的终点位置</span></span><br><span class="line">        <span class="keyword">if</span>(s[i]==p[j+<span class="number">1</span>]) j++;</span><br><span class="line">        <span class="comment">//匹配成功</span></span><br><span class="line">        <span class="keyword">if</span>(j==n)</span><br><span class="line">        &#123;</span><br><span class="line">            cout&lt;&lt;i-n&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">            j=ne[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="示例题目：周期"><a href="#示例题目：周期" class="headerlink" title="示例题目：周期"></a>示例题目：周期</h1><p>题目链接： <a href="https://www.acwing.com/problem/content/143/">141. 周期 - AcWing题库</a></p>
-<h2 id="题目思路："><a href="#题目思路：" class="headerlink" title="题目思路："></a>题目思路：</h2><p>需要注意到kmp中的前缀ne[]函数与循环节之间的关系，如果在某一个前缀长度为s中存在长度为三的循环节，那么对应到该前缀子串的ne[]数组的特征就是s % (s-ne[s]) &#x3D;&#x3D; 0，且ne[s]不等于0；<br>证明：<br>作图，暂且称子串减去公共前后缀的部分为循环节，那么就可以发现循环节一定等于其后的一段等长的节，因为前后缀相等，循环节后面一节就是后缀开头的一节，而这一节同时又是前缀的第二节，那么可以得到前缀中第一节等于第二节，后缀则也是如此，而后缀的第二节又是前缀的第三节···如此这般，可以推导出当整除关系下，我们假设的循环节就是真正的循环节。</p>
-<p>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="type">int</span> t,i,j,n,nex[<span class="number">1000005</span>];<span class="type">char</span> a[<span class="number">1000005</span>];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n),n)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,a+<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Test case #%d\n&quot;</span>,++t);</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">2</span>,j=<span class="number">0</span>;i&lt;=n;i++)&#123;<span class="comment">//最基本的 next[] 数组求法</span></span><br><span class="line">            <span class="keyword">while</span>(j&amp;&amp;a[i]!=a[j+<span class="number">1</span>])j=nex[j];</span><br><span class="line">            <span class="keyword">if</span>(a[i]==a[j+<span class="number">1</span>])j++;nex[i]=j;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=n;i++)<span class="comment">//由于1～1只有一个字母，只能是它本身构成长度为1的循环，所以从2开始枚举</span></span><br><span class="line">            <span class="keyword">if</span>(i%(i-nex[i])==<span class="number">0</span>&amp;&amp;nex[i])<span class="comment">//判断时还要注意nex[i]是否为0</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,i,i/(i-nex[i]));</span><br><span class="line"><span class="comment">//如果i含有长度大于1的最小循环元，输出i的长度(即i)以及最大循环次数K(即i-nex[i])</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);<span class="comment">//记得输出一个空行</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于django用户系统的搭建流程</title>
-    <url>/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="用户系统的搭建和登录界面的完成"><a href="#用户系统的搭建和登录界面的完成" class="headerlink" title="用户系统的搭建和登录界面的完成"></a>用户系统的搭建和登录界面的完成</h1><h2 id="1-1-向django自带数据库中添加自定义的类时需要注意的操作"><a href="#1-1-向django自带数据库中添加自定义的类时需要注意的操作" class="headerlink" title="1.1 向django自带数据库中添加自定义的类时需要注意的操作"></a>1.1 向django自带数据库中添加自定义的类时需要注意的操作</h2><p>启动uwsgi.ini服务之后<code>sudo uwsgi --ini scripts/uwsgi.ini</code>不要直接关闭终端，这样导致服务难以被关闭</p>
-<span id="more"></span>
-
-<p>如果无法关闭，则使用<code>sudo fuser -k 8000/tcp</code>杀死在8000端口的进程，在运行ini</p>
-<p>登陆界面中的每个函数都要实现三个部分：</p>
-<ol>
-<li>views实现函数的本体</li>
-<li>urls中实现函数的映射</li>
-<li>js中实现对应的调用</li>
-</ol>
-<p>每一个处理请求的函数都要传入一个参数:request，请求登陆也是如此，并且导入包：<code>from django.http import JsonResponse</code></p>
-<p>json文件：通用的序列化存储字典等内容的文件</p>
-<p>path中填写的url最后一定带上&#x2F;，否则后面接新的东西时会出错</p>
-<p>注意为文件添加可执行权限的操作是 chmod +x filename</p>
-<p>js实现三秒后刷新：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>科技</category>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -222,6 +193,35 @@
       </tags>
   </entry>
   <entry>
+    <title>关于django用户系统的搭建流程</title>
+    <url>/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="用户系统的搭建和登录界面的完成"><a href="#用户系统的搭建和登录界面的完成" class="headerlink" title="用户系统的搭建和登录界面的完成"></a>用户系统的搭建和登录界面的完成</h1><h2 id="1-1-向django自带数据库中添加自定义的类时需要注意的操作"><a href="#1-1-向django自带数据库中添加自定义的类时需要注意的操作" class="headerlink" title="1.1 向django自带数据库中添加自定义的类时需要注意的操作"></a>1.1 向django自带数据库中添加自定义的类时需要注意的操作</h2><p>启动uwsgi.ini服务之后<code>sudo uwsgi --ini scripts/uwsgi.ini</code>不要直接关闭终端，这样导致服务难以被关闭</p>
+<span id="more"></span>
+
+<p>如果无法关闭，则使用<code>sudo fuser -k 8000/tcp</code>杀死在8000端口的进程，在运行ini</p>
+<p>登陆界面中的每个函数都要实现三个部分：</p>
+<ol>
+<li>views实现函数的本体</li>
+<li>urls中实现函数的映射</li>
+<li>js中实现对应的调用</li>
+</ol>
+<p>每一个处理请求的函数都要传入一个参数:request，请求登陆也是如此，并且导入包：<code>from django.http import JsonResponse</code></p>
+<p>json文件：通用的序列化存储字典等内容的文件</p>
+<p>path中填写的url最后一定带上&#x2F;，否则后面接新的东西时会出错</p>
+<p>注意为文件添加可执行权限的操作是 chmod +x filename</p>
+<p>js实现三秒后刷新：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>科技</category>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>关于本博客的一些希望</title>
     <url>/2022/12/16/%E5%85%B3%E4%BA%8E%E6%9C%AC%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%8C%E6%9C%9B/</url>
     <content><![CDATA[<p><em>关于本博客的一些初衷，首先写在这里，以勉励自己</em></p>
@@ -271,6 +271,37 @@
       </tags>
   </entry>
   <entry>
+    <title>每日一题 第二周</title>
+    <url>/2023/01/01/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E7%AC%AC%E4%BA%8C%E5%91%A8/</url>
+    <content><![CDATA[<h1 id="选数异或"><a href="#选数异或" class="headerlink" title="选数异或"></a>选数异或</h1><p>题目： <a href="https://www.acwing.com/activity/content/problem/content/7908/">https://www.acwing.com/activity/content/problem/content/7908/</a></p>
+<h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><p>类似于前缀和，相当于预先总结好那个范围中有可以异或匹配的数字对，然后查询时就会十分方便。这道题中使用了两种技巧：</p>
+<ol>
+<li>利用unordered_map做hash表将每对数字对记录下来，数字为关键字，映射值为数字的下标。</li>
+<li>利用 dp 做对于预先总结数字对的匹配情况，dp[i]，代表再 1 - i 中含有的数字对中，左边界最大的值所在的下标。这样维护时只需要<code> dp[i]=max(dp[i−1],last[a⊕x])</code> 这是hash表查询的优势也发挥出来了。</li>
+</ol>
+<span id="more"></span>
+
+
+
+<h2 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h2><p>必要异或运算性质：<br>归零律：a⊕a&#x3D;0<br>结合律: a⊕b⊕c&#x3D;a⊕(b⊕c)&#x3D;(a⊕b)⊕c<br>交换律：a⊕b&#x3D;b⊕a<br>因此, a⊕b&#x3D;x⟺a⊕b⊕x&#x3D;0⟺a⊕x&#x3D;b<br>因此对于一个数a， 与a配对的数可以直接计算得出， 即为a⊕xa⊕x<br>递推优化<br>不妨将满足题意的两个数a, b简称为数对， a、b中较小的下标叫下界.<br>定义dp[i]为[1, i]区间中所有数对中的最大下界<br>如样例1 2 3 4, 只有2 3的异或为1.<br>对于区间[1, 2]它不包含数对{2， 3}所以 dp[2] 应该为一个无效值， 取0<br>对于区间[1, 3] [1, 4]， 都仅且包含数对{2, 3}, 所以dp[3] &#x3D; dp[4] &#x3D; 2</p>
+<p>dp[r]的实际意义想必大家都看出来了， 就是当查询区间[l, r], 右边界为r时， 至少包含一个数对时的左边界最大值, 所以如果l小于等于这个左边界最大值， [l, r]区间内就至少有一个数对。</p>
+<p>代码实现<br>用哈希表last[i]记录值i最后一次出现时的位置下标， dp[i]的求法是： 若ai⊕xai⊕x最后一次出现的下标要大于dp[i-1]， 则dp[i] &#x3D; last[ai⊕x]last[ai⊕x], 否则dp[i] &#x3D; dp[i-1]     </p>
+<p>即<code> dp[i]=max(dp[i−1],last[a⊕x])</code></p>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> dp[<span class="number">100010</span>];</span><br><span class="line"><span class="comment">//使用一种类似于前缀和加dp的方法</span></span><br><span class="line"><span class="comment">//代码中使用了unordered_map，可以直接朴素地理解为一种不用担心越界的数组，方便你打hash表</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n, m, x;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m&gt;&gt;x;</span><br><span class="line">    unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; last;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> a;</span><br><span class="line">        cin&gt;&gt;a;</span><br><span class="line">        dp[i] = <span class="built_in">max</span>(dp[i<span class="number">-1</span>], last[x ^ a]);</span><br><span class="line">        last[a] = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> l, r;</span><br><span class="line">        cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">        cout&lt;&lt;(dp[r] &gt;= l ? <span class="string">&quot;yes&quot;</span> : <span class="string">&quot;no&quot;</span>)&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h1><p>题目： <a href="https://www.acwing.com/problem/content/description/4647/">4644. 求和 - AcWing题库</a></p>
+<p>使用了前缀和，但是实际上可以不用，求出总和依次相乘后除以2即可</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">200010</span>;</span><br><span class="line"><span class="type">int</span> sum[N];</span><br><span class="line"><span class="type">int</span> a[N];</span><br><span class="line">ll ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cin&gt;&gt;a[i];</span><br><span class="line">        sum[i] = sum[i<span class="number">-1</span>] + a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ll cheng = (ll)(sum[n] - sum[i]);</span><br><span class="line">        ans += (ll)cheng * a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>每日一题2022-10-30</title>
     <url>/2022/12/30/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982022-10-30/</url>
     <content><![CDATA[<h1 id="上课睡觉"><a href="#上课睡觉" class="headerlink" title="上课睡觉"></a>上课睡觉</h1><p>题目：<br><a href="https://www.acwing.com/problem/content/description/4369/">https://www.acwing.com/problem/content/description/4369/</a></p>
@@ -301,37 +332,6 @@
 
 <p>代码如下：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10010</span>;</span><br><span class="line"><span class="type">int</span> f[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Stone</span>&#123;</span><br><span class="line">    <span class="type">int</span> s, e, l;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&lt; (<span class="type">const</span> Stone &amp;W) <span class="type">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> s * W.l &lt; l * W.s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;stone[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> C=<span class="number">0</span>; C&lt;T; C++) &#123;</span><br><span class="line">        <span class="type">int</span> m = <span class="number">0</span>;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s, e, l;</span><br><span class="line">            cin&gt;&gt;s&gt;&gt;e&gt;&gt;l;</span><br><span class="line">            stone[i] = &#123;s, e, l&#125;;</span><br><span class="line">            m += s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(stone, stone+n);</span><br><span class="line">    </span><br><span class="line">        <span class="built_in">memset</span>(f, <span class="number">-0x3f</span>, <span class="keyword">sizeof</span> f);</span><br><span class="line">        f[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s = stone[i].s, e = stone[i].e, l = stone[i].l;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=s; j--) &#123;</span><br><span class="line">                f[j] = <span class="built_in">max</span>(f[j], f[j-s]+e-(j-s)*l); <span class="comment">//在所有能量石降为负数时就自然不是最大值了，这样就省去了判断不能小于0的情况；</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;=m; i++) &#123;</span><br><span class="line">            res = <span class="built_in">max</span>(res, f[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Case #%d: %d\n&quot;</span>, C+<span class="number">1</span>, res);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>每日一题 第二周</title>
-    <url>/2023/01/01/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E7%AC%AC%E4%BA%8C%E5%91%A8/</url>
-    <content><![CDATA[<h1 id="选数异或"><a href="#选数异或" class="headerlink" title="选数异或"></a>选数异或</h1><p>题目： <a href="https://www.acwing.com/activity/content/problem/content/7908/">https://www.acwing.com/activity/content/problem/content/7908/</a></p>
-<h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><p>类似于前缀和，相当于预先总结好那个范围中有可以异或匹配的数字对，然后查询时就会十分方便。这道题中使用了两种技巧：</p>
-<ol>
-<li>利用unordered_map做hash表将每对数字对记录下来，数字为关键字，映射值为数字的下标。</li>
-<li>利用 dp 做对于预先总结数字对的匹配情况，dp[i]，代表再 1 - i 中含有的数字对中，左边界最大的值所在的下标。这样维护时只需要<code> dp[i]=max(dp[i−1],last[a⊕x])</code> 这是hash表查询的优势也发挥出来了。</li>
-</ol>
-<span id="more"></span>
-
-
-
-<h2 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h2><p>必要异或运算性质：<br>归零律：a⊕a&#x3D;0<br>结合律: a⊕b⊕c&#x3D;a⊕(b⊕c)&#x3D;(a⊕b)⊕c<br>交换律：a⊕b&#x3D;b⊕a<br>因此, a⊕b&#x3D;x⟺a⊕b⊕x&#x3D;0⟺a⊕x&#x3D;b<br>因此对于一个数a， 与a配对的数可以直接计算得出， 即为a⊕xa⊕x<br>递推优化<br>不妨将满足题意的两个数a, b简称为数对， a、b中较小的下标叫下界.<br>定义dp[i]为[1, i]区间中所有数对中的最大下界<br>如样例1 2 3 4, 只有2 3的异或为1.<br>对于区间[1, 2]它不包含数对{2， 3}所以 dp[2] 应该为一个无效值， 取0<br>对于区间[1, 3] [1, 4]， 都仅且包含数对{2, 3}, 所以dp[3] &#x3D; dp[4] &#x3D; 2</p>
-<p>dp[r]的实际意义想必大家都看出来了， 就是当查询区间[l, r], 右边界为r时， 至少包含一个数对时的左边界最大值, 所以如果l小于等于这个左边界最大值， [l, r]区间内就至少有一个数对。</p>
-<p>代码实现<br>用哈希表last[i]记录值i最后一次出现时的位置下标， dp[i]的求法是： 若ai⊕xai⊕x最后一次出现的下标要大于dp[i-1]， 则dp[i] &#x3D; last[ai⊕x]last[ai⊕x], 否则dp[i] &#x3D; dp[i-1]     </p>
-<p>即<code> dp[i]=max(dp[i−1],last[a⊕x])</code></p>
-<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> dp[<span class="number">100010</span>];</span><br><span class="line"><span class="comment">//使用一种类似于前缀和加dp的方法</span></span><br><span class="line"><span class="comment">//代码中使用了unordered_map，可以直接朴素地理解为一种不用担心越界的数组，方便你打hash表</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n, m, x;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m&gt;&gt;x;</span><br><span class="line">    unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; last;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> a;</span><br><span class="line">        cin&gt;&gt;a;</span><br><span class="line">        dp[i] = <span class="built_in">max</span>(dp[i<span class="number">-1</span>], last[x ^ a]);</span><br><span class="line">        last[a] = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> l, r;</span><br><span class="line">        cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">        cout&lt;&lt;(dp[r] &gt;= l ? <span class="string">&quot;yes&quot;</span> : <span class="string">&quot;no&quot;</span>)&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h1><p>题目： <a href="https://www.acwing.com/problem/content/description/4647/">4644. 求和 - AcWing题库</a></p>
-<p>使用了前缀和，但是实际上可以不用，求出总和依次相乘后除以2即可</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">200010</span>;</span><br><span class="line"><span class="type">int</span> sum[N];</span><br><span class="line"><span class="type">int</span> a[N];</span><br><span class="line">ll ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cin&gt;&gt;a[i];</span><br><span class="line">        sum[i] = sum[i<span class="number">-1</span>] + a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ll cheng = (ll)(sum[n] - sum[i]);</span><br><span class="line">        ans += (ll)cheng * a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <categories>
         <category>算法</category>
