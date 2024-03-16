@@ -1,52 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>2023-3-20</title>
-    <url>/2023/03/20/2023-3-20/</url>
-    <content><![CDATA[<p>曾几何时，我还愿意去想象一些纯粹的梦想。<br>我愿意写诗，我愿意为一场清雨唏嘘，我愿意尽己所能，用最灵动的词句歌唱自我。<br>我会做错的选择，我也会为失败消沉，我会一遍遍的怀疑，我是否真的有做梦的资格。<br>我会愿意为在靠近梦想一点挣扎，我会愿意在每一次愧对与自己的期待之后，告诉自己，你真的赢面很大。<br>我原以为与其不切实际的挣扎，不如真正认清自己，少一些痛苦，多一些自得。<br>哪有那么多自得，我再不自觉中遗忘掉的，没有那些脆弱与自卑，只有愿意真正相信自己的勇气，或者错觉。<br>我宁愿相信错觉。<br>我宁愿一遍又一遍的忽悠自己，虽然你没有做到，但梦想真的有可能，我应该，再一次又一次，一天又一天，一遍又一遍，每时每刻的告诉自己：你所做的一切，都有一个极为梦幻了理由：为了梦想，青春也不过这些时光。</p>
-<p>这是2023-3-20的日记，徯璺</p>
-]]></content>
-      <categories>
-        <category>diary</category>
-      </categories>
-      <tags>
-        <tag>diary</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>home</title>
     <url>/2024/03/07/home/</url>
-    <content><![CDATA[<p>I am currently a undergraduate student in School of Computer Science at Wuhan University , advised by <a href="https://wangzwhu.github.io/home/">Zheng Wang</a>. My research interest focuses on adversarial attack and AIGC. </p>
+    <content><![CDATA[<p>I am currently a undergraduate student in School of Computer Science at Wuhan University , advised by <a href="https://wangzwhu.github.io/home/">Zheng Wang</a>. My research interest focuses on adversarial attack and AIGC.</p>
 <p>Always feel free to contact me. Welcome any chat and collaboration🤗.</p>
-<h3 id="🔑Key-words"><a href="#🔑Key-words" class="headerlink" title="🔑Key words"></a>🔑Key words</h3><p>Trustworthy AI, Adversarial Attack, AIGC.</p>
-<h1 id="🔥News"><a href="#🔥News" class="headerlink" title="🔥News"></a>🔥News</h1><ul>
-<li>10&#x2F;2023: one <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=cFk7BcAAAAAJ&citation_for_view=cFk7BcAAAAAJ:u5HHmVD_uO8C">paper</a> is accepted by ACM MM 2023.</li>
+<h1>🔑Key words</h1>
+<p>Trustworthy AI, Adversarial Attack, AIGC.</p>
+<h1>🔥News</h1>
+<ul>
+<li>10/2023: one <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=cFk7BcAAAAAJ&amp;citation_for_view=cFk7BcAAAAAJ:u5HHmVD_uO8C">paper</a> is accepted by ACM MM 2023.</li>
 </ul>
 ]]></content>
   </entry>
   <entry>
     <title>kmp算法学习笔记</title>
     <url>/2023/01/02/kmp%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="kmp算法"><a href="#kmp算法" class="headerlink" title="kmp算法"></a>kmp算法</h1><p>学习状态机的题目时，遇到一道题需要使用到kmp的知识，于是上csdn学习了一下并整理了如下笔记。</p>
+    <content><![CDATA[<h1>kmp算法</h1>
+<p>学习状态机的题目时，遇到一道题需要使用到kmp的知识，于是上csdn学习了一下并整理了如下笔记。</p>
 <span id="more"></span>
 <p>讲解视频： <a href="https://www.bilibili.com/video/BV1234y1y7pm">https://www.bilibili.com/video/BV1234y1y7pm</a></p>
 <p>kmp: 一个人能能走的多远不在于他在顺境时能走的多快，而在于他在逆境时多久能找到曾经的自己。  ————KMP</p>
-<p>kmp算法用于匹配字符串位置。<br>给定两个字符串：a, b 定义a为主串，b为模板串，kmp的任务就是检查主串中是否存在等同于b的字串。</p>
-<h2 id="传统暴力方法"><a href="#传统暴力方法" class="headerlink" title="传统暴力方法"></a>传统暴力方法</h2><p>设定两个指针i, j，分别指向两个字符串的开头，然后一次向后匹配，若没有匹配，那么i回溯到原本的位置+1，j回溯到最开始继续匹配，直到完全匹配。<br>这样的方法完全没有从之前的失败经历中吸取到信息从而采取更好的策略，所以世间复杂度很高。</p>
-<h2 id="kmp给出的答案"><a href="#kmp给出的答案" class="headerlink" title="kmp给出的答案"></a>kmp给出的答案</h2><p>kmp定义了一个字符串的前缀与后缀，在上述的方案中，回溯指针时是从头开始的，但是kmp不是这样的，在上述的匹配方案中，遇到第一个未匹配的字符时其前面的子串是完全相同的。我们要做的是找到该字串前缀与后缀相同的位置，然后将指针回溯到这里，这样，前后缀的部分一定是匹配的，可以省去许多无用功。<br>当回溯一次是若发现下一个字符还是不匹配，那么就让当前匹配的子串（即先前的前后缀）继续查找相同的前后缀，并回溯到这个位置，直到 j 指针指向0，就令i指针持续后移，直到i指针所指的对象与模板串的第一个字符相同。</p>
-<p>那么如何查找上述方案中相同前后缀的位置呢，这里我们使用一个ne[]数组对模板串采用dp的方式进行记录其每个子串的前后缀长度情况。具体方法实际上还是kmp的思想。<br>具体方法如下：</p>
+<p>kmp算法用于匹配字符串位置。<br>
+给定两个字符串：a, b 定义a为主串，b为模板串，kmp的任务就是检查主串中是否存在等同于b的字串。</p>
+<h2 id="传统暴力方法"><a class="header-anchor" href="#传统暴力方法">null</a>传统暴力方法</h2>
+<p>设定两个指针i, j，分别指向两个字符串的开头，然后一次向后匹配，若没有匹配，那么i回溯到原本的位置+1，j回溯到最开始继续匹配，直到完全匹配。<br>
+这样的方法完全没有从之前的失败经历中吸取到信息从而采取更好的策略，所以世间复杂度很高。</p>
+<h2 id="kmp给出的答案"><a class="header-anchor" href="#kmp给出的答案">null</a>kmp给出的答案</h2>
+<p>kmp定义了一个字符串的前缀与后缀，在上述的方案中，回溯指针时是从头开始的，但是kmp不是这样的，在上述的匹配方案中，遇到第一个未匹配的字符时其前面的子串是完全相同的。我们要做的是找到该字串前缀与后缀相同的位置，然后将指针回溯到这里，这样，前后缀的部分一定是匹配的，可以省去许多无用功。<br>
+当回溯一次是若发现下一个字符还是不匹配，那么就让当前匹配的子串（即先前的前后缀）继续查找相同的前后缀，并回溯到这个位置，直到 j 指针指向0，就令i指针持续后移，直到i指针所指的对象与模板串的第一个字符相同。</p>
+<p>那么如何查找上述方案中相同前后缀的位置呢，这里我们使用一个ne[]数组对模板串采用dp的方式进行记录其每个子串的前后缀长度情况。具体方法实际上还是kmp的思想。<br>
+具体方法如下：</p>
 <ol>
-<li>设置两个指针i，j，i&#x3D;2，j&#x3D;0；检查pi &#x3D;&#x3D; pj+1;</li>
-<li>如果匹配，那么对于1-i的子串，他的最长公共前后缀的长度就是ne[]，而ne[i] &#x3D; j+1.</li>
-<li>如果不匹配，则回溯j指针，使j &#x3D; ne[j]，直到匹配成功（kmp思想，这里将1-j的子串看作当前的前后公共子串）</li>
+<li>设置两个指针i，j，i=2，j=0；检查pi == pj+1;</li>
+<li>如果匹配，那么对于1-i的子串，他的最长公共前后缀的长度就是ne[]，而ne[i] = j+1.</li>
+<li>如果不匹配，则回溯j指针，使j = ne[j]，直到匹配成功（kmp思想，这里将1-j的子串看作当前的前后公共子串）</li>
 </ol>
 <p>代码：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1e7</span>+<span class="number">10</span>;</span><br><span class="line"><span class="type">char</span> p[N],s[N];</span><br><span class="line"><span class="comment">//next数组表示的是不匹配时子串下标退回的位置</span></span><br><span class="line"><span class="comment">//比如next[i]=j就表示在子串中p[1~j]=p[i-j+1~i]</span></span><br><span class="line"><span class="comment">//所以子串直接退回到j下标继续和主串进行模式匹配直到匹配成功为止</span></span><br><span class="line"><span class="type">int</span> ne[N];</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;p+<span class="number">1</span>&gt;&gt;m&gt;&gt;s+<span class="number">1</span>;</span><br><span class="line">    <span class="comment">//求next数组的过程</span></span><br><span class="line">    <span class="comment">//类似于KMP匹配过程</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>,j=<span class="number">0</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(j&amp;&amp;p[i]!=p[j+<span class="number">1</span>]) j=ne[j];</span><br><span class="line">        <span class="keyword">if</span>(p[i]==p[j+<span class="number">1</span>]) j++;</span><br><span class="line">        ne[i]=j;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//KMP匹配过程</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>,j=<span class="number">0</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//如果子串没有退回到起点，并且主串和子串不匹配</span></span><br><span class="line">        <span class="keyword">while</span>(j&amp;&amp;s[i]!=p[j+<span class="number">1</span>]) j=ne[j];<span class="comment">//j退回到重合部分的终点位置</span></span><br><span class="line">        <span class="keyword">if</span>(s[i]==p[j+<span class="number">1</span>]) j++;</span><br><span class="line">        <span class="comment">//匹配成功</span></span><br><span class="line">        <span class="keyword">if</span>(j==n)</span><br><span class="line">        &#123;</span><br><span class="line">            cout&lt;&lt;i-n&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">            j=ne[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="示例题目：周期"><a href="#示例题目：周期" class="headerlink" title="示例题目：周期"></a>示例题目：周期</h1><p>题目链接： <a href="https://www.acwing.com/problem/content/143/">141. 周期 - AcWing题库</a></p>
-<h2 id="题目思路："><a href="#题目思路：" class="headerlink" title="题目思路："></a>题目思路：</h2><p>需要注意到kmp中的前缀ne[]函数与循环节之间的关系，如果在某一个前缀长度为s中存在长度为三的循环节，那么对应到该前缀子串的ne[]数组的特征就是s % (s-ne[s]) &#x3D;&#x3D; 0，且ne[s]不等于0；<br>证明：<br>作图，暂且称子串减去公共前后缀的部分为循环节，那么就可以发现循环节一定等于其后的一段等长的节，因为前后缀相等，循环节后面一节就是后缀开头的一节，而这一节同时又是前缀的第二节，那么可以得到前缀中第一节等于第二节，后缀则也是如此，而后缀的第二节又是前缀的第三节···如此这般，可以推导出当整除关系下，我们假设的循环节就是真正的循环节。</p>
+<h1>示例题目：周期</h1>
+<p>题目链接： <a href="https://www.acwing.com/problem/content/143/">141. 周期 - AcWing题库</a></p>
+<h2 id="题目思路："><a class="header-anchor" href="#题目思路：">null</a>题目思路：</h2>
+<p>需要注意到kmp中的前缀ne[]函数与循环节之间的关系，如果在某一个前缀长度为s中存在长度为三的循环节，那么对应到该前缀子串的ne[]数组的特征就是s % (s-ne[s]) == 0，且ne[s]不等于0；<br>
+证明：<br>
+作图，暂且称子串减去公共前后缀的部分为循环节，那么就可以发现循环节一定等于其后的一段等长的节，因为前后缀相等，循环节后面一节就是后缀开头的一节，而这一节同时又是前缀的第二节，那么可以得到前缀中第一节等于第二节，后缀则也是如此，而后缀的第二节又是前缀的第三节···如此这般，可以推导出当整除关系下，我们假设的循环节就是真正的循环节。</p>
 <p>代码如下：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="type">int</span> t,i,j,n,nex[<span class="number">1000005</span>];<span class="type">char</span> a[<span class="number">1000005</span>];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n),n)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,a+<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Test case #%d\n&quot;</span>,++t);</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">2</span>,j=<span class="number">0</span>;i&lt;=n;i++)&#123;<span class="comment">//最基本的 next[] 数组求法</span></span><br><span class="line">            <span class="keyword">while</span>(j&amp;&amp;a[i]!=a[j+<span class="number">1</span>])j=nex[j];</span><br><span class="line">            <span class="keyword">if</span>(a[i]==a[j+<span class="number">1</span>])j++;nex[i]=j;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=n;i++)<span class="comment">//由于1～1只有一个字母，只能是它本身构成长度为1的循环，所以从2开始枚举</span></span><br><span class="line">            <span class="keyword">if</span>(i%(i-nex[i])==<span class="number">0</span>&amp;&amp;nex[i])<span class="comment">//判断时还要注意nex[i]是否为0</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,i,i/(i-nex[i]));</span><br><span class="line"><span class="comment">//如果i含有长度大于1的最小循环元，输出i的长度(即i)以及最大循环次数K(即i-nex[i])</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);<span class="comment">//记得输出一个空行</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
@@ -58,20 +55,31 @@
       </tags>
   </entry>
   <entry>
-    <title>yolo系列以及mmdetection代码阅读</title>
-    <url>/2023/07/11/yolov7%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/</url>
-    <content><![CDATA[<p>最近一个工作需要大量对比不同的计算机视觉检测模型，需要使用到一个指标ASR，即Attack Successful Rate, 攻击成功率，这个指标需要使用到tp(true positives), 然而tp这个指标通常大部分检测模型不会默认给出, 在yolov5等系列中, 你可以在val.py中轻松找到相应的指标并手动打印, yolov7中并没有给出tp这个变量, 但是依然可以依葫芦画瓢拿到这一变量, 然而事情到了mmdetection中就大为不同, 不同于专精于行人检测的yolo系列, mmdetection是一个极为庞大包罗万象的检测库, 其代码层次结构复杂, 想获得对应的指标, 少不了一场代码阅读.</p>
-<h1 id="计算tp-true-positives-的方法"><a href="#计算tp-true-positives-的方法" class="headerlink" title="计算tp(true positives)的方法"></a>计算tp(true positives)的方法</h1><p>在yolov5中，正例数是直接通过<code>tp = (recall * number_targets).round()</code>计算得到的，在各个检测库中，recall通常是会给出的，这时候只需要想办法获得number_targets的值也就是真正例数的数量，就可以计算出tp(recall(召回率) &#x3D; tp &#x2F; (tp + fn)，tp + fn即是真正正例的个数) </p>
-<h2 id="关于视觉检测库常见指标的解释"><a href="#关于视觉检测库常见指标的解释" class="headerlink" title="关于视觉检测库常见指标的解释"></a>关于视觉检测库常见指标的解释</h2>]]></content>
+    <title>2023-3-20</title>
+    <url>/2023/03/20/2023-3-20/</url>
+    <content><![CDATA[<p>曾几何时，我还愿意去想象一些纯粹的梦想。<br>
+我愿意写诗，我愿意为一场清雨唏嘘，我愿意尽己所能，用最灵动的词句歌唱自我。<br>
+我会做错的选择，我也会为失败消沉，我会一遍遍的怀疑，我是否真的有做梦的资格。<br>
+我会愿意为在靠近梦想一点挣扎，我会愿意在每一次愧对与自己的期待之后，告诉自己，你真的赢面很大。<br>
+我原以为与其不切实际的挣扎，不如真正认清自己，少一些痛苦，多一些自得。<br>
+哪有那么多自得，我再不自觉中遗忘掉的，没有那些脆弱与自卑，只有愿意真正相信自己的勇气，或者错觉。<br>
+我宁愿相信错觉。<br>
+我宁愿一遍又一遍的忽悠自己，虽然你没有做到，但梦想真的有可能，我应该，再一次又一次，一天又一天，一遍又一遍，每时每刻的告诉自己：你所做的一切，都有一个极为梦幻了理由：为了梦想，青春也不过这些时光。</p>
+<p>这是2023-3-20的日记，徯璺</p>
+]]></content>
+      <categories>
+        <category>diary</category>
+      </categories>
       <tags>
-        <tag>科技</tag>
+        <tag>diary</tag>
       </tags>
   </entry>
   <entry>
     <title>“关于多巴胺脱瘾”</title>
     <url>/2023/02/16/%E2%80%9C%E5%85%B3%E4%BA%8E%E5%A4%9A%E5%B7%B4%E8%83%BA%E8%84%B1%E7%98%BE%E2%80%9D/</url>
-    <content><![CDATA[<h2 id="每天都上自己的博客看看吧"><a href="#每天都上自己的博客看看吧" class="headerlink" title="每天都上自己的博客看看吧"></a>每天都上自己的博客看看吧</h2><p>  当代互联网上琳琅满目的娱乐方式极大的提高了线代人们的多巴胺阈值, 在我自己的人生经历中, 这种感觉变得愈发的明显<span id="more"></span> 从小时候能够看到电视就会十分兴奋, 再到对b站的各种视频持续性的上瘾, 再到这些东西不再能让我感到快乐, 每一天都生活变得愈发麻木, 这样的坏处显而易见, 那就是我对于学习这样的事情的耐心和兴趣变得愈发的淡薄, 对于在学习技术与编程的过程中所遇到的困难愈发变得抗拒.</p>
-<p>  于是, 多巴胺脱瘾, 这就是我为自己所指定的目标, 就是要培养自己的自控能力, 并在这个过程中努力避免来自新媒体以及游戏的高多巴胺刺激内容的诱惑, 这个过程会无聊到感到痛苦, 但是, 痛苦本身就往往意味着成长. 成长并不都是好事, 但是时间不会等人, 走到现在, 我愈发感觉到, 想要被自己真正认可究竟是多么困难的一件事情, 我已经让自己失望过了无数次, 前面的无数次我也是这么说的, 但是没有外界明显的压力的情况下人就是会这样不断的朝着低级娱乐的方向前进, 但这和我们自己的目标是绝对相互矛盾的, 我们不能被别人逼着走, 我尤为讨厌这种失去控制权的感觉, 所以, 我定下每天日记的计划, 让每一天的我都能够回顾自己前一天的所思所想, 自己逼迫自己去不断的反思纠正, 一旦发现有堕落的迹象就要以此文为例, 勉励自己.</p>
+    <content><![CDATA[<h2 id="每天都上自己的博客看看吧"><a class="header-anchor" href="#每天都上自己的博客看看吧">null</a>每天都上自己的博客看看吧</h2>
+<p>当代互联网上琳琅满目的娱乐方式极大的提高了线代人们的多巴胺阈值, 在我自己的人生经历中, 这种感觉变得愈发的明显<span id="more"></span> 从小时候能够看到电视就会十分兴奋, 再到对b站的各种视频持续性的上瘾, 再到这些东西不再能让我感到快乐, 每一天都生活变得愈发麻木, 这样的坏处显而易见, 那就是我对于学习这样的事情的耐心和兴趣变得愈发的淡薄, 对于在学习技术与编程的过程中所遇到的困难愈发变得抗拒.</p>
+<p>于是, 多巴胺脱瘾, 这就是我为自己所指定的目标, 就是要培养自己的自控能力, 并在这个过程中努力避免来自新媒体以及游戏的高多巴胺刺激内容的诱惑, 这个过程会无聊到感到痛苦, 但是, 痛苦本身就往往意味着成长. 成长并不都是好事, 但是时间不会等人, 走到现在, 我愈发感觉到, 想要被自己真正认可究竟是多么困难的一件事情, 我已经让自己失望过了无数次, 前面的无数次我也是这么说的, 但是没有外界明显的压力的情况下人就是会这样不断的朝着低级娱乐的方向前进, 但这和我们自己的目标是绝对相互矛盾的, 我们不能被别人逼着走, 我尤为讨厌这种失去控制权的感觉, 所以, 我定下每天日记的计划, 让每一天的我都能够回顾自己前一天的所思所想, 自己逼迫自己去不断的反思纠正, 一旦发现有堕落的迹象就要以此文为例, 勉励自己.</p>
 ]]></content>
       <categories>
         <category>diary</category>
@@ -83,9 +91,9 @@
   <entry>
     <title>不开long long见祖宗</title>
     <url>/2023/01/04/%E4%B8%8D%E5%BC%80long-long%E8%A7%81%E7%A5%96%E5%AE%97/</url>
-    <content><![CDATA[<h1 id="感受差分的威力吧"><a href="#感受差分的威力吧" class="headerlink" title="感受差分的威力吧"></a>感受差分的威力吧</h1><p>题目链接： <a href="https://www.acwing.com/problem/content/description/4658/">4655. 重新排序 - AcWing题库</a></p>
+    <content><![CDATA[<h1>感受差分的威力吧</h1>
+<p>题目链接： <a href="https://www.acwing.com/problem/content/description/4658/">4655. 重新排序 - AcWing题库</a></p>
 <span id="more"></span>
-
 <p>题目思路一开始我就有了，我想的是贪心+桶排序</p>
 <p>贪心很好理解：我们将原数组排序，然后让重叠次数最多的地方填上最大的数字，然后依次后推，这样就得到了一开始最朴素的思路：</p>
 <ol>
@@ -103,7 +111,6 @@
 <p>但是还是长个记性吧，以后遇到这种情况还是用差分吧；</p>
 <p>代码如下：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100010</span>;</span><br><span class="line">ll sum[N];</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"><span class="type">int</span> a[N], t[N];</span><br><span class="line">ll res;</span><br><span class="line">ll ress;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (a&gt;b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">        sum[i] = sum[i<span class="number">-1</span>] + a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cin&gt;&gt;m;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> l, r;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;l, &amp;r);</span><br><span class="line">        res += (sum[r] - sum[l<span class="number">-1</span>]);</span><br><span class="line">        t[l] ++, t[r+<span class="number">1</span>] --;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        t[i] += t[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sort</span>(a+<span class="number">1</span>, a+n+<span class="number">2</span>, cmp);</span><br><span class="line">    <span class="built_in">sort</span>(t+<span class="number">1</span>, t+n+<span class="number">2</span>, cmp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; t[i]; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ress += (ll)t[i] * a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ress - res&lt;&lt;endl;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <categories>
         <category>算法</category>
@@ -113,13 +120,112 @@
       </tags>
   </entry>
   <entry>
+    <title>yolo系列以及mmdetection代码阅读</title>
+    <url>/2023/07/11/yolov7%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/</url>
+    <content><![CDATA[<p>最近一个工作需要大量对比不同的计算机视觉检测模型，需要使用到一个指标ASR，即Attack Successful Rate, 攻击成功率，这个指标需要使用到tp(true positives), 然而tp这个指标通常大部分检测模型不会默认给出, 在yolov5等系列中, 你可以在val.py中轻松找到相应的指标并手动打印, yolov7中并没有给出tp这个变量, 但是依然可以依葫芦画瓢拿到这一变量, 然而事情到了mmdetection中就大为不同, 不同于专精于行人检测的yolo系列, mmdetection是一个极为庞大包罗万象的检测库, 其代码层次结构复杂, 想获得对应的指标, 少不了一场代码阅读.</p>
+<h1>计算tp(true positives)的方法</h1>
+<p>在yolov5中，正例数是直接通过<code>tp = (recall * number_targets).round()</code>计算得到的，在各个检测库中，recall通常是会给出的，这时候只需要想办法获得number_targets的值也就是真正例数的数量，就可以计算出tp(recall(召回率) = tp / (tp + fn)，tp + fn即是真正正例的个数)</p>
+<h2 id="关于视觉检测库常见指标的解释"><a class="header-anchor" href="#关于视觉检测库常见指标的解释">null</a>关于视觉检测库常见指标的解释</h2>
+]]></content>
+      <tags>
+        <tag>科技</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于一道集合性状压dp的题目</title>
+    <url>/2023/01/03/%E5%85%B3%E4%BA%8E%E4%B8%80%E9%81%93%E9%9B%86%E5%90%88%E6%80%A7%E7%8A%B6%E5%8E%8Bdp%E7%9A%84%E9%A2%98%E7%9B%AE/</url>
+    <content><![CDATA[<h2 id="愤怒的小鸟（集合性状压dp）"><a class="header-anchor" href="#愤怒的小鸟（集合性状压dp）">null</a>愤怒的小鸟（集合性状压dp）</h2>
+<p>题目链接： <a href="https://www.acwing.com/problem/content/526/">524. 愤怒的小鸟 - AcWing题库</a></p>
+<p>在题目条件下，两个点可以确定一条过原点的抛物线，有n个点，那么就可以预处理出n^2条抛物线，然后再预处理出每条抛物线最多经过多少个点，以及是哪些点。</p>
+<span id="more"></span>
+<p>这是一个重复覆盖问题，与之相对的就是精确覆盖问题；<br>
+这两个问题都已经有的最优解法：dancing links 这是一种数据结构（十字链表），可以优化dfs爆搜；</p>
+<p>但是dancing links没学，这里用状压dp去达到相似的效果，优化爆搜；<br>
+爆搜的核心是：顺序，要以那种顺序枚举所有方案。以爆搜为基础思考优化方案；</p>
+<p>优化方法：记忆化搜索（状压dp），注意到每一个state传入dfs函数都会唯一对应一个res解，因此我们可以使用一个f[state]将其存储下来<strong>避免重复计算</strong>。</p>
+<p>x代表为当前state中未被覆盖的一列，path表示一条可以覆盖当前列的抛物线，new_state就可以用上述的公式求得。</p>
+<p>两个过程的区别就是引入状压dp之后，有些已经被计算过的state再dfs再次遇到的时候不会被重复再计算一遍，大概可以优化一半多。<br>
+f中存储的就是当前状态下最少的抛物线数；<br>
+遇到相同的状态但是线数更多的时候就会被直接排除掉；<br>
+看看拦截导弹那一题；<br>
+path i, j 表示由第i个与第j个猪创建的抛物线经过了那些猪，使用二进制表示。</p>
+<p>最后再总结一下这道题目的思路：</p>
+<ol>
+<li>
+<p>使用pair读入个点；</p>
+</li>
+<li>
+<p>利用任意两个点的位置求出抛物线集合path i, j i与j代表选择了第i和j个点，path中存储的是其经过的所有猪的二进制表达；</p>
+</li>
+<li>
+<p>设置f为0x3f，f0 为0；</p>
+</li>
+<li>
+<p>枚举所有的当前猪的位置情况（二进制）i，循环每一种情况中没有被干掉的猪x，枚举所有包含这个猪的抛物线path x, j，那么最终的状态转移方程就是：<br>
+<code>f[i | path[x][j]] = min(f[i | path[i][j]], f[i]+1)</code></p>
+</li>
+</ol>
+<p>这样的状态转移方程的思想就是，将每一个f通过可以由哪一条合法的抛物线转移过来进行状态划分；所以这里以终点进行枚举，因为通过终点反推其组合时困难的；</p>
+<p>但是这里可以不采用集合的思想，将这道题看作一种记忆化搜索可以更便于你的理解；</p>
+<p>看一下如果爆搜当前任意一个抛物线时是否有更好的选择（f中的min），否则就将f更新为<code>f[i] + 1</code>，这样当就可以减去不必要的分枝，不行的转移方案直接剪掉，减少搜索花费；</p>
+<ol start="5">
+<li>
+<p>另外需要注意一点，double比较的时候有可能出现误差，需要自己再写一个cmp函数用于比较；</p>
+</li>
+<li>
+<p>fabs函数用于求浮点数的绝对值；<br>
+代码如下：</p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">double</span>, <span class="type">double</span>&gt; PDD;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">18</span>, M = <span class="number">1</span> &lt;&lt; <span class="number">18</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">double</span> eps = <span class="number">1e-8</span>; <span class="comment">//这里</span></span><br><span class="line"></span><br><span class="line">PDD q[N];</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"><span class="type">int</span> f[M];</span><br><span class="line"><span class="type">int</span> path[N][N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">cmp</span><span class="params">(<span class="type">double</span> a, <span class="type">double</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">fabs</span>(a - b) &lt; eps) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(a &lt; b) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">            cin&gt;&gt;q[i].x&gt;&gt;q[i].y;</span><br><span class="line">        <span class="built_in">memset</span>(path, <span class="number">0</span>, <span class="keyword">sizeof</span> path); <span class="comment">//记得每一次都要恢复原样</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            path[i][i] = <span class="number">1</span> &lt;&lt; i;<span class="comment">//防一手只给一个点的情况</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="type">double</span> x1 = q[i].x, y1 = q[i].y;</span><br><span class="line">                <span class="type">double</span> x2 = q[j].x, y2 = q[j].y;</span><br><span class="line">                <span class="keyword">if</span>(!<span class="built_in">cmp</span>(x1, x2)) <span class="keyword">continue</span>;  <span class="comment">// 在同一列的两个点不能作为构建抛物线的点</span></span><br><span class="line">                <span class="type">double</span> a = (y1 / x1 - y2 / x2) / (x1 - x2);</span><br><span class="line">                <span class="type">double</span> b = y1 / x1 - a * x1;</span><br><span class="line">                 <span class="comment">//if(a &gt; 0) continue; 这个写法被坑了一手</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">cmp</span>(a, <span class="number">0</span>) &gt;= <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="type">int</span> state = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>; k&lt;n; k++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="type">double</span> x3 = q[k].x, y3 = q[k].y;</span><br><span class="line">                    <span class="keyword">if</span>(!<span class="built_in">cmp</span>(a* x3 * x3 + b * x3, y3)) state += <span class="number">1</span> &lt;&lt; k;</span><br><span class="line">                &#125;</span><br><span class="line">                path[i][j] = state; <span class="comment">//全部抛物线预处理完成；</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">memset</span>(f, <span class="number">0x3f</span>, <span class="keyword">sizeof</span> f); <span class="comment">//求最小值，初始化为inf；</span></span><br><span class="line">        f[<span class="number">0</span>] = <span class="number">0</span>; <span class="comment">//一只猪没杀需要的抛物线数为0</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i+<span class="number">1</span> &lt; <span class="number">1</span> &lt;&lt; n; i++) <span class="comment">//dp基操，上来先将f的每一维按照一定顺序枚举一遍；同时全为1的状态不需要枚举，</span></span><br><span class="line">        &#123;                               <span class="comment">//因为就是答案，后面已经计算出来了</span></span><br><span class="line">            <span class="type">int</span> x = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;n; j++)<span class="comment">//检查一下哪一位为空</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>((i &gt;&gt; j &amp; <span class="number">1</span>) == <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    x = j;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                f[i | path[x][j]] = <span class="built_in">min</span>(f[i | path[x][j]], f[i] + <span class="number">1</span>); <span class="comment">//多思考一下这个状态转移方程是怎么来的</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cout&lt;&lt;f[(<span class="number">1</span> &lt;&lt; n) - <span class="number">1</span>]&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于django用户系统的搭建流程</title>
+    <url>/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<h1>用户系统的搭建和登录界面的完成</h1>
+<h2 id="1-1-向django自带数据库中添加自定义的类时需要注意的操作"><a class="header-anchor" href="#1-1-向django自带数据库中添加自定义的类时需要注意的操作">null</a>1.1 向django自带数据库中添加自定义的类时需要注意的操作</h2>
+<p>启动uwsgi.ini服务之后<code>sudo uwsgi --ini scripts/uwsgi.ini</code>不要直接关闭终端，这样导致服务难以被关闭</p>
+<span id="more"></span>
+<p>如果无法关闭，则使用<code>sudo fuser -k 8000/tcp</code>杀死在8000端口的进程，在运行ini</p>
+<p>登陆界面中的每个函数都要实现三个部分：</p>
+<ol>
+<li>views实现函数的本体</li>
+<li>urls中实现函数的映射</li>
+<li>js中实现对应的调用</li>
+</ol>
+<p>每一个处理请求的函数都要传入一个参数:request，请求登陆也是如此，并且导入包：<code>from django.http import JsonResponse</code></p>
+<p>json文件：通用的序列化存储字典等内容的文件</p>
+<p>path中填写的url最后一定带上/，否则后面接新的东西时会出错</p>
+<p>注意为文件添加可执行权限的操作是 chmod +x filename</p>
+<p>js实现三秒后刷新：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>科技</category>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用django+canvas完成简单的网页游戏</title>
     <url>/2022/12/17/%E4%BD%BF%E7%94%A8django-canvas%E5%AE%8C%E6%88%90%E7%AE%80%E5%8D%95%E7%9A%84%E7%BD%91%E9%A1%B5%E6%B8%B8%E6%88%8F/</url>
     <content><![CDATA[<p><em>最近买了acwing的django框架课学习使用django进行简单的网页游戏开发，虽然现在还没有学完，但是目前对于javascript使用canvas进行简单的游戏开发已经有了相对之前非常多的心得，故有此篇，之后关于用户系统和thrift联机对战的内容会单独出一篇文章</em></p>
 <span id="more"></span>
-
-<h1 id="初识django"><a href="#初识django" class="headerlink" title="初识django"></a>初识django</h1><h2 id="1-1进行远程开发的前期工作"><a href="#1-1进行远程开发的前期工作" class="headerlink" title="1. 1进行远程开发的前期工作"></a>1. 1进行远程开发的前期工作</h2><h3 id="为什么要远程开发："><a href="#为什么要远程开发：" class="headerlink" title="为什么要远程开发："></a>为什么要远程开发：</h3><p>因为对于当下的服务器部署应用开发而言，云盘，数据库以及 app 本身会被存放在不同的服务器中，这样在本地的环境与线上环境会产生较大的差异，需要进行调试的时候也会遇上难以解决的结构问题，故而最好的方法是直接通过ssh远程登陆到服务器上，直接在服务器上进行远程开发，这样就能根本上避免掉从本地部署到服务器过程中会出现的一系列问题。</p>
-<h3 id="工具选择："><a href="#工具选择：" class="headerlink" title="工具选择："></a>工具选择：</h3><p>由于是django远程开发，故而有主要有三种选择：</p>
+<h1>初识django</h1>
+<h2 id="1-1进行远程开发的前期工作"><a class="header-anchor" href="#1-1进行远程开发的前期工作">null</a>1. 1进行远程开发的前期工作</h2>
+<h3 id="为什么要远程开发："><a class="header-anchor" href="#为什么要远程开发：">null</a>为什么要远程开发：</h3>
+<p>因为对于当下的服务器部署应用开发而言，云盘，数据库以及 app 本身会被存放在不同的服务器中，这样在本地的环境与线上环境会产生较大的差异，需要进行调试的时候也会遇上难以解决的结构问题，故而最好的方法是直接通过ssh远程登陆到服务器上，直接在服务器上进行远程开发，这样就能根本上避免掉从本地部署到服务器过程中会出现的一系列问题。</p>
+<h3 id="工具选择："><a class="header-anchor" href="#工具选择：">null</a>工具选择：</h3>
+<p>由于是django远程开发，故而有主要有三种选择：</p>
 <ol>
 <li>直接在终端使用vim或者nano进行代码编写；</li>
 <li>在本地通过vscode远程登录到服务器上，使用code本身完善的图形化界面进行代码编写；</li>
@@ -128,9 +234,11 @@
 <p>第一种是给大佬使用的，在使用之前你需要对vim或者nano的操作有相当程度的熟悉，但是即使不使用这种方式编写代码，也要有对这两个工具使用方法最基本的了解，因为对于需要管理员权限的文件的操作通常还是要在vim中进行的；</p>
 <p>第二种是我目前开发所使用的方法，使用vscode相较于直接使用终端开发的优点主要在于方便的文件结构图视，熟悉的操作方式，以及更为好看的界面，但是受限于服务器本身孱弱的性能（1c2g），vscode的代码补全功能体验上阉割了不少，但是总归好过vim；</p>
 <p>第三种方式应该是效率最高的方式，没有采用的原因是我自身更加希望通过避免使用ide来减少对其的依赖，因为ide过于周到的一条龙服务会使没有什么基础的小白对于一个项目所需要的各种知识的掌握有所欠缺，这点在后面会说明</p>
-<h3 id="服务器搭建："><a href="#服务器搭建：" class="headerlink" title="服务器搭建："></a>服务器搭建：</h3><p>服务器选择的是阿里云的云服务器，1c2g，可以直接选择试用的服务器先白嫖一个月再说，在服务器中又加了一层docker容器，优点是方便将你的成果直接打包迁移，省去了配环境的许多工作，同时将不同的服务部署在不同的容器中，管理起来也更加安全方便，关于docker的各种指令可以参考以下网址：</p>
+<h3 id="服务器搭建："><a class="header-anchor" href="#服务器搭建：">null</a>服务器搭建：</h3>
+<p>服务器选择的是阿里云的云服务器，1c2g，可以直接选择试用的服务器先白嫖一个月再说，在服务器中又加了一层docker容器，优点是方便将你的成果直接打包迁移，省去了配环境的许多工作，同时将不同的服务部署在不同的容器中，管理起来也更加安全方便，关于docker的各种指令可以参考以下网址：</p>
 <p><a href="https://www.acwing.com/file_system/file/content/whole/index/content/3074146/">https://www.acwing.com/file_system/file/content/whole/index/content/3074146/</a></p>
-<h2 id="1-2-django项目的文件结构的介绍"><a href="#1-2-django项目的文件结构的介绍" class="headerlink" title="1.2 django项目的文件结构的介绍"></a>1.2 django项目的文件结构的介绍</h2><p>项目初期可以对于整个游戏的规划不那么多，只先实现最基本的功能，只要你的文件结构合理，代码基地很扎实，那么后面依照模板添加新的内容也是很容易的，因此首先，我将这个游戏分成了三个板块：single mode, multi mode, settings. 之后止血药在项目的不同结构中均实现着三个板块即可. 对于项目文件的划分，主要分为：models, views, urls，这三者是主要实现django业务逻辑的模块，此外还有static文件夹存放静态文件(css, js, images)，以及templates存放html等基本网页，scripts存放配置脚本文件等。下面讲详细介绍这些文件：</p>
+<h2 id="1-2-django项目的文件结构的介绍"><a class="header-anchor" href="#1-2-django项目的文件结构的介绍">null</a>1.2 django项目的文件结构的介绍</h2>
+<p>项目初期可以对于整个游戏的规划不那么多，只先实现最基本的功能，只要你的文件结构合理，代码基地很扎实，那么后面依照模板添加新的内容也是很容易的，因此首先，我将这个游戏分成了三个板块：single mode, multi mode, settings. 之后止血药在项目的不同结构中均实现着三个板块即可. 对于项目文件的划分，主要分为：models, views, urls，这三者是主要实现django业务逻辑的模块，此外还有static文件夹存放静态文件(css, js, images)，以及templates存放html等基本网页，scripts存放配置脚本文件等。下面讲详细介绍这些文件：</p>
 <ol>
 <li>models实现的是“类”这样一个概念，它定义了数据库中一个类应有的各项属性，以及不同类之间的继承关系已方便数据库的管理</li>
 <li>views实现的是整个项目中需要使用的所有方法，所有涉及python，django的操作，链路，各种逻辑都是通过views.py中的方法实现的，例如urls中的mappings是通过path和include方法实现的，某个映射的最终结果都是一个方法，在这个方法中会return一个str来作为最终返回的网页，当然这个str也并非说的那么简单，实际使用中，会使用一种叫render()的十分方便的函数.</li>
@@ -140,7 +248,8 @@
 <li>script存放你调试网页，或者部署uwsgi的脚本文件，调试网页的脚本文件的实际作用类似于ide中的构建，将你刚刚写好的代码以服务需要的方式部署下来（因为方便写代码的文件结构通常不方便部署），例如游戏主题的js文件一共会有上千行，有着大量的class和复杂的继承关系，写到一个文件中通常就是一个灾难，但是如果通过树型的文件结构将他们管理起来就会十分利于开发，但是这样的文件结构在导入html时会十分麻烦，且需要经常更新，所以可以在script中利用shell编程将所有的js文件收集统筹到一个js文件中，最后导入这一个文件即可，之后每当写了新的代码只需要再运行一次这个代码即可。</li>
 </ol>
 <p>至此django项目的文件结构就介绍完了，而我的游戏项目存放在了<a href="https://gitee.com/xiwen-youmu/my-first-django">https://gitee.com/xiwen-youmu/my-first-django</a> 这个仓库中</p>
-<h2 id="1-3-从哪里开始"><a href="#1-3-从哪里开始" class="headerlink" title="1.3 从哪里开始"></a>1.3 从哪里开始</h2><p>首先，你可以掏出你已经配置好环境的祖传docker镜像，或者创建一个新的docker容器，配置好django包，安装pip与python，nano，tmux（终端开服需要），然后就可以直接创建django项目了。创建一个新的django项目所需要的命令行代码这里就不再赘述        </p>
+<h2 id="1-3-从哪里开始"><a class="header-anchor" href="#1-3-从哪里开始">null</a>1.3 从哪里开始</h2>
+<p>首先，你可以掏出你已经配置好环境的祖传docker镜像，或者创建一个新的docker容器，配置好django包，安装pip与python，nano，tmux（终端开服需要），然后就可以直接创建django项目了。创建一个新的django项目所需要的命令行代码这里就不再赘述</p>
 ]]></content>
       <categories>
         <category>科技</category>
@@ -153,66 +262,15 @@
       </tags>
   </entry>
   <entry>
-    <title>关于django用户系统的搭建流程</title>
-    <url>/2022/12/18/%E5%85%B3%E4%BA%8Edjango%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="用户系统的搭建和登录界面的完成"><a href="#用户系统的搭建和登录界面的完成" class="headerlink" title="用户系统的搭建和登录界面的完成"></a>用户系统的搭建和登录界面的完成</h1><h2 id="1-1-向django自带数据库中添加自定义的类时需要注意的操作"><a href="#1-1-向django自带数据库中添加自定义的类时需要注意的操作" class="headerlink" title="1.1 向django自带数据库中添加自定义的类时需要注意的操作"></a>1.1 向django自带数据库中添加自定义的类时需要注意的操作</h2><p>启动uwsgi.ini服务之后<code>sudo uwsgi --ini scripts/uwsgi.ini</code>不要直接关闭终端，这样导致服务难以被关闭</p>
-<span id="more"></span>
-
-<p>如果无法关闭，则使用<code>sudo fuser -k 8000/tcp</code>杀死在8000端口的进程，在运行ini</p>
-<p>登陆界面中的每个函数都要实现三个部分：</p>
-<ol>
-<li>views实现函数的本体</li>
-<li>urls中实现函数的映射</li>
-<li>js中实现对应的调用</li>
-</ol>
-<p>每一个处理请求的函数都要传入一个参数:request，请求登陆也是如此，并且导入包：<code>from django.http import JsonResponse</code></p>
-<p>json文件：通用的序列化存储字典等内容的文件</p>
-<p>path中填写的url最后一定带上&#x2F;，否则后面接新的东西时会出错</p>
-<p>注意为文件添加可执行权限的操作是 chmod +x filename</p>
-<p>js实现三秒后刷新：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>科技</category>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于一道集合性状压dp的题目</title>
-    <url>/2023/01/03/%E5%85%B3%E4%BA%8E%E4%B8%80%E9%81%93%E9%9B%86%E5%90%88%E6%80%A7%E7%8A%B6%E5%8E%8Bdp%E7%9A%84%E9%A2%98%E7%9B%AE/</url>
-    <content><![CDATA[<h2 id="愤怒的小鸟（集合性状压dp）"><a href="#愤怒的小鸟（集合性状压dp）" class="headerlink" title="愤怒的小鸟（集合性状压dp）"></a>愤怒的小鸟（集合性状压dp）</h2><p>题目链接： <a href="https://www.acwing.com/problem/content/526/">524. 愤怒的小鸟 - AcWing题库</a></p>
-<p>在题目条件下，两个点可以确定一条过原点的抛物线，有n个点，那么就可以预处理出n^2条抛物线，然后再预处理出每条抛物线最多经过多少个点，以及是哪些点。</p>
-<span id="more"></span>
-
-<p>这是一个重复覆盖问题，与之相对的就是精确覆盖问题；<br>这两个问题都已经有的最优解法：dancing links 这是一种数据结构（十字链表），可以优化dfs爆搜；</p>
-<p>但是dancing links没学，这里用状压dp去达到相似的效果，优化爆搜；<br>爆搜的核心是：顺序，要以那种顺序枚举所有方案。以爆搜为基础思考优化方案；</p>
-<p>优化方法：记忆化搜索（状压dp），注意到每一个state传入dfs函数都会唯一对应一个res解，因此我们可以使用一个f[state]将其存储下来<strong>避免重复计算</strong>。</p>
-<p>x代表为当前state中未被覆盖的一列，path表示一条可以覆盖当前列的抛物线，new_state就可以用上述的公式求得。</p>
-<p>两个过程的区别就是引入状压dp之后，有些已经被计算过的state再dfs再次遇到的时候不会被重复再计算一遍，大概可以优化一半多。<br>f中存储的就是当前状态下最少的抛物线数；<br>遇到相同的状态但是线数更多的时候就会被直接排除掉；<br>看看拦截导弹那一题；<br>path i, j 表示由第i个与第j个猪创建的抛物线经过了那些猪，使用二进制表示。</p>
-<p>最后再总结一下这道题目的思路：</p>
-<ol>
-<li><p>使用pair读入个点；</p>
-</li>
-<li><p>利用任意两个点的位置求出抛物线集合path i, j i与j代表选择了第i和j个点，path中存储的是其经过的所有猪的二进制表达；</p>
-</li>
-<li><p>设置f为0x3f，f0 为0；</p>
-</li>
-<li><p>枚举所有的当前猪的位置情况（二进制）i，循环每一种情况中没有被干掉的猪x，枚举所有包含这个猪的抛物线path x, j，那么最终的状态转移方程就是：<br>  <code>f[i | path[x][j]] = min(f[i | path[i][j]], f[i]+1)</code></p>
-</li>
-</ol>
-<p>  这样的状态转移方程的思想就是，将每一个f通过可以由哪一条合法的抛物线转移过来进行状态划分；所以这里以终点进行枚举，因为通过终点反推其组合时困难的；</p>
-<p>  但是这里可以不采用集合的思想，将这道题看作一种记忆化搜索可以更便于你的理解；</p>
-<p>  看一下如果爆搜当前任意一个抛物线时是否有更好的选择（f中的min），否则就将f更新为<code>f[i] + 1</code>，这样当就可以减去不必要的分枝，不行的转移方案直接剪掉，减少搜索花费；</p>
-<ol start="5">
-<li><p>另外需要注意一点，double比较的时候有可能出现误差，需要自己再写一个cmp函数用于比较；</p>
-</li>
-<li><p>fabs函数用于求浮点数的绝对值；<br>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">double</span>, <span class="type">double</span>&gt; PDD;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">18</span>, M = <span class="number">1</span> &lt;&lt; <span class="number">18</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">double</span> eps = <span class="number">1e-8</span>; <span class="comment">//这里</span></span><br><span class="line"></span><br><span class="line">PDD q[N];</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"><span class="type">int</span> f[M];</span><br><span class="line"><span class="type">int</span> path[N][N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">cmp</span><span class="params">(<span class="type">double</span> a, <span class="type">double</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">fabs</span>(a - b) &lt; eps) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(a &lt; b) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">            cin&gt;&gt;q[i].x&gt;&gt;q[i].y;</span><br><span class="line">        <span class="built_in">memset</span>(path, <span class="number">0</span>, <span class="keyword">sizeof</span> path); <span class="comment">//记得每一次都要恢复原样</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            path[i][i] = <span class="number">1</span> &lt;&lt; i;<span class="comment">//防一手只给一个点的情况</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="type">double</span> x1 = q[i].x, y1 = q[i].y;</span><br><span class="line">                <span class="type">double</span> x2 = q[j].x, y2 = q[j].y;</span><br><span class="line">                <span class="keyword">if</span>(!<span class="built_in">cmp</span>(x1, x2)) <span class="keyword">continue</span>;  <span class="comment">// 在同一列的两个点不能作为构建抛物线的点</span></span><br><span class="line">                <span class="type">double</span> a = (y1 / x1 - y2 / x2) / (x1 - x2);</span><br><span class="line">                <span class="type">double</span> b = y1 / x1 - a * x1;</span><br><span class="line">                 <span class="comment">//if(a &gt; 0) continue; 这个写法被坑了一手</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">cmp</span>(a, <span class="number">0</span>) &gt;= <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="type">int</span> state = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>; k&lt;n; k++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="type">double</span> x3 = q[k].x, y3 = q[k].y;</span><br><span class="line">                    <span class="keyword">if</span>(!<span class="built_in">cmp</span>(a* x3 * x3 + b * x3, y3)) state += <span class="number">1</span> &lt;&lt; k;</span><br><span class="line">                &#125;</span><br><span class="line">                path[i][j] = state; <span class="comment">//全部抛物线预处理完成；</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">memset</span>(f, <span class="number">0x3f</span>, <span class="keyword">sizeof</span> f); <span class="comment">//求最小值，初始化为inf；</span></span><br><span class="line">        f[<span class="number">0</span>] = <span class="number">0</span>; <span class="comment">//一只猪没杀需要的抛物线数为0</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i+<span class="number">1</span> &lt; <span class="number">1</span> &lt;&lt; n; i++) <span class="comment">//dp基操，上来先将f的每一维按照一定顺序枚举一遍；同时全为1的状态不需要枚举，</span></span><br><span class="line">        &#123;                               <span class="comment">//因为就是答案，后面已经计算出来了</span></span><br><span class="line">            <span class="type">int</span> x = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;n; j++)<span class="comment">//检查一下哪一位为空</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>((i &gt;&gt; j &amp; <span class="number">1</span>) == <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    x = j;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                f[i | path[x][j]] = <span class="built_in">min</span>(f[i | path[x][j]], f[i] + <span class="number">1</span>); <span class="comment">//多思考一下这个状态转移方程是怎么来的</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cout&lt;&lt;f[(<span class="number">1</span> &lt;&lt; n) - <span class="number">1</span>]&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ol>
+    <title>初学数组模拟邻接表的一些理解</title>
+    <url>/2022/12/24/%E5%88%9D%E5%AD%A6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<h2 id="head与next数组中保存的是ver数组的下标"><a class="header-anchor" href="#head与next数组中保存的是ver数组的下标">null</a>head与next数组中保存的是ver数组的下标</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//加入有向边(x, y)，权值为z；</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z)</span> </span>&#123;</span><br><span class="line">	ver[++tot] = y, edge[tot] = z; <span class="comment">//真实数据</span></span><br><span class="line">	next[tot] = head[x], head[x] = tot;</span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
+<h2 id="理解方法："><a class="header-anchor" href="#理解方法：">null</a>理解方法：</h2>
+<p>tot为每一个数据编号，从第一个输入开始一直往后排，至于数据的输入顺序有关，与数据本身的性质无关<br>
+ver[<ins>tot]因此就表示新录入一个数据，编号tot</ins>；<br>
+对于一个以邻接表表示的有向图而言，表头head的下表表示起点的值，head的内容指向该起点最新加入的一条邻边终点的编号（即输入时的tot），next[tot]表示下表为tot的数据的后面接的数的编号；因为表头指针更新的是最新插入的数据，所以无需查找到末尾直接更新表头指向即可，因此有了：<br>
+next[tot] = head[x], head[x] = tot; 这样的操作。</p>
 ]]></content>
       <categories>
         <category>算法</category>
@@ -226,10 +284,8 @@
     <url>/2022/12/16/%E5%85%B3%E4%BA%8E%E6%9C%AC%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%8C%E6%9C%9B/</url>
     <content><![CDATA[<p><em>关于本博客的一些初衷，首先写在这里，以勉励自己</em></p>
 <span id="more"></span>
-
-
-
-<h2 id="为什么要写博客"><a href="#为什么要写博客" class="headerlink" title="为什么要写博客"></a>为什么要写博客</h2><p>写博客的目的不在于给别人看，博客对我而言是一个特殊的笔记本，与普通的笔记本不同的是，博客中的内容并不是直接来源于一本书，一堂课，或者某一个视频，一篇博客的内容的直接生产者是我自己，一篇博客代表这我自己在这一段时间中获得的知识与感想的集合，它自成我的体系，它独属于我自己，写博客的过程，更似写一篇日记，我需要将自己的所思所想从心底全部引出，落在纸上（乐），这本身就是一种回顾，总结与加深，通过写博客，可以让一个人培养起不断反思，不断求深求全的习惯，我想这对自己的发展是大有脾益的。</p>
+<h2 id="为什么要写博客"><a class="header-anchor" href="#为什么要写博客">null</a>为什么要写博客</h2>
+<p>写博客的目的不在于给别人看，博客对我而言是一个特殊的笔记本，与普通的笔记本不同的是，博客中的内容并不是直接来源于一本书，一堂课，或者某一个视频，一篇博客的内容的直接生产者是我自己，一篇博客代表这我自己在这一段时间中获得的知识与感想的集合，它自成我的体系，它独属于我自己，写博客的过程，更似写一篇日记，我需要将自己的所思所想从心底全部引出，落在纸上（乐），这本身就是一种回顾，总结与加深，通过写博客，可以让一个人培养起不断反思，不断求深求全的习惯，我想这对自己的发展是大有脾益的。</p>
 <p>提示：<code>&lt;!-- more --&gt;</code>可以手动分割文章，善用</p>
 ]]></content>
       <categories>
@@ -240,28 +296,12 @@
       </tags>
   </entry>
   <entry>
-    <title>初学数组模拟邻接表的一些理解</title>
-    <url>/2022/12/24/%E5%88%9D%E5%AD%A6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%8B%9F%E9%82%BB%E6%8E%A5%E8%A1%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[<h2 id="head与next数组中保存的是ver数组的下标"><a href="#head与next数组中保存的是ver数组的下标" class="headerlink" title="head与next数组中保存的是ver数组的下标"></a>head与next数组中保存的是ver数组的下标</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//加入有向边(x, y)，权值为z；</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z)</span> </span>&#123;</span><br><span class="line">	ver[++tot] = y, edge[tot] = z; <span class="comment">//真实数据</span></span><br><span class="line">	next[tot] = head[x], head[x] = tot;</span><br><span class="line"> &#125;  </span><br></pre></td></tr></table></figure>
-
-<h2 id="理解方法："><a href="#理解方法：" class="headerlink" title="理解方法："></a>理解方法：</h2><p>tot为每一个数据编号，从第一个输入开始一直往后排，至于数据的输入顺序有关，与数据本身的性质无关<br>ver[++tot]因此就表示新录入一个数据，编号tot++；<br>对于一个以邻接表表示的有向图而言，表头head的下表表示起点的值，head的内容指向该起点最新加入的一条邻边终点的编号（即输入时的tot），next[tot]表示下表为tot的数据的后面接的数的编号；因为表头指针更新的是最新插入的数据，所以无需查找到末尾直接更新表头指向即可，因此有了：<br>next[tot] &#x3D; head[x], head[x] &#x3D; tot; 这样的操作。</p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>多重背包的二进制优化</title>
     <url>/2023/01/01/%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BC%98%E5%8C%96/</url>
     <content><![CDATA[<p>原理：对于任何一个数字而言，都可以分拆为几个单个的<code>2^k</code>相加，所以依据该物品的个数s，将其依次拆为若干个<code>2^k</code>组成的物品堆，将他们的体积和价值合并看待，之后再按照01背包的方法解决即可，因为这些<code>2^k</code>能够组合出0-s之间的任何一个数目</p>
 <span id="more"></span>
-
 <p>代码：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2010</span>, M = <span class="number">12010</span>;</span><br><span class="line"><span class="type">int</span> f[N], v[M], w[M];</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> a, b, s;</span><br><span class="line">        cin&gt;&gt;a&gt;&gt;b&gt;&gt;s;</span><br><span class="line">        <span class="type">int</span> k=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(k &lt;= s)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt ++;</span><br><span class="line">            v[cnt] = a * k;</span><br><span class="line">            w[cnt] = b * k;</span><br><span class="line">            s -= k;</span><br><span class="line">            k *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(s &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt ++;</span><br><span class="line">            v[cnt] = a * s;</span><br><span class="line">            w[cnt] = b * s;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    n = cnt;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=v[i]; j--)</span><br><span class="line">        &#123;</span><br><span class="line">            f[j] = <span class="built_in">max</span>(f[j], f[j-v[i]]+w[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;f[m];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <categories>
         <category>算法</category>
@@ -273,65 +313,38 @@
   <entry>
     <title>每日一题 第二周</title>
     <url>/2023/01/01/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E7%AC%AC%E4%BA%8C%E5%91%A8/</url>
-    <content><![CDATA[<h1 id="选数异或"><a href="#选数异或" class="headerlink" title="选数异或"></a>选数异或</h1><p>题目： <a href="https://www.acwing.com/activity/content/problem/content/7908/">https://www.acwing.com/activity/content/problem/content/7908/</a></p>
-<h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><p>类似于前缀和，相当于预先总结好那个范围中有可以异或匹配的数字对，然后查询时就会十分方便。这道题中使用了两种技巧：</p>
+    <content><![CDATA[<h1>选数异或</h1>
+<p>题目： <a href="https://www.acwing.com/activity/content/problem/content/7908/">https://www.acwing.com/activity/content/problem/content/7908/</a></p>
+<h2 id="思路："><a class="header-anchor" href="#思路：">null</a>思路：</h2>
+<p>类似于前缀和，相当于预先总结好那个范围中有可以异或匹配的数字对，然后查询时就会十分方便。这道题中使用了两种技巧：</p>
 <ol>
 <li>利用unordered_map做hash表将每对数字对记录下来，数字为关键字，映射值为数字的下标。</li>
 <li>利用 dp 做对于预先总结数字对的匹配情况，dp[i]，代表再 1 - i 中含有的数字对中，左边界最大的值所在的下标。这样维护时只需要<code> dp[i]=max(dp[i−1],last[a⊕x])</code> 这是hash表查询的优势也发挥出来了。</li>
 </ol>
 <span id="more"></span>
-
-
-
-<h2 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h2><p>必要异或运算性质：<br>归零律：a⊕a&#x3D;0<br>结合律: a⊕b⊕c&#x3D;a⊕(b⊕c)&#x3D;(a⊕b)⊕c<br>交换律：a⊕b&#x3D;b⊕a<br>因此, a⊕b&#x3D;x⟺a⊕b⊕x&#x3D;0⟺a⊕x&#x3D;b<br>因此对于一个数a， 与a配对的数可以直接计算得出， 即为a⊕xa⊕x<br>递推优化<br>不妨将满足题意的两个数a, b简称为数对， a、b中较小的下标叫下界.<br>定义dp[i]为[1, i]区间中所有数对中的最大下界<br>如样例1 2 3 4, 只有2 3的异或为1.<br>对于区间[1, 2]它不包含数对{2， 3}所以 dp[2] 应该为一个无效值， 取0<br>对于区间[1, 3] [1, 4]， 都仅且包含数对{2, 3}, 所以dp[3] &#x3D; dp[4] &#x3D; 2</p>
+<h2 id="题解："><a class="header-anchor" href="#题解：">null</a>题解：</h2>
+<p>必要异或运算性质：<br>
+归零律：a⊕a=0<br>
+结合律: a⊕b⊕c=a⊕(b⊕c)=(a⊕b)⊕c<br>
+交换律：a⊕b=b⊕a<br>
+因此, a⊕b=x⟺a⊕b⊕x=0⟺a⊕x=b<br>
+因此对于一个数a， 与a配对的数可以直接计算得出， 即为a⊕xa⊕x<br>
+递推优化<br>
+不妨将满足题意的两个数a, b简称为数对， a、b中较小的下标叫下界.<br>
+定义dp[i]为[1, i]区间中所有数对中的最大下界<br>
+如样例1 2 3 4, 只有2 3的异或为1.<br>
+对于区间[1, 2]它不包含数对{2， 3}所以 dp[2] 应该为一个无效值， 取0<br>
+对于区间[1, 3] [1, 4]， 都仅且包含数对{2, 3}, 所以dp[3] = dp[4] = 2</p>
 <p>dp[r]的实际意义想必大家都看出来了， 就是当查询区间[l, r], 右边界为r时， 至少包含一个数对时的左边界最大值, 所以如果l小于等于这个左边界最大值， [l, r]区间内就至少有一个数对。</p>
-<p>代码实现<br>用哈希表last[i]记录值i最后一次出现时的位置下标， dp[i]的求法是： 若ai⊕xai⊕x最后一次出现的下标要大于dp[i-1]， 则dp[i] &#x3D; last[ai⊕x]last[ai⊕x], 否则dp[i] &#x3D; dp[i-1]     </p>
+<p>代码实现<br>
+用哈希表last[i]记录值i最后一次出现时的位置下标， dp[i]的求法是： 若ai⊕xai⊕x最后一次出现的下标要大于dp[i-1]， 则dp[i] = last[ai⊕x]last[ai⊕x], 否则dp[i] = dp[i-1]</p>
 <p>即<code> dp[i]=max(dp[i−1],last[a⊕x])</code></p>
-<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> dp[<span class="number">100010</span>];</span><br><span class="line"><span class="comment">//使用一种类似于前缀和加dp的方法</span></span><br><span class="line"><span class="comment">//代码中使用了unordered_map，可以直接朴素地理解为一种不用担心越界的数组，方便你打hash表</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n, m, x;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m&gt;&gt;x;</span><br><span class="line">    unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; last;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> a;</span><br><span class="line">        cin&gt;&gt;a;</span><br><span class="line">        dp[i] = <span class="built_in">max</span>(dp[i<span class="number">-1</span>], last[x ^ a]);</span><br><span class="line">        last[a] = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> l, r;</span><br><span class="line">        cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">        cout&lt;&lt;(dp[r] &gt;= l ? <span class="string">&quot;yes&quot;</span> : <span class="string">&quot;no&quot;</span>)&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h1><p>题目： <a href="https://www.acwing.com/problem/content/description/4647/">4644. 求和 - AcWing题库</a></p>
+<h2 id="代码："><a class="header-anchor" href="#代码：">null</a>代码：</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> dp[<span class="number">100010</span>];</span><br><span class="line"><span class="comment">//使用一种类似于前缀和加dp的方法</span></span><br><span class="line"><span class="comment">//代码中使用了unordered_map，可以直接朴素地理解为一种不用担心越界的数组，方便你打hash表</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n, m, x;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m&gt;&gt;x;</span><br><span class="line">    unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; last;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> a;</span><br><span class="line">        cin&gt;&gt;a;</span><br><span class="line">        dp[i] = <span class="built_in">max</span>(dp[i<span class="number">-1</span>], last[x ^ a]);</span><br><span class="line">        last[a] = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> l, r;</span><br><span class="line">        cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">        cout&lt;&lt;(dp[r] &gt;= l ? <span class="string">&quot;yes&quot;</span> : <span class="string">&quot;no&quot;</span>)&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>求和</h1>
+<p>题目： <a href="https://www.acwing.com/problem/content/description/4647/">4644. 求和 - AcWing题库</a></p>
 <p>使用了前缀和，但是实际上可以不用，求出总和依次相乘后除以2即可</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">200010</span>;</span><br><span class="line"><span class="type">int</span> sum[N];</span><br><span class="line"><span class="type">int</span> a[N];</span><br><span class="line">ll ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cin&gt;&gt;a[i];</span><br><span class="line">        sum[i] = sum[i<span class="number">-1</span>] + a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ll cheng = (ll)(sum[n] - sum[i]);</span><br><span class="line">        ans += (ll)cheng * a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>每日一题2022-10-30</title>
-    <url>/2022/12/30/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982022-10-30/</url>
-    <content><![CDATA[<h1 id="上课睡觉"><a href="#上课睡觉" class="headerlink" title="上课睡觉"></a>上课睡觉</h1><p>题目：<br><a href="https://www.acwing.com/problem/content/description/4369/">https://www.acwing.com/problem/content/description/4369/</a></p>
-<p>思路：<br>最终分配结果是每一堆的个数相同，则总堆数一定是sum的约数。补充知识：对于每一个数的平均约数都是logn个，推理过程如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">对于一个数n，1-n中含有的2的倍数有n/2个，3的倍数有n/3个，以此类推，则总倍数有：1+n/2+n/3+......+n/n = nlnn个，然后倍数与约数又是一对相对的概念，所以约数大概为lnn个，为logn级别</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>所以解本题的思路为：寻找不同的cnt满足sum，然后依次检验cnt是否合法，最后找出最小的cnt(因为答案是n-sum&#x2F;cnt(动多少次就是原堆数减去现堆数))<br>如何检验是否合法：注意到能合并的堆一定是相互靠近的（这时候不要模拟实际的过程去思考，要抽象出最便于处理的本质），所以题目的本质就是将所给序列分割成一段段，每段sum都是cnt。</p>
-<p>使用差分与前缀和的知识。一定可以确定的是，每一堆的石子必然大于等于0.</p>
-<p>现预设一个cnt，然后从第一段开始检验，看看是否能够满足这个预设的cnt，然后再到后面去检验。<br>这样的话：枚举cnt是否成立时间复杂度为n，枚举约数时间复杂度为logn，总时间复杂度为nlogn，可以满足。<br>1e6下约数最多为240，则最多需要计算240*1e6次，c++一秒可以计算1e8次，所以稳过。</p>
-<p>示例代码：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> w[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">int</span> cnt)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>, s=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        s += w[i];</span><br><span class="line">        <span class="keyword">if</span>(s &gt; cnt) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(s == cnt) s=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>( T-- ) &#123;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;w[i]);</span><br><span class="line">            sum += w[i];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=n; i&gt;<span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span>(sum % i == <span class="number">0</span> &amp;&amp; <span class="built_in">check</span>(sum/i)) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, n-i);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>练习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>背包问题：能量石</title>
-    <url>/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/</url>
-    <content><![CDATA[<h1 id="能量石"><a href="#能量石" class="headerlink" title="能量石"></a>能量石</h1><p>链接： <a href="https://www.acwing.com/problem/content/736/">734. 能量石 - AcWing题库</a></p>
-<p>思路： 因为吃能量石的顺序会对物品的价值产生影响，所以要考虑的维度增多了，这时候要首先利用贪心的思路对能量石进行预先排序，注意到对于两件物品时，全部吃掉的情况下，<code>s[ i ] * l[ i+1 ] </code>即为当前顺序下会损失的能量值，这个值当然越小越好，所以对于假设要吃的所有物品，s&#x2F;l的值越小就说明它一定要先吃。<br>之前的考虑中没有考虑能量不能将为负数的情况，实际上只要将状态表达设置为时间恰好为j时的总能量值那么当能量降低为负数时就会对f产生负影响，只要遍历一遍求最大值就是题目所需的答案。</p>
-<span id="more"></span>
-
-<p>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10010</span>;</span><br><span class="line"><span class="type">int</span> f[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Stone</span>&#123;</span><br><span class="line">    <span class="type">int</span> s, e, l;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&lt; (<span class="type">const</span> Stone &amp;W) <span class="type">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> s * W.l &lt; l * W.s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;stone[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> C=<span class="number">0</span>; C&lt;T; C++) &#123;</span><br><span class="line">        <span class="type">int</span> m = <span class="number">0</span>;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s, e, l;</span><br><span class="line">            cin&gt;&gt;s&gt;&gt;e&gt;&gt;l;</span><br><span class="line">            stone[i] = &#123;s, e, l&#125;;</span><br><span class="line">            m += s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(stone, stone+n);</span><br><span class="line">    </span><br><span class="line">        <span class="built_in">memset</span>(f, <span class="number">-0x3f</span>, <span class="keyword">sizeof</span> f);</span><br><span class="line">        f[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s = stone[i].s, e = stone[i].e, l = stone[i].l;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=s; j--) &#123;</span><br><span class="line">                f[j] = <span class="built_in">max</span>(f[j], f[j-s]+e-(j-s)*l); <span class="comment">//在所有能量石降为负数时就自然不是最大值了，这样就省去了判断不能小于0的情况；</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;=m; i++) &#123;</span><br><span class="line">            res = <span class="built_in">max</span>(res, f[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Case #%d: %d\n&quot;</span>, C+<span class="number">1</span>, res);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>算法</category>
@@ -347,10 +360,8 @@
 <span id="more"></span>
 <p>我首先想当然的打开dev tools，将需要的headers全部写入config.json，然后直接requests.get，最后发现什么也没有拿到，原来headers里有一个anthorization的字段，而这个字段里的signature会随着请求信息，cookie以及时间变动，说明接下来到了JS逆向的环节了。</p>
 <figure class="highlight text"><table><tr><td class="code"><pre><span class="line">Accept: application/json, text/javascript, */*; q=0.01</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6</span><br><span class="line">Authorization:</span><br><span class="line">hmac id=&quot;AKID5t23df2wfg2r98i5599nadhfmiehiigkgif&quot;, algorithm=&quot;hmac-sha1&quot;, headers=&quot;x-date source&quot;, signature=&quot;2IEpu2dJidmh2vcg7UimNu/YsR8=&quot;</span><br><span class="line">Origin: https://s.ringjoys.com</span><br><span class="line">Referer: https://s.ringjoys.com/</span><br><span class="line">Sec-Ch-Ua: &quot;Not/A)Brand&quot;;v=&quot;99&quot;, &quot;Microsoft Edge&quot;;v=&quot;115&quot;, &quot;Chromium&quot;;v=&quot;115&quot;</span><br><span class="line">Sec-Ch-Ua-Mobile: ?0</span><br><span class="line">Sec-Ch-Ua-Platform: &quot;Windows&quot;</span><br><span class="line">Sec-Fetch-Dest: empty</span><br><span class="line">Sec-Fetch-Mode: cors</span><br><span class="line">Sec-Fetch-Site: cross-site</span><br><span class="line">Source: s</span><br><span class="line">User-Agent:</span><br><span class="line">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36 Edg/115.0.1901.203</span><br><span class="line">X-Date: Sat, 19 Aug 2023 12:30:56 GMT</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>这并不是一个好消息，因为我几乎没有相关的经验，我首先再dev tools的源代码一栏中搜索signature, date, secret等信息，结果一无所获。然后我查看了页面元素，发现表单提交里的input元素里有这样一个属性：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">id</span>=<span class="string">&quot;submitbutton&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;login(1,true)&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
 <p>我又到源代码中去搜索login这个函数，不出意外，0个匹配。</p>
 <p>这属于超出我贫瘠的知识范围的情况了，不得已求出openai，我得到了这样的回复：</p>
 <blockquote>
@@ -364,9 +375,11 @@
 <p>dev tools获得不了？我当即放弃了逆向加密算法的尝试，转而看看有没有其他漏洞，事实证明，这是一个错误的决定。</p>
 <p>我尝试控制请求的全部header信息与一个真实发送的请求一致，仅仅替换request url param中的课程号。这个策略一开始起效了，但我随即又遇到了问题：</p>
 <ol>
-<li><p>这个api对于x-date这个字段有校验，与x-date当前时间差距稍远的请求会被拒绝</p>
+<li>
+<p>这个api对于x-date这个字段有校验，与x-date当前时间差距稍远的请求会被拒绝</p>
 </li>
-<li><p>这个服务器对于过于频繁的请求会直接拒绝，我不得不再两个请求之间添加time.sleep</p>
+<li>
+<p>这个服务器对于过于频繁的请求会直接拒绝，我不得不再两个请求之间添加time.sleep</p>
 </li>
 </ol>
 <p>这就导致了我的一套真实signature是能供我发送600左右个请求，而总共的课程号大约有5000个。虽然只要这样重复操作不到10次就可以完成任务，但这样一点都不DRY，有违我的个人原则。</p>
@@ -375,7 +388,6 @@
 <p>铸币的我首先尝试自创hmacsha1编码代码，又踩了几个坑之后直接从crypto-js.js源代码中摘出了模组相关代码复制粘贴进了login函数所在的文件，历经千辛万苦，终于完成了我人生中第一个逆向。（鼓掌）</p>
 <p>最后的代码也十分的朴实无华：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> execjs</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;course_number.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    numbers = f.readlines()</span><br><span class="line"></span><br><span class="line">data = <span class="built_in">open</span>(<span class="string">&#x27;scores.json&#x27;</span>, <span class="string">&#x27;a+&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">scores = []</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;login_cp.js&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    jscode = f.read()</span><br><span class="line">context = execjs.<span class="built_in">compile</span>(jscode)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, number <span class="keyword">in</span> <span class="built_in">enumerate</span>(numbers):</span><br><span class="line">    number = number.strip()</span><br><span class="line">    <span class="built_in">print</span>(number)</span><br><span class="line">    result = context.call(<span class="string">&#x27;login&#x27;</span>, number, <span class="number">1</span>)</span><br><span class="line">    new_url = result[<span class="string">&#x27;url&#x27;</span>]</span><br><span class="line">    headers = result[<span class="string">&#x27;headers&#x27;</span>]</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        time.sleep(<span class="number">0.3</span>) <span class="comment"># avoid request rate detection</span></span><br><span class="line">        response = requests.get(new_url, headers=headers)</span><br><span class="line">        json_response = response.json()</span><br><span class="line">        total = <span class="built_in">int</span>(json_response[<span class="string">&#x27;total&#x27;</span>])</span><br><span class="line">        <span class="keyword">if</span> total &gt; <span class="number">10</span>:</span><br><span class="line">            tot = <span class="built_in">int</span>(total / <span class="number">10</span> + <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, tot + <span class="number">1</span>):</span><br><span class="line">                time.sleep(<span class="number">0.3</span>)</span><br><span class="line">                result = context.call(<span class="string">&#x27;login&#x27;</span>, number, i)</span><br><span class="line">                new_url = result[<span class="string">&#x27;url&#x27;</span>]</span><br><span class="line">                headers = result[<span class="string">&#x27;headers&#x27;</span>]</span><br><span class="line">                response = requests.get(new_url, headers=headers)</span><br><span class="line">                extra = response.json()</span><br><span class="line">                <span class="built_in">print</span>(extra)</span><br><span class="line">                scores = scores + extra[<span class="string">&#x27;score&#x27;</span>]</span><br><span class="line">        <span class="built_in">print</span>(i, json_response)</span><br><span class="line">        scores = scores + json_response[<span class="string">&#x27;score&#x27;</span>]</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">data.write(json.dumps(&#123;<span class="string">&quot;score&quot;</span>: scores&#125;, indent=<span class="number">4</span> ,ensure_ascii=<span class="literal">False</span>))</span><br></pre></td></tr></table></figure>
-
 <p>虽然事后看来感觉自己十分的铸币，这个逆向实际上也非常简单，只需要找到login这个函数就可以解决问题，但是这次的逆向经历对我而言还是意义非凡，故作此留念。</p>
 ]]></content>
       <categories>
@@ -385,6 +397,50 @@
         <tag>javascript</tag>
         <tag>spider</tag>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>背包问题：能量石</title>
+    <url>/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/</url>
+    <content><![CDATA[<h1>能量石</h1>
+<p>链接： <a href="https://www.acwing.com/problem/content/736/">734. 能量石 - AcWing题库</a></p>
+<p>思路： 因为吃能量石的顺序会对物品的价值产生影响，所以要考虑的维度增多了，这时候要首先利用贪心的思路对能量石进行预先排序，注意到对于两件物品时，全部吃掉的情况下，<code>s[ i ] * l[ i+1 ] </code>即为当前顺序下会损失的能量值，这个值当然越小越好，所以对于假设要吃的所有物品，s/l的值越小就说明它一定要先吃。<br>
+之前的考虑中没有考虑能量不能将为负数的情况，实际上只要将状态表达设置为时间恰好为j时的总能量值那么当能量降低为负数时就会对f产生负影响，只要遍历一遍求最大值就是题目所需的答案。</p>
+<span id="more"></span>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10010</span>;</span><br><span class="line"><span class="type">int</span> f[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Stone</span>&#123;</span><br><span class="line">    <span class="type">int</span> s, e, l;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&lt; (<span class="type">const</span> Stone &amp;W) <span class="type">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> s * W.l &lt; l * W.s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;stone[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> C=<span class="number">0</span>; C&lt;T; C++) &#123;</span><br><span class="line">        <span class="type">int</span> m = <span class="number">0</span>;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s, e, l;</span><br><span class="line">            cin&gt;&gt;s&gt;&gt;e&gt;&gt;l;</span><br><span class="line">            stone[i] = &#123;s, e, l&#125;;</span><br><span class="line">            m += s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(stone, stone+n);</span><br><span class="line">    </span><br><span class="line">        <span class="built_in">memset</span>(f, <span class="number">-0x3f</span>, <span class="keyword">sizeof</span> f);</span><br><span class="line">        f[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> s = stone[i].s, e = stone[i].e, l = stone[i].l;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=s; j--) &#123;</span><br><span class="line">                f[j] = <span class="built_in">max</span>(f[j], f[j-s]+e-(j-s)*l); <span class="comment">//在所有能量石降为负数时就自然不是最大值了，这样就省去了判断不能小于0的情况；</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;=m; i++) &#123;</span><br><span class="line">            res = <span class="built_in">max</span>(res, f[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Case #%d: %d\n&quot;</span>, C+<span class="number">1</span>, res);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>每日一题2022-10-30</title>
+    <url>/2022/12/30/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982022-10-30/</url>
+    <content><![CDATA[<h1>上课睡觉</h1>
+<p>题目：<br>
+<a href="https://www.acwing.com/problem/content/description/4369/">https://www.acwing.com/problem/content/description/4369/</a></p>
+<p>思路：<br>
+最终分配结果是每一堆的个数相同，则总堆数一定是sum的约数。补充知识：对于每一个数的平均约数都是logn个，推理过程如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">对于一个数n，1-n中含有的2的倍数有n/2个，3的倍数有n/3个，以此类推，则总倍数有：1+n/2+n/3+......+n/n = nlnn个，然后倍数与约数又是一对相对的概念，所以约数大概为lnn个，为logn级别</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>所以解本题的思路为：寻找不同的cnt满足sum，然后依次检验cnt是否合法，最后找出最小的cnt(因为答案是n-sum/cnt(动多少次就是原堆数减去现堆数))<br>
+如何检验是否合法：注意到能合并的堆一定是相互靠近的（这时候不要模拟实际的过程去思考，要抽象出最便于处理的本质），所以题目的本质就是将所给序列分割成一段段，每段sum都是cnt。</p>
+<p>使用差分与前缀和的知识。一定可以确定的是，每一堆的石子必然大于等于0.</p>
+<p>现预设一个cnt，然后从第一段开始检验，看看是否能够满足这个预设的cnt，然后再到后面去检验。<br>
+这样的话：枚举cnt是否成立时间复杂度为n，枚举约数时间复杂度为logn，总时间复杂度为nlogn，可以满足。<br>
+1e6下约数最多为240，则最多需要计算240*1e6次，c++一秒可以计算1e8次，所以稳过。</p>
+<p>示例代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> w[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">int</span> cnt)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>, s=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        s += w[i];</span><br><span class="line">        <span class="keyword">if</span>(s &gt; cnt) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(s == cnt) s=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>( T-- ) &#123;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;w[i]);</span><br><span class="line">            sum += w[i];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=n; i&gt;<span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span>(sum % i == <span class="number">0</span> &amp;&amp; <span class="built_in">check</span>(sum/i)) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, n-i);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>练习</tag>
       </tags>
   </entry>
 </search>
