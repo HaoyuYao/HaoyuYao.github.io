@@ -62,6 +62,20 @@
       </tags>
   </entry>
   <entry>
+    <title>home</title>
+    <url>/2024/03/07/home/</url>
+    <content><![CDATA[<p>I am a third-year CS undergraduate student in the AIM Lab at Wuhan University, under the supervision of Prof. Zheng Wang. My research interests lie in <strong>Computer Vision</strong>, <strong>Trustworthy AI</strong>, and <strong>Large Vision-Language Models (LVLM)</strong>. Additionally, I am passionate about AI-driven computer applications and have accumulated technical expertise in AI-related software development.</p>
+<p>Visit <a href="https://scholar.google.com/citations?user=cFk7BcAAAAAJ&amp;hl=en">my google scholar profile</a> for most recent publications. For any suggestions or collaborations, please reach out to me at <a href="mailto:2022302111077@whu.edu.cn">2022302111077@whu.edu.cn</a>.</p>
+<h1>🔑Key words</h1>
+<p>Trustworthy AI, Adversarial Attack, LVLM.</p>
+<h1>🔥News</h1>
+<ul>
+<li>10/2024: one <a href="https://camera-agnostic.github.io/">paper</a> is accepted by NeurIPS 2024.</li>
+<li>10/2023: one <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=cFk7BcAAAAAJ&amp;citation_for_view=cFk7BcAAAAAJ:u5HHmVD_uO8C">paper</a> is accepted by ACM MM 2023.</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>yolo系列以及mmdetection代码阅读</title>
     <url>/2023/07/11/yolov7%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/</url>
     <content><![CDATA[<p>最近一个工作需要大量对比不同的计算机视觉检测模型，需要使用到一个指标ASR，即Attack Successful Rate, 攻击成功率，这个指标需要使用到tp(true positives), 然而tp这个指标通常大部分检测模型不会默认给出, 在yolov5等系列中, 你可以在val.py中轻松找到相应的指标并手动打印, yolov7中并没有给出tp这个变量, 但是依然可以依葫芦画瓢拿到这一变量, 然而事情到了mmdetection中就大为不同, 不同于专精于行人检测的yolo系列, mmdetection是一个极为庞大包罗万象的检测库, 其代码层次结构复杂, 想获得对应的指标, 少不了一场代码阅读.</p>
@@ -71,6 +85,37 @@
 ]]></content>
       <tags>
         <tag>科技</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>不开long long见祖宗</title>
+    <url>/2023/01/04/%E4%B8%8D%E5%BC%80long-long%E8%A7%81%E7%A5%96%E5%AE%97/</url>
+    <content><![CDATA[<h1>感受差分的威力吧</h1>
+<p>题目链接： <a href="https://www.acwing.com/problem/content/description/4658/">4655. 重新排序 - AcWing题库</a></p>
+<span id="more"></span>
+<p>题目思路一开始我就有了，我想的是贪心+桶排序</p>
+<p>贪心很好理解：我们将原数组排序，然后让重叠次数最多的地方填上最大的数字，然后依次后推，这样就得到了一开始最朴素的思路：</p>
+<ol>
+<li>使用前缀和计算出一般的sum</li>
+<li>将原数组从大到小排序</li>
+<li>使用桶排序统计出每个数字被检索的次数</li>
+<li>为桶排序的结果排序</li>
+<li>然后统计出排序后数组的答案：<code>res = a[i] * t[i]</code> 被检索几次就乘以几次加上去；</li>
+<li>相减得到正确答案</li>
+</ol>
+<p>需要注意的是: <code>res = a[i] * t[i]</code>会爆int，然后憨憨的我改写成了 <code>res = (ll)(a[i] * t[i])</code>这样写实际上还是会爆int，太蠢了，计算完括号里的内容才ll就晚了，实际上应该这么写： <code>res = (ll) a[i] * t[i]</code>；一定要牢记</p>
+<p>同时cmp 函数 return 时也要记得结果加上括号。</p>
+<p>但是结果TLE，看了题解发现思路基本一样，但是题解使用的是差分统计检索情况，我不服，但是试了一下确实过了；</p>
+<p>难道是因为比起桶排序，差分法少嵌套一层循环？我原本以为本题最吃时间复杂度的不是那里，现在想想确实有可能在那里被卡住；</p>
+<p>但是还是长个记性吧，以后遇到这种情况还是用差分吧；</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100010</span>;</span><br><span class="line">ll sum[N];</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"><span class="type">int</span> a[N], t[N];</span><br><span class="line">ll res;</span><br><span class="line">ll ress;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (a&gt;b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">        sum[i] = sum[i<span class="number">-1</span>] + a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cin&gt;&gt;m;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> l, r;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;l, &amp;r);</span><br><span class="line">        res += (sum[r] - sum[l<span class="number">-1</span>]);</span><br><span class="line">        t[l] ++, t[r+<span class="number">1</span>] --;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        t[i] += t[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sort</span>(a+<span class="number">1</span>, a+n+<span class="number">2</span>, cmp);</span><br><span class="line">    <span class="built_in">sort</span>(t+<span class="number">1</span>, t+n+<span class="number">2</span>, cmp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; t[i]; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ress += (ll)t[i] * a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ress - res&lt;&lt;endl;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -86,20 +131,6 @@
       <tags>
         <tag>随记</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>home</title>
-    <url>/2024/03/07/home/</url>
-    <content><![CDATA[<p>I am currently a undergrad. in School of Computer Science at Wuhan Univ. advised by Zheng Wang. My research interest focuses on Adversarial Attack and AIGC (especially <a href="https://github.com/xiwen1/MultiDiffusion_with_controlnet">diffusion model</a>).</p>
-<p>Meanwhile, I interests a lot in creative software development, with a few open source works in my <a href="https://xiwen1.github.io">github repositorys</a>. I am familiar with <a href="https://github.com/just-dev-pm/just-dev-backend">Web dev technologies</a> in golang, rust and python, <a href="https://github.com/Nymph-Launcher/Nymph">desktop app techs</a> in C# and QT.</p>
-<p>Visit <a href="https://xiwenym.cn">my blog</a> to get my posts and recent notes, <a href="https://scholar.google.com/citations?user=cFk7BcAAAAAJ&amp;hl=en">my google scholar profile</a> for most recent publications. Always feel free to contact me. Welcome any chat and collaborations🤗.</p>
-<h1>🔑Key words</h1>
-<p>Trustworthy AI, Adversarial Attack, AIGC.</p>
-<h1>🔥News</h1>
-<ul>
-<li>10/2023: one <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=cFk7BcAAAAAJ&amp;citation_for_view=cFk7BcAAAAAJ:u5HHmVD_uO8C">paper</a> is accepted by ACM MM 2023.</li>
-</ul>
-]]></content>
   </entry>
   <entry>
     <title>使用django+canvas完成简单的网页游戏</title>
@@ -232,37 +263,6 @@ path i, j 表示由第i个与第j个猪创建的抛物线经过了那些猪，�
       </tags>
   </entry>
   <entry>
-    <title>不开long long见祖宗</title>
-    <url>/2023/01/04/%E4%B8%8D%E5%BC%80long-long%E8%A7%81%E7%A5%96%E5%AE%97/</url>
-    <content><![CDATA[<h1>感受差分的威力吧</h1>
-<p>题目链接： <a href="https://www.acwing.com/problem/content/description/4658/">4655. 重新排序 - AcWing题库</a></p>
-<span id="more"></span>
-<p>题目思路一开始我就有了，我想的是贪心+桶排序</p>
-<p>贪心很好理解：我们将原数组排序，然后让重叠次数最多的地方填上最大的数字，然后依次后推，这样就得到了一开始最朴素的思路：</p>
-<ol>
-<li>使用前缀和计算出一般的sum</li>
-<li>将原数组从大到小排序</li>
-<li>使用桶排序统计出每个数字被检索的次数</li>
-<li>为桶排序的结果排序</li>
-<li>然后统计出排序后数组的答案：<code>res = a[i] * t[i]</code> 被检索几次就乘以几次加上去；</li>
-<li>相减得到正确答案</li>
-</ol>
-<p>需要注意的是: <code>res = a[i] * t[i]</code>会爆int，然后憨憨的我改写成了 <code>res = (ll)(a[i] * t[i])</code>这样写实际上还是会爆int，太蠢了，计算完括号里的内容才ll就晚了，实际上应该这么写： <code>res = (ll) a[i] * t[i]</code>；一定要牢记</p>
-<p>同时cmp 函数 return 时也要记得结果加上括号。</p>
-<p>但是结果TLE，看了题解发现思路基本一样，但是题解使用的是差分统计检索情况，我不服，但是试了一下确实过了；</p>
-<p>难道是因为比起桶排序，差分法少嵌套一层循环？我原本以为本题最吃时间复杂度的不是那里，现在想想确实有可能在那里被卡住；</p>
-<p>但是还是长个记性吧，以后遇到这种情况还是用差分吧；</p>
-<p>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100010</span>;</span><br><span class="line">ll sum[N];</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"><span class="type">int</span> a[N], t[N];</span><br><span class="line">ll res;</span><br><span class="line">ll ress;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (a&gt;b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">        sum[i] = sum[i<span class="number">-1</span>] + a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cin&gt;&gt;m;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> l, r;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;l, &amp;r);</span><br><span class="line">        res += (sum[r] - sum[l<span class="number">-1</span>]);</span><br><span class="line">        t[l] ++, t[r+<span class="number">1</span>] --;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        t[i] += t[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sort</span>(a+<span class="number">1</span>, a+n+<span class="number">2</span>, cmp);</span><br><span class="line">    <span class="built_in">sort</span>(t+<span class="number">1</span>, t+n+<span class="number">2</span>, cmp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; t[i]; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ress += (ll)t[i] * a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ress - res&lt;&lt;endl;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>关于本博客的一些希望</title>
     <url>/2022/12/16/%E5%85%B3%E4%BA%8E%E6%9C%AC%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%8C%E6%9C%9B/</url>
     <content><![CDATA[<p><em>关于本博客的一些初衷，首先写在这里，以勉励自己</em></p>
@@ -288,6 +288,21 @@ path i, j 表示由第i个与第j个猪创建的抛物线经过了那些猪，�
 ver[<ins>tot]因此就表示新录入一个数据，编号tot</ins>；<br>
 对于一个以邻接表表示的有向图而言，表头head的下表表示起点的值，head的内容指向该起点最新加入的一条邻边终点的编号（即输入时的tot），next[tot]表示下表为tot的数据的后面接的数的编号；因为表头指针更新的是最新插入的数据，所以无需查找到末尾直接更新表头指向即可，因此有了：<br>
 next[tot] = head[x], head[x] = tot; 这样的操作。</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>多重背包的二进制优化</title>
+    <url>/2023/01/01/%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<p>原理：对于任何一个数字而言，都可以分拆为几个单个的<code>2^k</code>相加，所以依据该物品的个数s，将其依次拆为若干个<code>2^k</code>组成的物品堆，将他们的体积和价值合并看待，之后再按照01背包的方法解决即可，因为这些<code>2^k</code>能够组合出0-s之间的任何一个数目</p>
+<span id="more"></span>
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2010</span>, M = <span class="number">12010</span>;</span><br><span class="line"><span class="type">int</span> f[N], v[M], w[M];</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> a, b, s;</span><br><span class="line">        cin&gt;&gt;a&gt;&gt;b&gt;&gt;s;</span><br><span class="line">        <span class="type">int</span> k=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(k &lt;= s)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt ++;</span><br><span class="line">            v[cnt] = a * k;</span><br><span class="line">            w[cnt] = b * k;</span><br><span class="line">            s -= k;</span><br><span class="line">            k *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(s &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt ++;</span><br><span class="line">            v[cnt] = a * s;</span><br><span class="line">            w[cnt] = b * s;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    n = cnt;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=v[i]; j--)</span><br><span class="line">        &#123;</span><br><span class="line">            f[j] = <span class="built_in">max</span>(f[j], f[j-v[i]]+w[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;f[m];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>算法</category>
@@ -337,47 +352,6 @@ next[tot] = head[x], head[x] = tot; 这样的操作。</p>
       </categories>
       <tags>
         <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>多重背包的二进制优化</title>
-    <url>/2023/01/01/%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BC%98%E5%8C%96/</url>
-    <content><![CDATA[<p>原理：对于任何一个数字而言，都可以分拆为几个单个的<code>2^k</code>相加，所以依据该物品的个数s，将其依次拆为若干个<code>2^k</code>组成的物品堆，将他们的体积和价值合并看待，之后再按照01背包的方法解决即可，因为这些<code>2^k</code>能够组合出0-s之间的任何一个数目</p>
-<span id="more"></span>
-<p>代码：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2010</span>, M = <span class="number">12010</span>;</span><br><span class="line"><span class="type">int</span> f[N], v[M], w[M];</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> a, b, s;</span><br><span class="line">        cin&gt;&gt;a&gt;&gt;b&gt;&gt;s;</span><br><span class="line">        <span class="type">int</span> k=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(k &lt;= s)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt ++;</span><br><span class="line">            v[cnt] = a * k;</span><br><span class="line">            w[cnt] = b * k;</span><br><span class="line">            s -= k;</span><br><span class="line">            k *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(s &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt ++;</span><br><span class="line">            v[cnt] = a * s;</span><br><span class="line">            w[cnt] = b * s;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    n = cnt;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=v[i]; j--)</span><br><span class="line">        &#123;</span><br><span class="line">            f[j] = <span class="built_in">max</span>(f[j], f[j-v[i]]+w[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;f[m];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>每日一题2022-10-30</title>
-    <url>/2022/12/30/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982022-10-30/</url>
-    <content><![CDATA[<h1>上课睡觉</h1>
-<p>题目：<br>
-<a href="https://www.acwing.com/problem/content/description/4369/">https://www.acwing.com/problem/content/description/4369/</a></p>
-<p>思路：<br>
-最终分配结果是每一堆的个数相同，则总堆数一定是sum的约数。补充知识：对于每一个数的平均约数都是logn个，推理过程如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">对于一个数n，1-n中含有的2的倍数有n/2个，3的倍数有n/3个，以此类推，则总倍数有：1+n/2+n/3+......+n/n = nlnn个，然后倍数与约数又是一对相对的概念，所以约数大概为lnn个，为logn级别</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p>所以解本题的思路为：寻找不同的cnt满足sum，然后依次检验cnt是否合法，最后找出最小的cnt(因为答案是n-sum/cnt(动多少次就是原堆数减去现堆数))<br>
-如何检验是否合法：注意到能合并的堆一定是相互靠近的（这时候不要模拟实际的过程去思考，要抽象出最便于处理的本质），所以题目的本质就是将所给序列分割成一段段，每段sum都是cnt。</p>
-<p>使用差分与前缀和的知识。一定可以确定的是，每一堆的石子必然大于等于0.</p>
-<p>现预设一个cnt，然后从第一段开始检验，看看是否能够满足这个预设的cnt，然后再到后面去检验。<br>
-这样的话：枚举cnt是否成立时间复杂度为n，枚举约数时间复杂度为logn，总时间复杂度为nlogn，可以满足。<br>
-1e6下约数最多为240，则最多需要计算240*1e6次，c++一秒可以计算1e8次，所以稳过。</p>
-<p>示例代码：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> w[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">int</span> cnt)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>, s=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        s += w[i];</span><br><span class="line">        <span class="keyword">if</span>(s &gt; cnt) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(s == cnt) s=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>( T-- ) &#123;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;w[i]);</span><br><span class="line">            sum += w[i];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=n; i&gt;<span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span>(sum % i == <span class="number">0</span> &amp;&amp; <span class="built_in">check</span>(sum/i)) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, n-i);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>练习</tag>
       </tags>
   </entry>
   <entry>
@@ -442,6 +416,32 @@ next[tot] = head[x], head[x] = tot; 这样的操作。</p>
         <tag>javascript</tag>
         <tag>spider</tag>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>每日一题2022-10-30</title>
+    <url>/2022/12/30/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982022-10-30/</url>
+    <content><![CDATA[<h1>上课睡觉</h1>
+<p>题目：<br>
+<a href="https://www.acwing.com/problem/content/description/4369/">https://www.acwing.com/problem/content/description/4369/</a></p>
+<p>思路：<br>
+最终分配结果是每一堆的个数相同，则总堆数一定是sum的约数。补充知识：对于每一个数的平均约数都是logn个，推理过程如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">对于一个数n，1-n中含有的2的倍数有n/2个，3的倍数有n/3个，以此类推，则总倍数有：1+n/2+n/3+......+n/n = nlnn个，然后倍数与约数又是一对相对的概念，所以约数大概为lnn个，为logn级别</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>所以解本题的思路为：寻找不同的cnt满足sum，然后依次检验cnt是否合法，最后找出最小的cnt(因为答案是n-sum/cnt(动多少次就是原堆数减去现堆数))<br>
+如何检验是否合法：注意到能合并的堆一定是相互靠近的（这时候不要模拟实际的过程去思考，要抽象出最便于处理的本质），所以题目的本质就是将所给序列分割成一段段，每段sum都是cnt。</p>
+<p>使用差分与前缀和的知识。一定可以确定的是，每一堆的石子必然大于等于0.</p>
+<p>现预设一个cnt，然后从第一段开始检验，看看是否能够满足这个预设的cnt，然后再到后面去检验。<br>
+这样的话：枚举cnt是否成立时间复杂度为n，枚举约数时间复杂度为logn，总时间复杂度为nlogn，可以满足。<br>
+1e6下约数最多为240，则最多需要计算240*1e6次，c++一秒可以计算1e8次，所以稳过。</p>
+<p>示例代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> w[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">int</span> cnt)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>, s=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        s += w[i];</span><br><span class="line">        <span class="keyword">if</span>(s &gt; cnt) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(s == cnt) s=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>( T-- ) &#123;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;w[i]);</span><br><span class="line">            sum += w[i];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=n; i&gt;<span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span>(sum % i == <span class="number">0</span> &amp;&amp; <span class="built_in">check</span>(sum/i)) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, n-i);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>练习</tag>
       </tags>
   </entry>
 </search>
