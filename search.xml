@@ -21,6 +21,20 @@
       </tags>
   </entry>
   <entry>
+    <title>home</title>
+    <url>/2024/03/07/home/</url>
+    <content><![CDATA[<p>I am a third-year CS undergraduate student in the AIM Lab at Wuhan University, under the supervision of Prof. Zheng Wang. My research interests lie in <strong>Computer Vision</strong>, <strong>Trustworthy AI</strong>, and <strong>Large Vision-Language Models (LVLM)</strong>. Additionally, I am passionate about AI-driven computer applications and have accumulated technical expertise in AI-related software development.</p>
+<p>Visit <a href="https://scholar.google.com/citations?user=cFk7BcAAAAAJ&amp;hl=en">my google scholar profile</a> for most recent publications. For any suggestions or collaborations, please reach out to me at <a href="mailto:2022302111077@whu.edu.cn">2022302111077@whu.edu.cn</a>.</p>
+<h1>🔑Key words</h1>
+<p>Trustworthy AI, Adversarial Attack, LVLM.</p>
+<h1>🔥News</h1>
+<ul>
+<li>10/2024: one <a href="https://camera-agnostic.github.io/">paper</a> is accepted by NeurIPS 2024.</li>
+<li>10/2023: one <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=cFk7BcAAAAAJ&amp;citation_for_view=cFk7BcAAAAAJ:u5HHmVD_uO8C">paper</a> is accepted by ACM MM 2023.</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>kmp算法学习笔记</title>
     <url>/2023/01/02/kmp%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1>kmp算法</h1>
@@ -62,20 +76,6 @@
       </tags>
   </entry>
   <entry>
-    <title>home</title>
-    <url>/2024/03/07/home/</url>
-    <content><![CDATA[<p>I am a third-year CS undergraduate student in the AIM Lab at Wuhan University, under the supervision of Prof. Zheng Wang. My research interests lie in <strong>Computer Vision</strong>, <strong>Trustworthy AI</strong>, and <strong>Large Vision-Language Models (LVLM)</strong>. Additionally, I am passionate about AI-driven computer applications and have accumulated technical expertise in AI-related software development.</p>
-<p>Visit <a href="https://scholar.google.com/citations?user=cFk7BcAAAAAJ&amp;hl=en">my google scholar profile</a> for most recent publications. For any suggestions or collaborations, please reach out to me at <a href="mailto:2022302111077@whu.edu.cn">2022302111077@whu.edu.cn</a>.</p>
-<h1>🔑Key words</h1>
-<p>Trustworthy AI, Adversarial Attack, LVLM.</p>
-<h1>🔥News</h1>
-<ul>
-<li>10/2024: one <a href="https://camera-agnostic.github.io/">paper</a> is accepted by NeurIPS 2024.</li>
-<li>10/2023: one <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=cFk7BcAAAAAJ&amp;citation_for_view=cFk7BcAAAAAJ:u5HHmVD_uO8C">paper</a> is accepted by ACM MM 2023.</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>yolo系列以及mmdetection代码阅读</title>
     <url>/2023/07/11/yolov7%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/</url>
     <content><![CDATA[<p>最近一个工作需要大量对比不同的计算机视觉检测模型，需要使用到一个指标ASR，即Attack Successful Rate, 攻击成功率，这个指标需要使用到tp(true positives), 然而tp这个指标通常大部分检测模型不会默认给出, 在yolov5等系列中, 你可以在val.py中轻松找到相应的指标并手动打印, yolov7中并没有给出tp这个变量, 但是依然可以依葫芦画瓢拿到这一变量, 然而事情到了mmdetection中就大为不同, 不同于专精于行人检测的yolo系列, mmdetection是一个极为庞大包罗万象的检测库, 其代码层次结构复杂, 想获得对应的指标, 少不了一场代码阅读.</p>
@@ -85,6 +85,20 @@
 ]]></content>
       <tags>
         <tag>科技</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>“关于多巴胺脱瘾”</title>
+    <url>/2023/02/16/%E2%80%9C%E5%85%B3%E4%BA%8E%E5%A4%9A%E5%B7%B4%E8%83%BA%E8%84%B1%E7%98%BE%E2%80%9D/</url>
+    <content><![CDATA[<h2 id="每天都上自己的博客看看吧"><a class="header-anchor" href="#每天都上自己的博客看看吧">null</a>每天都上自己的博客看看吧</h2>
+<p>当代互联网上琳琅满目的娱乐方式极大的提高了线代人们的多巴胺阈值, 在我自己的人生经历中, 这种感觉变得愈发的明显<span id="more"></span> 从小时候能够看到电视就会十分兴奋, 再到对b站的各种视频持续性的上瘾, 再到这些东西不再能让我感到快乐, 每一天都生活变得愈发麻木, 这样的坏处显而易见, 那就是我对于学习这样的事情的耐心和兴趣变得愈发的淡薄, 对于在学习技术与编程的过程中所遇到的困难愈发变得抗拒.</p>
+<p>于是, 多巴胺脱瘾, 这就是我为自己所指定的目标, 就是要培养自己的自控能力, 并在这个过程中努力避免来自新媒体以及游戏的高多巴胺刺激内容的诱惑, 这个过程会无聊到感到痛苦, 但是, 痛苦本身就往往意味着成长. 成长并不都是好事, 但是时间不会等人, 走到现在, 我愈发感觉到, 想要被自己真正认可究竟是多么困难的一件事情, 我已经让自己失望过了无数次, 前面的无数次我也是这么说的, 但是没有外界明显的压力的情况下人就是会这样不断的朝着低级娱乐的方向前进, 但这和我们自己的目标是绝对相互矛盾的, 我们不能被别人逼着走, 我尤为讨厌这种失去控制权的感觉, 所以, 我定下每天日记的计划, 让每一天的我都能够回顾自己前一天的所思所想, 自己逼迫自己去不断的反思纠正, 一旦发现有堕落的迹象就要以此文为例, 勉励自己.</p>
+]]></content>
+      <categories>
+        <category>diary</category>
+      </categories>
+      <tags>
+        <tag>随记</tag>
       </tags>
   </entry>
   <entry>
@@ -116,20 +130,6 @@
       </categories>
       <tags>
         <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>“关于多巴胺脱瘾”</title>
-    <url>/2023/02/16/%E2%80%9C%E5%85%B3%E4%BA%8E%E5%A4%9A%E5%B7%B4%E8%83%BA%E8%84%B1%E7%98%BE%E2%80%9D/</url>
-    <content><![CDATA[<h2 id="每天都上自己的博客看看吧"><a class="header-anchor" href="#每天都上自己的博客看看吧">null</a>每天都上自己的博客看看吧</h2>
-<p>当代互联网上琳琅满目的娱乐方式极大的提高了线代人们的多巴胺阈值, 在我自己的人生经历中, 这种感觉变得愈发的明显<span id="more"></span> 从小时候能够看到电视就会十分兴奋, 再到对b站的各种视频持续性的上瘾, 再到这些东西不再能让我感到快乐, 每一天都生活变得愈发麻木, 这样的坏处显而易见, 那就是我对于学习这样的事情的耐心和兴趣变得愈发的淡薄, 对于在学习技术与编程的过程中所遇到的困难愈发变得抗拒.</p>
-<p>于是, 多巴胺脱瘾, 这就是我为自己所指定的目标, 就是要培养自己的自控能力, 并在这个过程中努力避免来自新媒体以及游戏的高多巴胺刺激内容的诱惑, 这个过程会无聊到感到痛苦, 但是, 痛苦本身就往往意味着成长. 成长并不都是好事, 但是时间不会等人, 走到现在, 我愈发感觉到, 想要被自己真正认可究竟是多么困难的一件事情, 我已经让自己失望过了无数次, 前面的无数次我也是这么说的, 但是没有外界明显的压力的情况下人就是会这样不断的朝着低级娱乐的方向前进, 但这和我们自己的目标是绝对相互矛盾的, 我们不能被别人逼着走, 我尤为讨厌这种失去控制权的感觉, 所以, 我定下每天日记的计划, 让每一天的我都能够回顾自己前一天的所思所想, 自己逼迫自己去不断的反思纠正, 一旦发现有堕落的迹象就要以此文为例, 勉励自己.</p>
-]]></content>
-      <categories>
-        <category>diary</category>
-      </categories>
-      <tags>
-        <tag>随记</tag>
       </tags>
   </entry>
   <entry>
@@ -355,6 +355,32 @@ next[tot] = head[x], head[x] = tot; 这样的操作。</p>
       </tags>
   </entry>
   <entry>
+    <title>每日一题2022-10-30</title>
+    <url>/2022/12/30/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982022-10-30/</url>
+    <content><![CDATA[<h1>上课睡觉</h1>
+<p>题目：<br>
+<a href="https://www.acwing.com/problem/content/description/4369/">https://www.acwing.com/problem/content/description/4369/</a></p>
+<p>思路：<br>
+最终分配结果是每一堆的个数相同，则总堆数一定是sum的约数。补充知识：对于每一个数的平均约数都是logn个，推理过程如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">对于一个数n，1-n中含有的2的倍数有n/2个，3的倍数有n/3个，以此类推，则总倍数有：1+n/2+n/3+......+n/n = nlnn个，然后倍数与约数又是一对相对的概念，所以约数大概为lnn个，为logn级别</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>所以解本题的思路为：寻找不同的cnt满足sum，然后依次检验cnt是否合法，最后找出最小的cnt(因为答案是n-sum/cnt(动多少次就是原堆数减去现堆数))<br>
+如何检验是否合法：注意到能合并的堆一定是相互靠近的（这时候不要模拟实际的过程去思考，要抽象出最便于处理的本质），所以题目的本质就是将所给序列分割成一段段，每段sum都是cnt。</p>
+<p>使用差分与前缀和的知识。一定可以确定的是，每一堆的石子必然大于等于0.</p>
+<p>现预设一个cnt，然后从第一段开始检验，看看是否能够满足这个预设的cnt，然后再到后面去检验。<br>
+这样的话：枚举cnt是否成立时间复杂度为n，枚举约数时间复杂度为logn，总时间复杂度为nlogn，可以满足。<br>
+1e6下约数最多为240，则最多需要计算240*1e6次，c++一秒可以计算1e8次，所以稳过。</p>
+<p>示例代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> w[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">int</span> cnt)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>, s=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        s += w[i];</span><br><span class="line">        <span class="keyword">if</span>(s &gt; cnt) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(s == cnt) s=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>( T-- ) &#123;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;w[i]);</span><br><span class="line">            sum += w[i];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=n; i&gt;<span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span>(sum % i == <span class="number">0</span> &amp;&amp; <span class="built_in">check</span>(sum/i)) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, n-i);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>练习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>背包问题：能量石</title>
     <url>/2022/12/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E8%83%BD%E9%87%8F%E7%9F%B3/</url>
     <content><![CDATA[<h1>能量石</h1>
@@ -416,32 +442,6 @@ next[tot] = head[x], head[x] = tot; 这样的操作。</p>
         <tag>javascript</tag>
         <tag>spider</tag>
         <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>每日一题2022-10-30</title>
-    <url>/2022/12/30/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982022-10-30/</url>
-    <content><![CDATA[<h1>上课睡觉</h1>
-<p>题目：<br>
-<a href="https://www.acwing.com/problem/content/description/4369/">https://www.acwing.com/problem/content/description/4369/</a></p>
-<p>思路：<br>
-最终分配结果是每一堆的个数相同，则总堆数一定是sum的约数。补充知识：对于每一个数的平均约数都是logn个，推理过程如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">对于一个数n，1-n中含有的2的倍数有n/2个，3的倍数有n/3个，以此类推，则总倍数有：1+n/2+n/3+......+n/n = nlnn个，然后倍数与约数又是一对相对的概念，所以约数大概为lnn个，为logn级别</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p>所以解本题的思路为：寻找不同的cnt满足sum，然后依次检验cnt是否合法，最后找出最小的cnt(因为答案是n-sum/cnt(动多少次就是原堆数减去现堆数))<br>
-如何检验是否合法：注意到能合并的堆一定是相互靠近的（这时候不要模拟实际的过程去思考，要抽象出最便于处理的本质），所以题目的本质就是将所给序列分割成一段段，每段sum都是cnt。</p>
-<p>使用差分与前缀和的知识。一定可以确定的是，每一堆的石子必然大于等于0.</p>
-<p>现预设一个cnt，然后从第一段开始检验，看看是否能够满足这个预设的cnt，然后再到后面去检验。<br>
-这样的话：枚举cnt是否成立时间复杂度为n，枚举约数时间复杂度为logn，总时间复杂度为nlogn，可以满足。<br>
-1e6下约数最多为240，则最多需要计算240*1e6次，c++一秒可以计算1e8次，所以稳过。</p>
-<p>示例代码：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> w[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">int</span> cnt)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>, s=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        s += w[i];</span><br><span class="line">        <span class="keyword">if</span>(s &gt; cnt) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(s == cnt) s=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>( T-- ) &#123;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;w[i]);</span><br><span class="line">            sum += w[i];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=n; i&gt;<span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span>(sum % i == <span class="number">0</span> &amp;&amp; <span class="built_in">check</span>(sum/i)) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, n-i);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>练习</tag>
       </tags>
   </entry>
 </search>
