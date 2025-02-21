@@ -1,11 +1,21 @@
 .publication-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 20px;
-  padding: 5px;
+  padding: 15px;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.publication-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+.co-first-authors {
+  font-size: 0.9rem;
+  font-style: italic;
 }
 .publication-list {
   padding-left: 0;
