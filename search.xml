@@ -27,7 +27,7 @@
 <p>Visit <a href="https://scholar.google.com/citations?user=cFk7BcAAAAAJ&amp;hl=en">my google scholar profile</a> for most recent publications. For any suggestions or collaborations, please reach out to me at <a href="mailto:xiwen.kwzhang@gmail.com">xiwen.kwzhang@gmail.com</a>.</p>
 <h1>🔥News</h1>
 <ul>
-<li><span style="text-decoration: underline; font-weight: bold;">02/2025</span>   I am actively looking for <strong>internships</strong> and opportunities for <strong>Masters</strong> and <strong>PhD</strong> programmes on AI at home and abroad. Check my CV <a href="/attaches/self-cv.pdf"><strong>here</strong></a> or <a href="/attaches/self-cv.pdf"><strong>here(zh-CN)</strong></a>.</li>
+<li><span style="text-decoration: underline; font-weight: bold;">02/2025</span>   I am actively looking for <strong>internships</strong> and opportunities for <strong>Masters</strong> and <strong>PhD</strong> programmes on AI at home and abroad. Check my CV <a href="/attaches/self-cv.pdf"><strong>here</strong></a> or <a href="/attaches/self-cv-zh-CN.pdf"><strong>here(zh-CN)</strong></a>.</li>
 <li><span style="text-decoration: underline; font-weight: bold;">10/2024</span>   one <a href="https://camera-agnostic.github.io/">paper</a> is accepted by <strong>NeurIPS 2024</strong>.</li>
 <li><span style="text-decoration: underline; font-weight: bold;">10/2023</span>   one <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=cFk7BcAAAAAJ&amp;citation_for_view=cFk7BcAAAAAJ:u5HHmVD_uO8C">paper</a> is accepted by <strong>ACM MM 2023</strong>.</li>
 </ul>
@@ -89,18 +89,6 @@
       </tags>
   </entry>
   <entry>
-    <title>yolo系列以及mmdetection代码阅读</title>
-    <url>/2023/07/11/yolov7%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/</url>
-    <content><![CDATA[<p>最近一个工作需要大量对比不同的计算机视觉检测模型，需要使用到一个指标ASR，即Attack Successful Rate, 攻击成功率，这个指标需要使用到tp(true positives), 然而tp这个指标通常大部分检测模型不会默认给出, 在yolov5等系列中, 你可以在val.py中轻松找到相应的指标并手动打印, yolov7中并没有给出tp这个变量, 但是依然可以依葫芦画瓢拿到这一变量, 然而事情到了mmdetection中就大为不同, 不同于专精于行人检测的yolo系列, mmdetection是一个极为庞大包罗万象的检测库, 其代码层次结构复杂, 想获得对应的指标, 少不了一场代码阅读.</p>
-<h1>计算tp(true positives)的方法</h1>
-<p>在yolov5中，正例数是直接通过<code>tp = (recall * number_targets).round()</code>计算得到的，在各个检测库中，recall通常是会给出的，这时候只需要想办法获得number_targets的值也就是真正例数的数量，就可以计算出tp(recall(召回率) = tp / (tp + fn)，tp + fn即是真正正例的个数)</p>
-<h2 id="关于视觉检测库常见指标的解释"><a class="header-anchor" href="#关于视觉检测库常见指标的解释">null</a>关于视觉检测库常见指标的解释</h2>
-]]></content>
-      <tags>
-        <tag>科技</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>不开long long见祖宗</title>
     <url>/2023/01/04/%E4%B8%8D%E5%BC%80long-long%E8%A7%81%E7%A5%96%E5%AE%97/</url>
     <content><![CDATA[<h1>感受差分的威力吧</h1>
@@ -129,6 +117,18 @@
       </categories>
       <tags>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>yolo系列以及mmdetection代码阅读</title>
+    <url>/2023/07/11/yolov7%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/</url>
+    <content><![CDATA[<p>最近一个工作需要大量对比不同的计算机视觉检测模型，需要使用到一个指标ASR，即Attack Successful Rate, 攻击成功率，这个指标需要使用到tp(true positives), 然而tp这个指标通常大部分检测模型不会默认给出, 在yolov5等系列中, 你可以在val.py中轻松找到相应的指标并手动打印, yolov7中并没有给出tp这个变量, 但是依然可以依葫芦画瓢拿到这一变量, 然而事情到了mmdetection中就大为不同, 不同于专精于行人检测的yolo系列, mmdetection是一个极为庞大包罗万象的检测库, 其代码层次结构复杂, 想获得对应的指标, 少不了一场代码阅读.</p>
+<h1>计算tp(true positives)的方法</h1>
+<p>在yolov5中，正例数是直接通过<code>tp = (recall * number_targets).round()</code>计算得到的，在各个检测库中，recall通常是会给出的，这时候只需要想办法获得number_targets的值也就是真正例数的数量，就可以计算出tp(recall(召回率) = tp / (tp + fn)，tp + fn即是真正正例的个数)</p>
+<h2 id="关于视觉检测库常见指标的解释"><a class="header-anchor" href="#关于视觉检测库常见指标的解释">null</a>关于视觉检测库常见指标的解释</h2>
+]]></content>
+      <tags>
+        <tag>科技</tag>
       </tags>
   </entry>
   <entry>
