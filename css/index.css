@@ -314,7 +314,7 @@ body {
   margin: 0;
   padding: 0;
   color: #494e52;
-  font-size: 1.5em;
+  font-size: 1.8em;
   line-height: 1.5;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
   scroll-behavior: smooth;
@@ -505,10 +505,10 @@ blockquote p {
   margin-left: auto;
   margin-right: auto;
   clear: both;
-  margin-top: 3.2rem;
+  margin-top: 3.5rem;
   margin-bottom: 0rem;
   padding-left: 1.6rem;
-  padding-right: 1.6rem;
+  padding-right: 1rem;
   animation: intro 0.3s both;
   animation-delay: 0.35s;
 }
@@ -526,20 +526,20 @@ blockquote p {
   padding-right: 1.2rem;
 }
 .page article h1 {
-  font-size: 3rem;
+  font-size: 2.6rem;
 }
 .page article h2 {
-  font-size: 2.8rem;
+  font-size: 2.2rem;
 }
 .page article h3 {
-  font-size: 2.6rem;
+  font-size: 1.9rem;
 }
 .page article h4 {
   font-size: 1.8rem;
 }
 .page article p,
 .page article li {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 .page article a {
   color: #494e52;
