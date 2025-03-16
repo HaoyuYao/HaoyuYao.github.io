@@ -293,6 +293,15 @@ figure.highlight {
 * {
   -webkit-text-size-adjust: none;
 }
+h2 {
+  font-size: 1.5em; /* 调整 h2 字体大小 */
+}
+h3 {
+  font-size: 1.2em; /* 调整 h3 字体大小 */
+}
+body {
+  font-size: 0.9em; /* 调整整体字体大小 */
+}
 html {
   height: 100%;
   margin: 0;
@@ -305,7 +314,7 @@ body {
   margin: 0;
   padding: 0;
   color: #494e52;
-  font-size: 1.8em;
+  font-size: 1.5em;
   line-height: 1.5;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
   scroll-behavior: smooth;
