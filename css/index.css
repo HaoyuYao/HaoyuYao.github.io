@@ -410,6 +410,8 @@ blockquote p {
     border-width: 0px 10px 10px;
     border-color: #fff transparent;
   }
+
+  
   .menus_items li {
     display: block;
     border-bottom: 1px solid #f2f3f3;
@@ -424,6 +426,24 @@ blockquote p {
     transition: all 0.2s ease-in-out 0s;
   }
 }
+
+body.about-page h1 {
+  font-size: 3rem;
+}
+body.about-page h2 {
+  font-size: 2.4rem !important; 
+}
+body.about-page h3 {
+  font-size: 2.0rem !important;
+}
+body.about-page h4 {
+  font-size: 1.6rem !important;
+}
+body.about-page p,
+body.about-page li {
+  font-size: 1.6rem !important;
+}
+
 .menus_icon {
   display: inline-block;
   position: absolute;
@@ -541,6 +561,9 @@ blockquote p {
 .page article li {
   font-size: 1.8rem;
 }
+
+
+
 .page article a {
   color: #494e52;
   -webkit-transition: all 0.2s ease-in-out;
