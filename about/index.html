@@ -49,7 +49,7 @@
 <p>🔍 <strong>研究方向</strong>：计算机视觉、行人重识别、跨模态学习</p>
 </li>
 <li>
-<p>📌 <strong>研究背景 | <a target="_blank" rel="noopener" href="https://haoyuyao.github.io/docs/PAPER_iccv25_motivation.png", style="color: #87CEEB;">[Motivation 示意图]</a></strong>：传统无监督可见光-红外行人重识别(VI-ReID)方法一般是基于“跨模态数据严格配对”的理想化假设，然而现实场景中，可见光与红外图像往往因采集时间、行人轨迹等差异会天然性形成非配对关系，所以这种假设不仅违背实际监控场景的跨模态身份缺失特性，会导致监督信息泄露(依赖人工配对标注)，还会引发两大核心挑战：(1)非配对场景缺乏模态间对应关系，现有基于聚类的伪标签生成方法因跨模态关联缺失产生噪声标签；(2)身份样本的跨模态缺失阻碍特征对齐，进一步加剧模态间分布差异；上述问题严重<strong>制约无监督VI-ReID在现实复杂场景中的实用性与鲁棒性，亟待探索非配对跨模态关联的隐式建模方法。</strong>。
+<p>📌 <strong>研究背景</strong> | <a target="_blank" rel="noopener" href="https://haoyuyao.github.io/docs/PAPER_iccv25_motivation.png", style="color: #87CEEB;">[Motivation 示意图]</a>：传统无监督可见光-红外行人重识别(VI-ReID)方法一般是基于“跨模态数据严格配对”的理想化假设，然而现实场景中，可见光与红外图像往往因采集时间、行人轨迹等差异会天然性形成非配对关系，所以这种假设不仅违背实际监控场景的跨模态身份缺失特性，会导致监督信息泄露(依赖人工配对标注)，还会引发两大核心挑战：(1)非配对场景缺乏模态间对应关系，现有基于聚类的伪标签生成方法因跨模态关联缺失产生噪声标签；(2)身份样本的跨模态缺失阻碍特征对齐，进一步加剧模态间分布差异；上述问题严重<strong>制约无监督VI-ReID在现实复杂场景中的实用性与鲁棒性，亟待探索非配对跨模态关联的隐式建模方法。</strong>。
 </p>
 </li>
 <li>
@@ -73,7 +73,7 @@
 <h3> 💡 夜间救援任务中的微光红外多模态遥感：异常检测方法回顾  </h3>
 <ul>
 <li>
-<p><strong>已投稿</strong>于 IEEE TGRS (共同第一作者)</p>
+<p><strong>已投稿</strong>于 IEEE TGRS (共同第一作者)<a target="_blank" rel="noopener" href="https://haoyuyao.github.io/docs/PAPER_ieeetgrs24_firstpage.png", style="color: #87CEEB;">[论文首页]</a></p>
 </li>
 <li>
 <p>🔍 <strong>研究方向</strong>：计算机视觉、多模态图像融合、异常检测</p>
@@ -82,10 +82,10 @@
 <p>📌 <strong>研究背景</strong>：夜间应急救援任务常⾯临以下挑战：(1) 传统无人机可见光遥感在夜间低光照条件下难以准确检测目标; (2) 灾后地形复杂、遮挡物多，单⼀模态存在局限性（如红外分辨率低、低光图像易受光照影响）; (3) 救援信息需快速获取，但现有数据驱动方法缺乏适⽤于夜间场景的多模态数据集，传统异常检测算法在复杂环境中误报率高; (4) 因此，目前亟需结合低光与红外多模态遥感技术，通过数据融合和先进的异常检测方法，提高夜间救援效率和精度。</p>
 </li>
 <li>
-<p>📌 <strong>我们的方法</strong>：</p>
+<p>📌 <strong>我们的方法</strong> | <a target="_blank" rel="noopener" href="https://haoyuyao.github.io/docs/PAPER_ieeetgrs24_main.png", style="color: #87CEEB;">[Method 示意图]</a>：</p>
 <ul>
 <li>提出<strong>一种基于频域特征分解的双流融合网络</strong>，结合Transformer(全局特征)与CNN(局部细节)，通过独⽴提取低/高频特征并融合，提升下游检测性能;</li>
-<li>提出<strong>首个专为夜间救援设计的多模态遥感数据集 MRSI-NERD</strong>: 包含低光与红外同步图像，涵盖4类场景（正常、跌倒、低温、遮挡），共4087帧全标注数据，真实模拟夜间应急救援环境;</li>
+<li>提出<strong><a target="_blank" rel="noopener" href="https://haoyuyao.github.io/docs/PAPER_ieeetgrs24_dataset.png", style="color: #87CEEB;">[首个专为夜间救援设计的多模态遥感数据集MRSI-NERD]</a></strong>: 包含低光与红外同步图像，涵盖4类场景（正常、跌倒、低温、遮挡），共4087帧全标注数据，真实模拟夜间应急救援环境;</li>
 <li>提供了<strong>⼀个夜间应急救援场景下的无监督异常检测方法基准测试</strong>，对8类传统与基于深度学习的异常检测方法进行<strong>全面评估</strong>，使⽤ROC-AUC、FPR、TPR等指标对比性能，为后续研究提供参考基准。</li>
 </ul>
 </li>
@@ -93,13 +93,13 @@
 <p>📌 <strong>实验结果</strong>：在熵(EN)/互信息(MI)/结构相似性(SSIM)等指标上均优于现有算法，显著提高下游异常检测性能。</p>
 </li>
 <li>
-<p>📜 <strong>产出成果</strong>：相关论文已完成，并已于2024.9<strong>投稿于IEEE TGRS(中科院一区、CCF-B类会议，地球科学和遥感领域顶刊)(我作为共同第一作者)</strong>，2024.11反馈为Major Revision，并于2025.1完成Resubmit。</p>
+<p>📜 <strong>产出成果</strong>：相关论文已完成，并已于2024.9<strong>投稿于IEEE TGRS(中科院一区、CCF-B类会议，地球科学和遥感领域顶刊)(我作为共同第一作者)</strong><a target="_blank" rel="noopener" href="https://haoyuyao.github.io/docs/PAPER_ieeetgrs24_firstpage.png", style="color: #87CEEB;">[论文首页]</a>，2024.11反馈为Major Revision，并于2025.1完成Resubmit<a target="_blank" rel="noopener" href="https://haoyuyao.github.io/docs/PAPER_ieeetgrs24_revision.pdf", style="color: #87CEEB;">[Revision]</a>。</p>
 </li>
 </ul>
 <h3> 💡 资源受限条件下的无人平台低功耗多模态遥感夜间应急搜救模型 </h3>
 <ul>
 <li>
-<p><u><strong>已中稿</strong>于 IGARSS 2025</u> (第三作者)</p>
+<p><u><strong>已中稿</strong>于 IGARSS 2025</u> (第三作者)<a target="_blank" rel="noopener" href="https://haoyuyao.github.io/docs/PAPER_ieeeigarss24_accept.png", style="color: #87CEEB;">[Acceptance Notification]</a></p>
 </li>
 <li>
 <p>🔍 <strong>研究方向</strong>：计算机视觉、目标检测、多模态图像融合、脉冲神经网络</p>
@@ -108,7 +108,7 @@
 <p>📌 <strong>研究背景</strong>：在夜间紧急救援任务中，无人机平台受限于计算资源与能耗，传统的基于人工神经网络的目标检测算法因高计算复杂度与高能耗难以高效部署; 同时，微光与红外图像虽能提供夜间环境下的关键特征，但其多模态数据融合与高效处理需求尚未被充分解决; 为此，亟需结合脉冲神经网络(SNN)与多模态图像融合技术，设计了一种适用于资源受限平台的低功耗目标检测方法，以同时平衡实时性、能效与检测精度。</p>
 </li>
 <li>
-<p>📌 <strong>我们的方法</strong>：</p>
+<p>📌 <strong>我们的方法</strong> | <a target="_blank" rel="noopener" href="https://haoyuyao.github.io/docs/PAPER_ieeeigarss24_main.png", style="color: #87CEEB;">[Method 示意图]</a>：</p>
 <ul>
 <li>提出了<strong>一种专门为夜间紧急救援任务设计的新型低功耗目标检测方法</strong>，基于Spiking-YOLO的SNN低功耗目标检测框架，利用事件驱动的稀疏计算特性来模拟大脑的信息处理，与传统ANN的密集计算相比，实现了更高的能量效率，在保持性能的同时显著降低了能耗; </li>
 <li>通过SeAFusion模型<strong>融合低光与红外图像的互补特征</strong>(如纹理细节与热辐射信息)，<strong>结合语义损失与轻量级梯度残差密集块</strong>，生成<strong>兼具高视觉质量与丰富语义信息的融合图像</strong>，以优化后续夜间和复杂环境条件下的目标检测性能。</li>
@@ -121,8 +121,8 @@
 <p>📜 <strong>产出成果</strong>：</p>
 <ul>
     <li>依托武汉大学测绘遥感信息工程国家重点实验室申请为省级大创项目，并在期限内“优秀”结项。</li>
-    <li>相关成果已申请<strong>一项国家发明专利(我作为第一发明人)</strong>，目前处于实质审查阶段。</li>
-    <li>相关论文已完成，并<strong><u>已中稿于IGARSS 2025</u>(CCF-C类会议)(我作为第三作者)</strong></li>
+    <li>相关成果已申请<strong>一项国家发明专利(我作为第一发明人)</strong>，目前处于实质审查阶段<a target="_blank" rel="noopener" href="https://haoyuyao.github.io/docs/PATENT_SNNweiguanghongwaiyaoganrenyuanjiance.pdf", style="color: #87CEEB;">[专利证明]</a>。</li>
+    <li>相关论文已完成，并<strong><u>已中稿于IGARSS 2025</u>(CCF-C类会议)(我作为第三作者)</strong><a target="_blank" rel="noopener" href="https://haoyuyao.github.io/docs/PAPER_ieeeigarss24_accept.png", style="color: #87CEEB;">[Acceptance Notification]</a></li>
 </ul>
 </li>
 </li>
